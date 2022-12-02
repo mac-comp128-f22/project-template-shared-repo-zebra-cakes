@@ -8,57 +8,7 @@ import java.io.Serializable;
  * @author Koffman and Wolfgang
  **/
 public class BinaryTree<E> implements Serializable {
-
-    /**
-     * Class to encapsulate a tree node.
-     */
-    protected static class Node<E> implements Serializable {
-        // Data Fields
-
-        /**
-         * The information stored in this node.
-         */
-        public E data;
-        /**
-         * Reference to the left child.
-         */
-        public Node<E> left;
-        /**
-         * Reference to the right child.
-         */
-        public Node<E> right;
-
-        /**
-         * Reference to the parent
-         */
-        public Node<E> parent;
-
-        // Constructors
-
-        /**
-         * Construct a node with given data and no children.
-         *
-         * @param data The data to store in this node
-         */
-        public Node(E data) {
-            this.data = data;
-            left = null;
-            right = null;
-            parent = null;
-        }
-
-        // Methods
-
-        /**
-         * Returns a string representation of the node.
-         *
-         * @return A string representation of the data fields
-         */
-        @Override
-        public String toString() {
-            return data.toString();
-        }
-    }
+ 
 
     // Data Field
     /**
