@@ -14,6 +14,8 @@ public class TreeVisualizationApp {
     public static void main(String[] args) {
         TreeVisualizationApp treeApp = new TreeVisualizationApp(CANVAS_WIDTH, CANVAS_HEIGHT);
     }
+
+    
 }
 
 
