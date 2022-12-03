@@ -70,10 +70,10 @@ public class RedAndBlackHomepageButton implements PleasingButton{
         rightBorder.setStrokeWidth(0);
         leftBorder.setStrokeWidth(0);
         bottomBorder.setStrokeWidth(0);
-        topBorder.setStrokeColor(Color.white);
-        rightBorder.setStrokeColor(Color.white);
-        leftBorder.setStrokeColor(Color.white);
-        bottomBorder.setStrokeColor(Color.white);
+        topBorder.setStrokeColor(Color.lightGray);
+        rightBorder.setStrokeColor(Color.lightGray);
+        leftBorder.setStrokeColor(Color.lightGray);
+        bottomBorder.setStrokeColor(Color.lightGray);
 
         canvas.add(topBorder);
         canvas.add(rightBorder);
@@ -141,10 +141,10 @@ public class RedAndBlackHomepageButton implements PleasingButton{
             rightBorder.setStrokeWidth(0);
             leftBorder.setStrokeWidth(0);
             bottomBorder.setStrokeWidth(0);
-            topBorder.setStrokeColor(Color.white);
-            rightBorder.setStrokeColor(Color.white);
-            leftBorder.setStrokeColor(Color.white);
-            bottomBorder.setStrokeColor(Color.white);
+            topBorder.setStrokeColor(Color.lightGray);
+            rightBorder.setStrokeColor(Color.lightGray);
+            leftBorder.setStrokeColor(Color.lightGray);
+            bottomBorder.setStrokeColor(Color.lightGray);
         }
         
     }
