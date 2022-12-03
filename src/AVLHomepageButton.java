@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+
 
 //imports
 import edu.macalester.graphics.CanvasWindow;
@@ -21,6 +20,8 @@ public class AVLHomepageButton implements PleasingButton{
     private GraphicsText avlLabel;
     private GraphicsText avlDescription;
     public CanvasWindow canvas;
+
+
 
     /**
      * AVLHomepageButton class object
@@ -48,8 +49,9 @@ public class AVLHomepageButton implements PleasingButton{
 
         //avl description
         avlDescription = new GraphicsText();
-        avlDescription.setFont(FontStyle.PLAIN, size * 0.035);
-        avlDescription.setCenter(size * .5, size * .75);
+        avlDescription.setFont(FontStyle.PLAIN, size * 0.02);
+        avlDescription.setCenter(size * .35, size * .8);
+        canvas.add(avlDescription);
 
         update();
 
@@ -70,7 +72,7 @@ public class AVLHomepageButton implements PleasingButton{
     public void update() {
         avlIcon.setImagePath("images/avlImage .png");
         avlLabel.setText("AVL Tree");
-        avlDescription.setText("AVL tree description goes here");
+        avlDescription.setText("");
         updateLayout();
 
     }
@@ -95,22 +97,13 @@ public class AVLHomepageButton implements PleasingButton{
      */
     @Override
     public void onHover(Point position) {
-        GraphicsObject object = group.getElementAt(position);
-        if (object != null) {
-            // System.out.println("is in bounds");
-            // canvas.add(avlDescription);
+        if (avlIcon.isInBounds(position)) {
+            avlDescription.setText("Information about the avl structure");
             
+        } else {
+            avlDescription.setText("");
         }
-        // System.out.println("is not in bounds");
-        // canvas.remove(avlDescription);
+        
     }
 
-    public GraphicsText getLabel () {
-        return avlLabel;
-    }
-
-    public GraphicsText getDescription () {
-        return avlDescription;
-    }
-    
 }

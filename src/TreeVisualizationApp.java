@@ -3,12 +3,9 @@
 import java.util.ArrayList;
 
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
-import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 
 
@@ -21,6 +18,7 @@ public class TreeVisualizationApp {
     private static CanvasWindow canvas;
     private static AVLHomepageButton avlButton;
     private static Button treeArrayButton;
+    
 
     public TreeVisualizationApp() {
     }
@@ -36,9 +34,9 @@ public class TreeVisualizationApp {
      * @param newApp
      */
     public static void treeAppRunner(TreeVisualizationApp newApp) {
+        canvas = new CanvasWindow("Tree Visualization App", CANVAS_WIDTH, CANVAS_HEIGHT);
         avlButton = new AVLHomepageButton(CANVAS_HEIGHT, canvas);
         arrTree = new ArrayList<>();
-        canvas = new CanvasWindow("Tree Visualization App", CANVAS_WIDTH, CANVAS_HEIGHT);
 
         //error text set position
         errorText.setCenter(avlButton.getSize()*0.5, avlButton.getSize()*0.7);
