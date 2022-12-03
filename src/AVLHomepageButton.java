@@ -20,10 +20,7 @@ public class AVLHomepageButton implements PleasingButton{
     private Image avlIcon;
     private GraphicsText avlLabel;
     private GraphicsText avlDescription;
-
-    //list of buttons
-    private List<PleasingButtonBox> boxes = new ArrayList<>();
-
+    public CanvasWindow canvas;
 
     /**
      * AVLHomepageButton class object
@@ -31,26 +28,30 @@ public class AVLHomepageButton implements PleasingButton{
      * @param size
      * @param cavas
      */
-    public AVLHomepageButton (double size, CanvasWindow cavas) {
+    public AVLHomepageButton (double size, CanvasWindow canvas) {
 
         //initialize size
         this.size = size;
+        this.canvas = canvas;
 
         //new graphics group, create new icon
         group = new GraphicsGroup();
         avlIcon = new Image(0, 0);
-        avlIcon.setMaxWidth(size);
-        avlIcon.setMaxHeight(size);
+        avlIcon.setMaxWidth(size * .5);
+        avlIcon.setMaxHeight(size * .5);
         group.add(avlIcon);
 
         //avl label
         avlLabel = new GraphicsText();
-        avlLabel.setFont(FontStyle.PLAIN, size * 0.075);
+        avlLabel.setFont(FontStyle.PLAIN, size * 0.02);
         group.add(avlLabel);    
 
         //avl description
         avlDescription = new GraphicsText();
         avlDescription.setFont(FontStyle.PLAIN, size * 0.035);
+        avlDescription.setCenter(size * .5, size * .75);
+
+        update();
 
     }
 
@@ -67,9 +68,10 @@ public class AVLHomepageButton implements PleasingButton{
      */
     @Override
     public void update() {
-        avlIcon.setImagePath(null);
+        avlIcon.setImagePath("images/avlImage .png");
         avlLabel.setText("AVL Tree");
         avlDescription.setText("AVL tree description goes here");
+        updateLayout();
 
     }
 
@@ -77,47 +79,35 @@ public class AVLHomepageButton implements PleasingButton{
      * updates layout of avlicon and avllabel
      */
     public void updateLayout() {
-        avlIcon.setCenter(size * .5, size *.5);
-        avlLabel.setCenter(size * .5, size * .25);
+        avlIcon.setCenter(size * .25, size *.25);
+        avlLabel.setCenter(size * .25, size * .5);
     }
 
-    /**
-     * 
-     * @param location
-     * @return
-     */
-    private PleasingButtonBox getBoxAt(Point location) {
-        GraphicsObject obj = group.getElementAt(location);
-        if (obj instanceof PleasingButtonBox) {
-            return (PleasingButtonBox) obj;
-        }
-        return null;
-    }
+    
 
-    /**
-     * 
-     * @param box
-     */
-    private void updateZoomAndDescription (PleasingButtonBox box) {
-        box.setActive(true);
-        for (PleasingButtonBox item : boxes) {
-            if (item != box) {
-                item.setActive(false);
-            }
-        }
-        avlIcon.setScale( size * 1.2, size * 1.2);
-    }
+    
 
     /**
      * 
      */
     @Override
     public void onHover(Point position) {
-        if (getBoxAt(position) != null) {
-            updateZoomAndDescription(getBoxAt(position));
-        }        
+        GraphicsObject object = group.getElementAt(position);
+        if (object != null) {
+            System.out.println("is in bounds");
+            // canvas.add(avlDescription);
+            
+        }
+        System.out.println("is not in bounds");
+        // canvas.remove(avlDescription);
     }
 
-    
+    public GraphicsText getLabel () {
+        return avlLabel;
+    }
+
+    public GraphicsText getDescription () {
+        return avlDescription;
+    }
     
 }

@@ -10,15 +10,14 @@ import edu.macalester.graphics.Point;
 
 public class TreeVisualizationApp {
     private static final int CANVAS_HEIGHT = 800;
-    private static final int CANVAS_WIDTH = 1000;
-    private static GraphicsGroup avlGroup;
+    private static final int CANVAS_WIDTH = 800;
+    private static AVLHomepageButton avlButton;
 
     public TreeVisualizationApp() {
     }
 
     public static void main(String[] args) {
         TreeVisualizationApp newApp = new TreeVisualizationApp();
-        avlGroup = new GraphicsGroup();
         treeAppRunner(newApp);
     }
 
@@ -29,18 +28,17 @@ public class TreeVisualizationApp {
      */
     public static void treeAppRunner(TreeVisualizationApp newApp) {
         CanvasWindow canvas = new CanvasWindow("Tree Visualization App", CANVAS_WIDTH, CANVAS_HEIGHT);
+        AVLHomepageButton avlButton = new AVLHomepageButton(CANVAS_HEIGHT, canvas);
 
-        Image avlImage = new Image("images/avlImage .png");
-        avlImage.setScale(CANVAS_WIDTH * .0020, CANVAS_HEIGHT * .0020);
-        avlImage.setCenter(CANVAS_WIDTH * .25, CANVAS_HEIGHT * .25);
+        canvas.add(avlButton.getButtonGraphics());
 
-        canvas.add(avlImage);
+        canvas.onMouseMove(event -> totalOnHover(event.getPosition()));
+
     }
 
-    // public void onHover(Point position) {
-    //     GraphicsObject object = avlGroup.getElementAt(position);
-    //     if ()
-    // }
+    public static void totalOnHover(Point position) {
+        avlButton.onHover(position);
+    }
 
 
 }
