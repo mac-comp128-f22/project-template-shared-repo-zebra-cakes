@@ -1,7 +1,6 @@
 
 
 //imports
-import javax.swing.Painter;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
