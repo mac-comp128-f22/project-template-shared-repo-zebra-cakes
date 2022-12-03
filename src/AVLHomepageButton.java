@@ -1,6 +1,8 @@
 
 
 //imports
+import javax.swing.Painter;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsGroup;
@@ -10,6 +12,8 @@ import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
+import edu.macalester.graphics.Line;
+import java.awt.Color;
 
 
 public class AVLHomepageButton implements PleasingButton{
@@ -22,6 +26,10 @@ public class AVLHomepageButton implements PleasingButton{
     private GraphicsText avlLabel;
     private GraphicsText avlDescription;
     public CanvasWindow canvas;
+    private Line topBorder;
+    private Line rightBorder;
+    private Line leftBorder;
+    private Line bottomBorder;
 
 
 
@@ -54,6 +62,29 @@ public class AVLHomepageButton implements PleasingButton{
         avlDescription.setFont(FontStyle.PLAIN, size * 0.02);
         avlDescription.setCenter(size * .35, size * .8);
         canvas.add(avlDescription);
+
+        //border lines
+        topBorder = new Line(size * 0, (size * 0) + 2.5, size * .5, (size * 0) + 2.5);
+        rightBorder= new Line(size * .5, size * 0, size * .5, size * .5);
+        leftBorder = new Line((size * 0) + 2.5, size * 0, (size * 0) + 2.5, size * .5);
+        bottomBorder= new Line(size * 0, size * .5, size * .5, size * .5);
+
+        topBorder.setStrokeWidth(0);
+        rightBorder.setStrokeWidth(0);
+        leftBorder.setStrokeWidth(0);
+        bottomBorder.setStrokeWidth(0);
+        topBorder.setStrokeColor(Color.white);
+        rightBorder.setStrokeColor(Color.white);
+        leftBorder.setStrokeColor(Color.white);
+        bottomBorder.setStrokeColor(Color.white);
+
+        canvas.add(topBorder);
+        canvas.add(rightBorder);
+        canvas.add(leftBorder);
+        canvas.add(bottomBorder);
+
+        // topBorder.setStrokeWidth(size);
+
 
         update();
 
@@ -94,6 +125,7 @@ public class AVLHomepageButton implements PleasingButton{
         return this.size;
     }
 
+    
     /**
      * 
      */
@@ -101,9 +133,26 @@ public class AVLHomepageButton implements PleasingButton{
     public void onHover(Point position) {
         if (avlIcon.isInBounds(position)) {
             avlDescription.setText("Information about the avl structure");
-            
+            topBorder.setStrokeWidth(5);
+            rightBorder.setStrokeWidth(5);
+            leftBorder.setStrokeWidth(5);
+            bottomBorder.setStrokeWidth(5);
+            topBorder.setStrokeColor(Color.black);
+            rightBorder.setStrokeColor(Color.black);
+            leftBorder.setStrokeColor(Color.black);
+            bottomBorder.setStrokeColor(Color.black);
+
+
         } else {
             avlDescription.setText("");
+            topBorder.setStrokeWidth(0);
+            rightBorder.setStrokeWidth(0);
+            leftBorder.setStrokeWidth(0);
+            bottomBorder.setStrokeWidth(0);
+            topBorder.setStrokeColor(Color.white);
+            rightBorder.setStrokeColor(Color.white);
+            leftBorder.setStrokeColor(Color.white);
+            bottomBorder.setStrokeColor(Color.white);
         }
         
     }
