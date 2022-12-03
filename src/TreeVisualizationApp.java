@@ -1,9 +1,13 @@
 
 
+import java.util.ArrayList;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsObject;
+import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
+import edu.macalester.graphics.ui.TextField;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 
@@ -11,7 +15,12 @@ import edu.macalester.graphics.Point;
 public class TreeVisualizationApp {
     private static final int CANVAS_HEIGHT = 800;
     private static final int CANVAS_WIDTH = 800;
+    private static GraphicsText errorText = new GraphicsText("You may not have entered an Integer value. Please try again.");
+    private static ArrayList<Integer> arrTree;
+    private static TextField treeArray;
+    private static CanvasWindow canvas;
     private static AVLHomepageButton avlButton;
+    private static Button treeArrayButton;
 
     public TreeVisualizationApp() {
     }
@@ -27,16 +36,69 @@ public class TreeVisualizationApp {
      * @param newApp
      */
     public static void treeAppRunner(TreeVisualizationApp newApp) {
-        CanvasWindow canvas = new CanvasWindow("Tree Visualization App", CANVAS_WIDTH, CANVAS_HEIGHT);
-        AVLHomepageButton avlButton = new AVLHomepageButton(CANVAS_HEIGHT, canvas);
+        avlButton = new AVLHomepageButton(CANVAS_HEIGHT, canvas);
+        arrTree = new ArrayList<>();
+        canvas = new CanvasWindow("Tree Visualization App", CANVAS_WIDTH, CANVAS_HEIGHT);
+
+        //error text set position
+        errorText.setCenter(avlButton.getSize()*0.5, avlButton.getSize()*0.7);
+
+        //add the text input box
+        treeArray = new TextField();
+        treeArray.setCenter(avlButton.getSize()*0.5, avlButton.getSize()*0.6);
+        canvas.add(treeArray);
+
+        //add the text input button
+        treeArrayButton = new Button("Add to Tree");
+        treeArrayButton.setCenter(avlButton.getSize()*0.7, avlButton.getSize()*0.6);
+        canvas.add(treeArrayButton);
+        treeArrayButton.onClick(() -> treeArrayButtonRunner());
 
         canvas.add(avlButton.getButtonGraphics());
 
-        canvas.onMouseMove(event -> totalOnHover(event.getPosition()));
+        canvas.onMouseMove(event -> totalOnHover(event.getPosition(), avlButton));
 
     }
 
-    public static void totalOnHover(Point position) {
+    /**
+     * run the button for the treeArrayButton
+     * add the integer from the treeArray to an array
+     * @return
+     */
+    private static void treeArrayButtonRunner() {
+        //error text create
+        Boolean woah = true;
+
+        //get text inside of treeArray and convert it to an integer
+        String getNode = treeArray.getText();
+
+        try {
+            Integer.parseInt(getNode);
+        } catch (NumberFormatException e) {
+            errorText.setText("You may not have entered an Integer value. Please try again.");
+            canvas.add(errorText);
+            woah = false;
+        } catch (NullPointerException e) {
+            errorText.setText("You may not have entered an Integer value. Please try again.");
+            canvas.add(errorText);
+            woah = false;
+        } 
+
+        if (woah == true) {
+            errorText.setText("");
+            Integer getNodeInt = Integer.valueOf(getNode);
+            arrTree.add(getNodeInt);
+            System.out.println(arrTree);   
+            treeArray.setText("");
+        }
+    }
+
+    /**
+     * 
+     * @param position
+     * @param avlButton
+     */
+    public static void totalOnHover(Point position, AVLHomepageButton avlButton) {
         avlButton.onHover(position);
     }
 

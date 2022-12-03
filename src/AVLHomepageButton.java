@@ -83,9 +83,12 @@ public class AVLHomepageButton implements PleasingButton{
         avlLabel.setCenter(size * .25, size * .5);
     }
 
-    
-
-    
+    /**
+     * get size
+     */
+    public double getSize() {
+        return this.size;
+    }
 
     /**
      * 
@@ -94,11 +97,11 @@ public class AVLHomepageButton implements PleasingButton{
     public void onHover(Point position) {
         GraphicsObject object = group.getElementAt(position);
         if (object != null) {
-            System.out.println("is in bounds");
+            // System.out.println("is in bounds");
             // canvas.add(avlDescription);
             
         }
-        System.out.println("is not in bounds");
+        // System.out.println("is not in bounds");
         // canvas.remove(avlDescription);
     }
 
