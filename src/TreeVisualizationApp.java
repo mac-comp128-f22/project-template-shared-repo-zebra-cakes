@@ -7,6 +7,7 @@ import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 import edu.macalester.graphics.Point;
+// import java.awt.Color;
 
 
 public class TreeVisualizationApp {
@@ -55,6 +56,7 @@ public class TreeVisualizationApp {
 
         canvas.add(avlButton.getButtonGraphics());
         canvas.add(rbButton.getButtonGraphics());
+        // canvas.setBackground(Color.lightGray);
 
         canvas.onMouseMove(event -> totalOnHover(event.getPosition()));
         canvas.onClick(event -> totalOnClick(event.getPosition()));
