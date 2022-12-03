@@ -47,18 +47,17 @@ public class TreeVisualizationApp {
         //add the text input box
         treeArray = new TextField();
         treeArray.setCenter(avlButton.getSize()*0.5, avlButton.getSize()*0.6);
-        canvas.add(treeArray);
 
         //add the text input button
         treeArrayButton = new Button("Add to Tree");
         treeArrayButton.setCenter(avlButton.getSize()*0.7, avlButton.getSize()*0.6);
-        canvas.add(treeArrayButton);
         treeArrayButton.onClick(() -> treeArrayButtonRunner());
 
         canvas.add(avlButton.getButtonGraphics());
         canvas.add(rbButton.getButtonGraphics());
 
-        canvas.onMouseMove(event -> totalOnHover(event.getPosition(), avlButton));
+        canvas.onMouseMove(event -> totalOnHover(event.getPosition()));
+        canvas.onClick(event -> totalOnClick(event.getPosition()));
 
     }
 
@@ -100,12 +99,15 @@ public class TreeVisualizationApp {
      * @param position
      * @param avlButton
      */
-    public static void totalOnHover(Point position, AVLHomepageButton avlButton) {
+    public static void totalOnHover(Point position) {
         avlButton.onHover(position);
         rbButton.onHover(position);
     }
 
-
+    public static void totalOnClick(Point position) {
+        avlButton.onClick(position, treeArray, treeArrayButton);
+        rbButton.onClick(position, treeArray, treeArrayButton);
+    }
 }
 
 

@@ -8,6 +8,8 @@ import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
+import edu.macalester.graphics.ui.Button;
+import edu.macalester.graphics.ui.TextField;
 
 
 public class AVLHomepageButton implements PleasingButton{
@@ -104,6 +106,14 @@ public class AVLHomepageButton implements PleasingButton{
             avlDescription.setText("");
         }
         
+    }
+
+    public void onClick(Point position, TextField textField, Button button) {
+        if (avlIcon.isInBounds(position)) {
+            canvas.removeAll();
+            canvas.add(textField);
+            canvas.add(button);
+        }
     }
 
 }

@@ -8,6 +8,8 @@ import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
+import edu.macalester.graphics.ui.Button;
+import edu.macalester.graphics.ui.TextField;
 
 
 public class RedAndBlackHomepageButton implements PleasingButton{
@@ -103,7 +105,14 @@ public class RedAndBlackHomepageButton implements PleasingButton{
         } else {
             rbDescription.setText("");
         }
-        
+    }
+
+    public void onClick(Point position, TextField textField, Button button) {
+        if (rbIcon.isInBounds(position)) {
+            canvas.removeAll();
+            canvas.add(textField);
+            canvas.add(button);
+        }
     }
 
 }
