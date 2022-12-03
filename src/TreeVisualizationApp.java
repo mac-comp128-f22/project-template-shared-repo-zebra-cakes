@@ -18,6 +18,7 @@ public class TreeVisualizationApp {
     private static CanvasWindow canvas;
     private static AVLHomepageButton avlButton;
     private static Button treeArrayButton;
+    private static RedAndBlackHomepageButton rbButton;
     
 
     public TreeVisualizationApp() {
@@ -35,7 +36,9 @@ public class TreeVisualizationApp {
      */
     public static void treeAppRunner(TreeVisualizationApp newApp) {
         canvas = new CanvasWindow("Tree Visualization App", CANVAS_WIDTH, CANVAS_HEIGHT);
-        avlButton = new AVLHomepageButton(CANVAS_HEIGHT, canvas);
+        avlButton = new AVLHomepageButton(CANVAS_WIDTH, canvas);
+        rbButton = new RedAndBlackHomepageButton(CANVAS_WIDTH, canvas);
+
         arrTree = new ArrayList<>();
 
         //error text set position
@@ -53,6 +56,7 @@ public class TreeVisualizationApp {
         treeArrayButton.onClick(() -> treeArrayButtonRunner());
 
         canvas.add(avlButton.getButtonGraphics());
+        canvas.add(rbButton.getButtonGraphics());
 
         canvas.onMouseMove(event -> totalOnHover(event.getPosition(), avlButton));
 
@@ -98,6 +102,7 @@ public class TreeVisualizationApp {
      */
     public static void totalOnHover(Point position, AVLHomepageButton avlButton) {
         avlButton.onHover(position);
+        rbButton.onHover(position);
     }
 
 
