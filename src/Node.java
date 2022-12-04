@@ -17,6 +17,15 @@ public class Node<E> implements Serializable {
         this.data = data;
     }
 
+    public void setRed() {
+        this.color = Color.red;
+    }
+
+    public void setBlack() {
+        this.color = Color.black;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sB = new StringBuilder();
         sB.append('(');
