@@ -7,6 +7,7 @@ public class Node<E> implements Serializable {
     public Node<E> left;
     public Node<E> right;
     public Color color;
+    public int index;
 
     public Node(E data) {
         this.data = data;
@@ -23,6 +24,18 @@ public class Node<E> implements Serializable {
 
     public void setBlack() {
         this.color = Color.black;
+    }
+
+    public int getIndex() {
+        if (parent == null) {
+            return 0;
+        } else if (parent.left == this) {
+            return 2 * parent.getIndex() + 1;
+        } else if (parent.right == this) {
+            return 2 * (parent.getIndex() + 1);
+        } else {
+            return (int) Double.NEGATIVE_INFINITY;
+        }
     }
 
     @Override
