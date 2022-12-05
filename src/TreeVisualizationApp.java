@@ -19,7 +19,9 @@ public class TreeVisualizationApp {
     private static CanvasWindow canvas;
     private static AVLHomepageButton avlButton;
     private static Button treeArrayButton;
+    private static Button doneButton;
     private static RedAndBlackHomepageButton rbButton;
+    private static int treeSize;
     
 
     public TreeVisualizationApp() {
@@ -50,9 +52,14 @@ public class TreeVisualizationApp {
         treeArray.setCenter(avlButton.getSize()*0.5, avlButton.getSize()*0.6);
 
         //add the text input button
-        treeArrayButton = new Button("Add to Tree");
+        treeArrayButton = new Button("Add to Tree (no duplicate values)");
         treeArrayButton.setCenter(avlButton.getSize()*0.7, avlButton.getSize()*0.6);
         treeArrayButton.onClick(() -> treeArrayButtonRunner());
+
+        //add the done button
+        doneButton = new Button("Done (maximum 31 value)");
+        doneButton.setCenter(avlButton.getSize()*0.7, avlButton.getSize()*0.65);
+        doneButton.onClick(() -> inputComplete());
 
         canvas.add(avlButton.getButtonGraphics());
         canvas.add(rbButton.getButtonGraphics());
@@ -61,6 +68,10 @@ public class TreeVisualizationApp {
         canvas.onMouseMove(event -> totalOnHover(event.getPosition()));
         canvas.onClick(event -> totalOnClick(event.getPosition()));
 
+    }
+
+    private static void inputComplete() {
+        System.out.println("To be completed when Binary Tree functions are complete");
     }
 
     /**
@@ -74,7 +85,7 @@ public class TreeVisualizationApp {
 
         //get text inside of treeArray and convert it to an integer
         String getNode = treeArray.getText();
-
+        
         try {
             Integer.parseInt(getNode);
         } catch (NumberFormatException e) {
@@ -87,12 +98,23 @@ public class TreeVisualizationApp {
             woah = false;
         } 
 
-        if (woah == true) {
-            errorText.setText("");
-            Integer getNodeInt = Integer.valueOf(getNode);
-            arrTree.add(getNodeInt);
-            System.out.println(arrTree);   
-            treeArray.setText("");
+        if (treeSize >= 31) {
+            errorText.setText("You have reached the maximum number of values. Press the done button to vizualize your tree.");
+            canvas.add(errorText);
+        } else {
+            if (woah == true) {
+                Integer getNodeInt = Integer.valueOf(getNode);
+                if (arrTree.contains(getNodeInt)) {
+                    errorText.setText("You have entered a duplicate value. Please try again.");
+                    canvas.add(errorText);
+                } else {
+                    errorText.setText("");
+                    arrTree.add(getNodeInt);
+                    System.out.println(arrTree);   
+                    treeArray.setText("");
+                    treeSize++;
+                }
+            }
         }
     }
 
@@ -106,8 +128,8 @@ public class TreeVisualizationApp {
     }
 
     public static void totalOnClick(Point position) {
-        avlButton.onClick(position, treeArray, treeArrayButton);
-        rbButton.onClick(position, treeArray, treeArrayButton);
+        avlButton.onClick(position, treeArray, treeArrayButton, doneButton);
+        rbButton.onClick(position, treeArray, treeArrayButton, doneButton);
     }
 }
 
