@@ -22,6 +22,7 @@ public class TreeVisualizationApp {
     private static Button doneButton;
     private static RedAndBlackHomepageButton rbButton;
     private static int treeSize;
+    private static Button removeButton;
     
 
     public TreeVisualizationApp() {
@@ -46,6 +47,8 @@ public class TreeVisualizationApp {
 
         //error text set position
         errorText.setCenter(avlButton.getSize()*0.5, avlButton.getSize()*0.7);
+        errorText.setText("");
+        canvas.add(errorText);
 
         //add the text input box
         treeArray = new TextField();
@@ -61,6 +64,11 @@ public class TreeVisualizationApp {
         doneButton.setCenter(avlButton.getSize()*0.7, avlButton.getSize()*0.65);
         doneButton.onClick(() -> inputComplete());
 
+        //add the remove button
+        removeButton = new Button("Remove last input");
+        removeButton.setCenter(avlButton.getSize()*0.7, avlButton.getSize()*0.7);
+        removeButton.onClick(() -> removeButtonRunner());
+
         canvas.add(avlButton.getButtonGraphics());
         canvas.add(rbButton.getButtonGraphics());
         canvas.setBackground(Color.lightGray);
@@ -70,6 +78,27 @@ public class TreeVisualizationApp {
 
     }
 
+    /**
+     * removes the most recently added value from the input treeArray
+     * @return
+     */
+    private static void removeButtonRunner() {
+        errorText.setText("");
+        if (!arrTree.isEmpty()) {
+            arrTree.remove(arrTree.get(arrTree.size()-1));
+            treeSize--;
+            System.out.println(arrTree);
+        } else {
+            errorText.setText("There are no values to remove.");
+            canvas.add(errorText);
+        }
+        
+    }
+
+    /**
+     * indicates that the user is done adding values to their tree
+     * starts the visualization process
+     */
     private static void inputComplete() {
         System.out.println("To be completed when Binary Tree functions are complete");
     }
@@ -80,7 +109,7 @@ public class TreeVisualizationApp {
      * @return
      */
     private static void treeArrayButtonRunner() {
-        //error text create
+        //boolean to avoid running if statement
         Boolean woah = true;
 
         //get text inside of treeArray and convert it to an integer
@@ -128,8 +157,8 @@ public class TreeVisualizationApp {
     }
 
     public static void totalOnClick(Point position) {
-        avlButton.onClick(position, treeArray, treeArrayButton, doneButton);
-        rbButton.onClick(position, treeArray, treeArrayButton, doneButton);
+        avlButton.onClick(position, treeArray, treeArrayButton, doneButton, removeButton);
+        rbButton.onClick(position, treeArray, treeArrayButton, doneButton, removeButton);
     }
 }
 

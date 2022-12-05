@@ -149,12 +149,13 @@ public class RedAndBlackHomepageButton implements PleasingButton{
         
     }
 
-    public void onClick(Point position, TextField textField, Button button, Button doneButton) {
+    public void onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton) {
         if (rbIcon.isInBounds(position)) {
             canvas.removeAll();
             canvas.add(textField);
             canvas.add(button);
             canvas.add(doneButton);
+            canvas.add(removeButton);
         }
     }
 
