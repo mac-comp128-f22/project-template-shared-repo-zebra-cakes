@@ -26,7 +26,7 @@ public class NodeGraphics<E> extends Node<E> {
         this.nodeGraphics.add(nodeBoundary);
         this.nodeGraphics.add(this.nodeContent);
         this.nodeContent.setText(data.toString());
-        this.nodeContent.setCenter(12, 12);
+        this.nodeContent.setCenter(14, 14);
         if (color == Color.BLACK) {
             setColorBlack();
         } else if (color == Color.RED) {
@@ -49,7 +49,7 @@ public class NodeGraphics<E> extends Node<E> {
 
     public static void main(String[] args) {
         CanvasWindow canvas = new CanvasWindow("Test", 100, 100);
-        NodeGraphics<Integer> test1 = new NodeGraphics<>(1, Color.RED);
+        NodeGraphics<Integer> test1 = new NodeGraphics<>(15, Color.BLACK);
         canvas.add(test1.nodeGraphics, 10, 10);
     }
     
