@@ -9,7 +9,6 @@ import edu.macalester.graphics.ui.TextField;
 import edu.macalester.graphics.Point;
 import java.awt.Color;
 
-
 public class TreeVisualizationApp {
     private static final int CANVAS_HEIGHT = 800;
     private static final int CANVAS_WIDTH = 800;
@@ -24,7 +23,6 @@ public class TreeVisualizationApp {
     private static int treeSize;
     private static Button removeButton;
     
-
     public TreeVisualizationApp() {
     }
 
