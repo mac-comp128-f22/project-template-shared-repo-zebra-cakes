@@ -82,7 +82,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
      * @post The data field addReturn is set true if the item is added to
      * the tree, false if the item is already in the tree.
      */
-    private Node<E> add(Node<E> localRoot, Node<E> parent, E item) {
+    protected Node<E> add(Node<E> localRoot, Node<E> parent, E item) {
         if (localRoot == null) {
             // item is not in the tree � insert it.
             addReturn = true;
