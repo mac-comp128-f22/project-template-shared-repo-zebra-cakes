@@ -17,6 +17,128 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
+    private void adjustBasedOnBlack (RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
+        boolean nodeIsLeftChild = node == node.parent.left;
+
+        if (nodeIsLeftChild && siblingNode.right.color == Color.black) {
+            siblingNode.left.color = Color.black;
+            siblingNode.color = Color.red;
+            rotateRight(siblingNode);
+            siblingNode = (RedAndBlackNode<E>) node.parent.right;
+        } else if (!nodeIsLeftChild && siblingNode.left.color == Color.black) {
+            siblingNode.right.color = Color.black;
+            siblingNode.color = Color.red;
+            rotateLeft(siblingNode);
+            siblingNode = (RedAndBlackNode<E>) node.parent.left;
+        }
+        siblingNode.color = node.parent.color;
+        node.parent.color = Color.black;
+        if (nodeIsLeftChild) {
+            siblingNode.right.color = Color.black;
+            rotateLeft((RedAndBlackNode<E>)node.parent);
+        }else {
+            siblingNode.left.color = Color.black;
+            rotateRight((RedAndBlackNode<E>) node.parent);
+        }
+    }
+
+    private void adjustBasedOnRed (RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
+        siblingNode.color = Color.black;
+        node.parent.color = Color.red;
+        if (node == node.parent.left) {
+            rotateLeft((RedAndBlackNode<E>)node.parent);
+        } else {
+            rotateRight((RedAndBlackNode<E>) node.parent);
+        }
+    }
+
+    private RedAndBlackNode<E> getSibling (RedAndBlackNode<E> searchNode) {
+        RedAndBlackNode<E> parentNode = (RedAndBlackNode<E>) searchNode.parent;
+        if (searchNode  == parentNode.left) {
+            return (RedAndBlackNode<E>) parentNode.right;
+        } else {
+            return (RedAndBlackNode<E>) parentNode.left;
+        }
+    }
+
+    private void readjustColor (RedAndBlackNode<E> nodeToReadjust) {
+        if (nodeToReadjust == root) {
+            return;
+        }
+
+        RedAndBlackNode<E> siblingNode = getSibling(nodeToReadjust);
+
+        if (siblingNode.color == Color.red) {
+            adjustBasedOnRed(nodeToReadjust, siblingNode);
+            siblingNode = getSibling(nodeToReadjust);
+        }
+        if (siblingNode.left.color == Color.black && siblingNode.right.color == Color.black) {
+            siblingNode.color = Color.red;
+            if (nodeToReadjust.parent.color == Color.red) {
+                nodeToReadjust.parent.color = Color.black;
+            } else {
+                readjustColor((RedAndBlackNode<E>) nodeToReadjust.parent);
+            }
+        } else {
+            adjustBasedOnBlack(nodeToReadjust, siblingNode);
+        }
+    }
+
+    private RedAndBlackNode<E> findMinimum(RedAndBlackNode<E> nodeToSearch) {
+        while (nodeToSearch.left != null) {
+            nodeToSearch = (RedAndBlackNode<E>) nodeToSearch.left;
+        }
+        return nodeToSearch;
+    }
+
+    private RedAndBlackNode<E> deleteNodeWithOneOrNoChild (RedAndBlackNode<E> nodeToDelete) {
+        if (nodeToDelete.left != null) {
+            replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, (RedAndBlackNode<E>)nodeToDelete.left);
+            return (RedAndBlackNode<E>) nodeToDelete.left;
+        } else if (nodeToDelete.right != null) {
+            replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, (RedAndBlackNode<E>)nodeToDelete.right);
+            return (RedAndBlackNode<E>) nodeToDelete.right;
+        } else {
+            RedAndBlackNode<E> nilChild = nilChild.color == Color.black ? new NilNode() : null;
+            replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, nilChild);
+            return nilChild;
+        }
+
+    }
+
+    public void deleteNode (E key) {
+        RedAndBlackNode<E> searchNode = (RedAndBlackNode<E>) root;
+
+        while (searchNode.data != key && searchNode != null) {
+            if (key.compareTo(searchNode.data) < 0) {
+                searchNode = (RedAndBlackNode<E>) searchNode.left;
+            } else {
+                searchNode  = (RedAndBlackNode<E>) searchNode.right;
+            }
+        }
+        if (searchNode == null) {
+             return;
+        }
+
+        RedAndBlackNode<E> nodeToMove;
+        Color deletedNodeColor;
+
+        if (searchNode.left == null || searchNode.right == null) {
+            nodeToMove = deleteNodeWithOneOrNoChild(searchNode);
+            deletedNodeColor = searchNode.color;
+        } else {
+            RedAndBlackNode<E> successor = findMinimum((RedAndBlackNode<E>)searchNode.right);
+            searchNode.data = successor.data;
+            deletedNodeColor = successor.color;
+        }
+        if (deletedNodeColor == Color.black) {
+            readjustColor(nodeToMove);
+            if (nodeToMove.getClass() == NilNode.class) {
+                replaceParentsChild((RedAndBlackNode<E>)nodeToMove.parent, nodeToMove, null);
+            }
+        }
+    }
+
     private void rotations (RedAndBlackNode<E> insertedNode) {
         RedAndBlackNode<E> parentNode = (RedAndBlackNode<E>) insertedNode.parent;
         if (parentNode == null) {
@@ -116,6 +238,19 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
             } else {
                 nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.right;
             }
+        }
+    }
+
+    private void replaceParentsChild(RedAndBlackNode<E> parentNode, RedAndBlackNode<E> oldChildNode, RedAndBlackNode<E> newChildNode) {
+        if (parentNode == null) {
+            root = newChildNode;
+        } else if (parentNode.left == oldChildNode) {
+            parentNode.left = newChildNode;
+        } else if (parentNode.right == oldChildNode) {
+            parentNode.right = newChildNode;
+        }
+        if (newChildNode != null) {
+            newChildNode.parent = parentNode;
         }
     }
 
@@ -282,11 +417,11 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
      *                            Comparable
      * @post The object is not in the tree.
      */
-    @Override
-    public E delete(E target) {
-        root = delete((RedAndBlackNode<E>)root, target);
-        return deleteReturn;
-    }
+    // @Override
+    // public E delete(E target) {
+    //     root = delete((RedAndBlackNode<E>)root, target);
+    //     return deleteReturn;
+    // }
 
     /**
      * Recursive delete method.
@@ -300,63 +435,63 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
      * as it was stored in the tree or null
      * if the item was not found.
      */
-    private RedAndBlackNode<E> delete(RedAndBlackNode<E> localRoot, E item) {
-        if (localRoot == null) {
-            // item is not in the tree.
-            deleteReturn = null;
-            return localRoot;
-        }
+    // private RedAndBlackNode<E> delete(RedAndBlackNode<E> localRoot, E item) {
+    //     if (localRoot == null) {
+    //         // item is not in the tree.
+    //         deleteReturn = null;
+    //         return localRoot;
+    //     }
 
-        // Search for item to delete.
-        int compResult = item.compareTo(localRoot.data);
-        if (compResult < 0) {
-            // item is smaller than localRoot.data.
-            localRoot.left = delete((RedAndBlackNode<E>)localRoot.left, item);
-            if (localRoot.left != null) {
-                localRoot.left.parent = localRoot;
-            }
-        } else if (compResult > 0) {
-            // item is larger than localRoot.data.
-            localRoot.right = delete((RedAndBlackNode<E>)localRoot.right, item);
-            if (localRoot.right != null) {
-                localRoot.right.parent = localRoot;
-            }
-        } else {
-            // item is at local root.
-            deleteReturn = localRoot.data;
-            // node with only one child or no child
-            if ((localRoot.left == null) || (localRoot.right == null)) {
-                RedAndBlackNode<E> temp = null;
-                if (temp == localRoot.left) {
-                    temp = (RedAndBlackNode<E>)localRoot.right;
-                }
-                else {
-                    temp = (RedAndBlackNode<E>)localRoot.left;
-                }
+    //     // Search for item to delete.
+    //     int compResult = item.compareTo(localRoot.data);
+    //     if (compResult < 0) {
+    //         // item is smaller than localRoot.data.
+    //         localRoot.left = delete((RedAndBlackNode<E>)localRoot.left, item);
+    //         if (localRoot.left != null) {
+    //             localRoot.left.parent = localRoot;
+    //         }
+    //     } else if (compResult > 0) {
+    //         // item is larger than localRoot.data.
+    //         localRoot.right = delete((RedAndBlackNode<E>)localRoot.right, item);
+    //         if (localRoot.right != null) {
+    //             localRoot.right.parent = localRoot;
+    //         }
+    //     } else {
+    //         // item is at local root.
+    //         deleteReturn = localRoot.data;
+    //         // node with only one child or no child
+    //         if ((localRoot.left == null) || (localRoot.right == null)) {
+    //             RedAndBlackNode<E> temp = null;
+    //             if (temp == localRoot.left) {
+    //                 temp = (RedAndBlackNode<E>)localRoot.right;
+    //             }
+    //             else {
+    //                 temp = (RedAndBlackNode<E>)localRoot.left;
+    //             }
 
-                // No child case
-                if (temp == null) {
-                    temp = localRoot;
-                    localRoot = null;
-                }
-                else { // One child case
-                    localRoot = temp; // Copy the contents of the non-empty child
-                }
-            }
-            else
-            {
-                // Search for the inorder predecessor (ip) and
-                // replace deleted node's data with ip.
-                Node<E> temp = findLargestChild(localRoot.left);
+    //             // No child case
+    //             if (temp == null) {
+    //                 temp = localRoot;
+    //                 localRoot = null;
+    //             }
+    //             else { // One child case
+    //                 localRoot = temp; // Copy the contents of the non-empty child
+    //             }
+    //         }
+    //         else
+    //         {
+    //             // Search for the inorder predecessor (ip) and
+    //             // replace deleted node's data with ip.
+    //             Node<E> temp = findLargestChild(localRoot.left);
 
-                // Copy the inorder predecessors's data to this node
-                localRoot.data = temp.data;
+    //             // Copy the inorder predecessors's data to this node
+    //             localRoot.data = temp.data;
 
-                // Delete the inorder successor
-                localRoot.right = delete((RedAndBlackNode<E>)localRoot.right, temp.data);
-            }
+    //             // Delete the inorder successor
+    //             localRoot.right = delete((RedAndBlackNode<E>)localRoot.right, temp.data);
+    //         }
 
-        }
+    //     }
 
         // // If the tree had only one node then return
         // if (localRoot == null)
@@ -393,7 +528,7 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         // }
 
         // return localRoot;
-    }
+    // }
 
     /**
      * Find the node that is the
@@ -403,15 +538,15 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
      *               predecessor (ip)
      * @return The data in the ip
      */
-    private Node<E> findLargestChild(Node<E> parent) {
-        Node<E> current = parent;
+    // private Node<E> findLargestChild(Node<E> parent) {
+    //     Node<E> current = parent;
 
-        /* loop down to find the leftmost leaf */
-        while (current.right != null)
-            current = current.right;
+    //     /* loop down to find the leftmost leaf */
+    //     while (current.right != null)
+    //         current = current.right;
 
-        return current;
-    }
+    //     return current;
+    // }
 
 }
 
