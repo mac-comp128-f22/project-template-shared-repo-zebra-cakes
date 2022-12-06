@@ -1,3 +1,4 @@
+import java.awt.Color;
 /**
  * A class to represent a red and black search tree.
  * Red and black trees self-balance to maintain a heights that only differ by at most 1 between the left and right child
@@ -5,6 +6,7 @@
  * @author Bret Jackson, Mayank Jaiswal, (adjusted by Brayden Coronado, Devinn Chi, and Minh Nguyen to work with Red and Black trees)
  */
 public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E> {
+    protected boolean addReturn;
     // Inner class that extends Node to add a heightFromLeaf property to calculate the balance factor
     protected static class RedAndBlackNode<E> extends Node<E>{
         public int heightFromLeaf;
@@ -15,28 +17,106 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    /**
-     * Convenience funtion to check for null and convert nodes to RedAndBlackNodes when getting the heightfromLeaf
-     * @param node
-     * @return
-     */
-    private int heightFromLeaf(Node<E> node){
-        if (node == null){
-            return 0;
+    private void rotations (RedAndBlackNode<E> insertedNode) {
+        RedAndBlackNode<E> parentNode = (RedAndBlackNode<E>) insertedNode.parent;
+        if (parentNode == null) {
+            insertedNode.color = Color.black;
+            return;
         }
-        return ((RedAndBlackNode<E>)node).heightFromLeaf;
+        if (parentNode.color == Color.black) {
+            return;
+        }
+
+        RedAndBlackNode<E> grandparentNode = (RedAndBlackNode<E>) parentNode.parent;
+
+        if (grandparentNode == null) {
+            parentNode.color =Color.black;
+            return;
+        }
+
+        RedAndBlackNode<E> uncleNode = getUncle(parentNode);
+
+        if (uncleNode != null && uncleNode.color == Color.black) {
+            parentNode.color = Color.black;
+            grandparentNode.color = Color.red;
+            uncleNode.color = Color.black;
+
+            rotations(grandparentNode);
+        } else if (parentNode == grandparentNode.left) {
+            if (insertedNode == parentNode.right) {
+                rotateLeft(parentNode);
+                parentNode = insertedNode;
+            }
+            rotateRight(grandparentNode);
+            parentNode.color = Color.black;
+            grandparentNode.color = Color.red;
+        } else {
+            if (insertedNode == parentNode.left) {
+                rotateRight(parentNode);
+                parentNode = insertedNode;
+            }
+            rotateLeft(grandparentNode);
+            parentNode.color = Color.black;
+            grandparentNode.color = Color.red;
+        }
     }
 
-    /**
-     * Calculates the balance factor for node
-     * @param node
-     * @return
-     */
-    private int getBalance(Node<E> node) {
-        if (node == null){
-            return 0;
+    public RedAndBlackNode<E> getUncle (RedAndBlackNode<E> parentNode) {
+        RedAndBlackNode<E> grandparentNode = (RedAndBlackNode<E>) parentNode.parent;
+        if (grandparentNode.right == parentNode) {
+            return (RedAndBlackNode<E>) grandparentNode.right;
+        } else {
+            return (RedAndBlackNode<E>) grandparentNode.left;
         }
-        return heightFromLeaf(node.left) - heightFromLeaf(node.right);
+    }
+
+    public void insert (RedAndBlackNode<E> parentNode, E key) {
+        RedAndBlackNode<E> nodeToInsert = new RedAndBlackNode<E>(key);
+        nodeToInsert.color = Color.red;
+        if (parentNode == nodeToInsert) {
+            root = nodeToInsert;
+        } else if (key.compareTo(parentNode.data) < 0) {
+            parentNode.left = nodeToInsert;
+        } else {
+            parentNode.right = nodeToInsert;
+        }
+        nodeToInsert.parent = parentNode;
+
+        rotations(nodeToInsert);
+
+    }
+
+    public void addNode(E key) {
+        RedAndBlackNode<E> nodeSearcher = ((RedAndBlackNode<E>)root);
+        RedAndBlackNode<E> parent = null;
+
+        for (;;) {
+            if (nodeSearcher == null) {
+                break;
+            } 
+            parent = nodeSearcher;
+            if (key.compareTo(nodeSearcher.data) < 0) {
+                nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.left;
+            } else if (key.compareTo(nodeSearcher.data) > 0) {
+                nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.right;
+            }
+        }
+        insert(parent, key);
+    }
+
+    public RedAndBlackNode<E> searchForNode(E key) {
+        RedAndBlackNode<E> nodeSearcher = ((RedAndBlackNode<E>)root);
+        for (;;) {
+            if (nodeSearcher == null) {
+                return null;
+            } else if (key.compareTo(nodeSearcher.data) == 0) {
+                return nodeSearcher;
+            } else if (key.compareTo(nodeSearcher.data) < 0) {
+                nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.left;
+            } else {
+                nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.right;
+            }
+        }
     }
 
     /**
@@ -123,11 +203,11 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
      * @pre The object to insert must implement the
      * Comparable interface.
      */
-    @Override
-    public boolean add(E item) {
-        root = add((RedAndBlackNode<E>) root, null, item);
-        return addReturn;
-    }
+    // @Override
+    // public boolean add(E item) {
+    //     root = add((RedAndBlackNode<E>) root, null, item);
+    //     return addReturn;
+    // }
 
     /**
      * Recursive add method.
@@ -139,58 +219,58 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
      * @post The data field addReturn is set true if the item is added to
      * the tree, false if the item is already in the tree.
      */
-    private RedAndBlackNode<E> add(RedAndBlackNode<E> localRoot, RedAndBlackNode<E> parent, E item) {
-        /* 1. Perform the normal BST insertion */
-        if (localRoot == null){
-            addReturn = true;
-            RedAndBlackNode<E> newNode = new RedAndBlackNode<E>(item);
-            newNode.parent = parent;
-            return newNode;
-        } else if (item.compareTo(localRoot.data) == 0) {
-            // item is equal to localRoot.data
-            addReturn = false;
-            return localRoot;
-        } else if (item.compareTo(localRoot.data) < 0) {
-            // item is less than localRoot.data
-            localRoot.left = add((RedAndBlackNode<E>)localRoot.left, localRoot, item);
-        } else {
-            // item is greater than localRoot.data
-            localRoot.right = add((RedAndBlackNode<E>)localRoot.right, localRoot, item);
-        }
+    // private RedAndBlackNode<E> add(RedAndBlackNode<E> localRoot, RedAndBlackNode<E> parent, E item) {
+    //     /* 1. Perform the normal BST insertion */
+    //     if (localRoot == null){
+    //         addReturn = true;
+    //         RedAndBlackNode<E> newNode = new RedAndBlackNode<E>(item);
+    //         newNode.parent = parent;
+    //         return newNode;
+    //     } else if (item.compareTo(localRoot.data) == 0) {
+    //         // item is equal to localRoot.data
+    //         addReturn = false;
+    //         return localRoot;
+    //     } else if (item.compareTo(localRoot.data) < 0) {
+    //         // item is less than localRoot.data
+    //         localRoot.left = add((RedAndBlackNode<E>)localRoot.left, localRoot, item);
+    //     } else {
+    //         // item is greater than localRoot.data
+    //         localRoot.right = add((RedAndBlackNode<E>)localRoot.right, localRoot, item);
+    //     }
 
-        // /* 2. Update height of this ancestor node */
-        // localRoot.heightFromLeaf = 1 + Math.max(heightFromLeaf(localRoot.left), heightFromLeaf(localRoot.right));
+    //     // /* 2. Update height of this ancestor node */
+    //     // localRoot.heightFromLeaf = 1 + Math.max(heightFromLeaf(localRoot.left), heightFromLeaf(localRoot.right));
 
-        // /* 3. Get the balance factor of this ancestor node to check whether this node became unbalanced */
-        // int balance = getBalance(localRoot);
+    //     // /* 3. Get the balance factor of this ancestor node to check whether this node became unbalanced */
+    //     // int balance = getBalance(localRoot);
 
-        // // If this node becomes unbalanced, then there are 4 cases
+    //     // // If this node becomes unbalanced, then there are 4 cases
 
-        // // Left Left Case
-        // if (balance > 1 && item.compareTo(localRoot.left.data) < 0) {
-        //     rotateRight(localRoot);
-        // }
+    //     // // Left Left Case
+    //     // if (balance > 1 && item.compareTo(localRoot.left.data) < 0) {
+    //     //     rotateRight(localRoot);
+    //     // }
 
-        // // Right Right Case
-        // if (balance < -1 && item.compareTo(localRoot.right.data) > 0)
-        //     rotateLeft(localRoot);
+    //     // // Right Right Case
+    //     // if (balance < -1 && item.compareTo(localRoot.right.data) > 0)
+    //     //     rotateLeft(localRoot);
 
-        // // Left Right Case
-        // if (balance > 1 && item.compareTo(localRoot.left.data) > 0)
-        // {
-        //     localRoot.left = rotateLeft((RedAndBlackNode<E>) localRoot.left);
-        //     rotateRight(localRoot);
-        // }
+    //     // // Left Right Case
+    //     // if (balance > 1 && item.compareTo(localRoot.left.data) > 0)
+    //     // {
+    //     //     localRoot.left = rotateLeft((RedAndBlackNode<E>) localRoot.left);
+    //     //     rotateRight(localRoot);
+    //     // }
 
-        // // Right Left Case
-        // if (balance < -1 && item.compareTo(localRoot.right.data) < 0)
-        // {
-        //     localRoot.right = rotateRight((RedAndBlackNode<E>) localRoot.right);
-        //     return rotateLeft(localRoot);
-        // }
+    //     // // Right Left Case
+    //     // if (balance < -1 && item.compareTo(localRoot.right.data) < 0)
+    //     // {
+    //     //     localRoot.right = rotateRight((RedAndBlackNode<E>) localRoot.right);
+    //     //     return rotateLeft(localRoot);
+    //     // }
 
-        // return localRoot;
-    }
+    //     // return localRoot;
+    // }
 
     /**
      * Starter method delete.
