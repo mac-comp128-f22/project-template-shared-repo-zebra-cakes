@@ -34,7 +34,7 @@ public class RedAndBlackHomepageButton implements PleasingButton{
     private double bottomY;
 
     /**
-     * AVLHomepageButton class object
+     * RedAndBlackHomepageButton class object
      * creates graphics group objects and text buttons
      * @param size
      * @param cavas
@@ -52,24 +52,27 @@ public class RedAndBlackHomepageButton implements PleasingButton{
         rbIcon.setMaxHeight(size * .5);
         group.add(rbIcon);
 
-        //avl label
+        //red and black label
         rbLabel = new GraphicsText();
         rbLabel.setFont(FontStyle.PLAIN, size * 0.02);
         group.add(rbLabel);    
 
-        //avl description
+        //red and black description
         rbDescription = new GraphicsText();
         rbDescription.setFont(FontStyle.PLAIN, size * 0.02);
         rbDescription.setCenter(size * .35, size * .8);
         canvas.add(rbDescription);
 
+        //calls the update method to update the visuals of the group
         update();
 
+        //creates a border around the picture
         topBorder = new Line(leftX-5, topY-2, rightX+5, topY-2);
         rightBorder = new Line(rightX+2, topY-5, rightX+2, bottomY+5);
         leftBorder = new Line(leftX-2, topY-5, leftX-2, bottomY+5);
         bottomBorder= new Line(leftX-5, bottomY+2, rightX+5, bottomY+2);
 
+        //sets the border to the color of the background and their width
         topBorder.setStrokeWidth(30);
         rightBorder.setStrokeWidth(30);
         leftBorder.setStrokeWidth(30);
@@ -79,6 +82,7 @@ public class RedAndBlackHomepageButton implements PleasingButton{
         leftBorder.setStrokeColor(Color.lightGray);
         bottomBorder.setStrokeColor(Color.lightGray);
 
+        //adds the borders to the canvas
         canvas.add(topBorder);
         canvas.add(rightBorder);
         canvas.add(leftBorder);
@@ -94,13 +98,15 @@ public class RedAndBlackHomepageButton implements PleasingButton{
     }
 
     /**
-     * updates the avl label
+     * updates the red and black label
      */
     @Override
     public void update() {
+        //updates the visuals of the group
         rbIcon.setImagePath("images/redAndBlackPicture.png");
         rbLabel.setText("Red and Black Tree");
         rbDescription.setText("");
+        //calls the method to update positions of graphics objects
         updateLayout();
 
     }
@@ -110,8 +116,11 @@ public class RedAndBlackHomepageButton implements PleasingButton{
      * initializes variables which are used to create borders.
      */
     public void updateLayout() {
+        //updating positions of the image and label
         rbIcon.setCenter(size * .75, size *.25);
         rbLabel.setCenter(size * .75, size * .5);
+
+        //grabs the borders position of the image
         leftX = rbIcon.getX();
         topY = rbIcon.getY();
         rightX = rbIcon.getX() + rbIcon.getWidth();
@@ -130,8 +139,12 @@ public class RedAndBlackHomepageButton implements PleasingButton{
      */
     @Override
     public void onHover(Point position) {
+        //if the mouse position is within the bounds of the image
         if (rbIcon.isInBounds(position)) {
+            //add information about the tree to the canvas
             rbDescription.setText("Information about the avl structure");
+
+            //make the borders visible
             topBorder.setStrokeWidth(5);
             rightBorder.setStrokeWidth(5);
             leftBorder.setStrokeWidth(5);
@@ -142,7 +155,10 @@ public class RedAndBlackHomepageButton implements PleasingButton{
             bottomBorder.setStrokeColor(Color.black);
 
         } else {
+            //hide the information about the tree
             rbDescription.setText("");
+
+            //hide the borders
             topBorder.setStrokeWidth(0);
             rightBorder.setStrokeWidth(0);
             leftBorder.setStrokeWidth(0);
@@ -166,7 +182,9 @@ public class RedAndBlackHomepageButton implements PleasingButton{
      * @param backButton
      */
     public void onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton, Button backButton) {
+        //if the mouse position is within the bounds of the image
         if (rbIcon.isInBounds(position)) {
+            //reset the canvas
             canvas.removeAll();
             canvas.add(textField);
             canvas.add(button);

@@ -1,7 +1,6 @@
 
 
 //imports
-
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsGroup;
@@ -64,13 +63,16 @@ public class AVLHomepageButton implements PleasingButton {
         avlDescription.setCenter(size * .35, size * .8);
         canvas.add(avlDescription);
 
+        //calls the update method to update the visuals of the group
         update();
 
+        //creates a border around the picture
         topBorder = new Line(leftX-5, topY-2, rightX+5, topY-2);
         rightBorder = new Line(rightX+2, topY-5, rightX+2, bottomY+5);
         leftBorder = new Line(leftX-2, topY-5, leftX-2, bottomY+5);
         bottomBorder= new Line(leftX-5, bottomY+2, rightX+5, bottomY+2);
 
+        //sets the border to the color of the background and their width
         topBorder.setStrokeWidth(5);
         rightBorder.setStrokeWidth(5);
         leftBorder.setStrokeWidth(5);
@@ -80,6 +82,7 @@ public class AVLHomepageButton implements PleasingButton {
         leftBorder.setStrokeColor(Color.lightGray);
         bottomBorder.setStrokeColor(Color.lightGray);
 
+        //adds the borders to the canvas
         canvas.add(topBorder);
         canvas.add(rightBorder);
         canvas.add(leftBorder);
@@ -99,9 +102,11 @@ public class AVLHomepageButton implements PleasingButton {
      */
     @Override
     public void update() {
+        //updates the visuals of the group
         avlIcon.setImagePath("images/avlImage .png");
         avlLabel.setText("AVL Tree");
         avlDescription.setText("");
+        //calls the method to update positions of graphics objects
         updateLayout();
 
     }
@@ -111,8 +116,10 @@ public class AVLHomepageButton implements PleasingButton {
      * Initializes variables which are used to create borders.
      */
     public void updateLayout() {
+        //updating positions of the image and label
         avlIcon.setCenter(size * .25, size *.25);
         avlLabel.setCenter(size * .25, size * .5);
+        //grabs the borders position of the image
         leftX = avlIcon.getX();
         topY = avlIcon.getY();
         rightX = avlIcon.getX() + avlIcon.getWidth();
@@ -132,8 +139,11 @@ public class AVLHomepageButton implements PleasingButton {
      */
     @Override
     public void onHover(Point position) {
+        //if the mouse position is within the bounds of the image
         if (avlIcon.isInBounds(position)) {
+            //add information about the tree to the canvas
             avlDescription.setText("Information about the avl structure");
+            //make the borders visible
             topBorder.setStrokeWidth(5);
             rightBorder.setStrokeWidth(5);
             leftBorder.setStrokeWidth(5);
@@ -145,7 +155,9 @@ public class AVLHomepageButton implements PleasingButton {
 
 
         } else {
+            //hide the information about the tree
             avlDescription.setText("");
+            //hide the borders
             topBorder.setStrokeWidth(0);
             rightBorder.setStrokeWidth(0);
             leftBorder.setStrokeWidth(0);
@@ -169,7 +181,9 @@ public class AVLHomepageButton implements PleasingButton {
      * @param backButton
      */
     public void onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton, Button backButton) {
+        //if the mouse position is within the bounds of the image
         if (avlIcon.isInBounds(position)) {
+            //reset the canvas
             canvas.removeAll();
             canvas.add(textField);
             canvas.add(button);
