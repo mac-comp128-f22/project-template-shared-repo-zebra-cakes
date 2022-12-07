@@ -11,6 +11,11 @@ public class BSTTreeVisualization<E extends Comparable<E>> extends BinarySearchT
     public double height;
     public HashMap<Integer, Point> coordinate = new HashMap<>();
 
+    /**
+     * Creates a binary tree visualization
+     * @param width
+     * @param height
+     */
     public BSTTreeVisualization(double width, double height) {
         super();
         this.BSTGraphics = new GraphicsGroup(width, height);
@@ -19,6 +24,9 @@ public class BSTTreeVisualization<E extends Comparable<E>> extends BinarySearchT
         createCoordinates();
     }
     
+    /**
+     * Creates coordinates to be used in the visualization.
+     */
     public void createCoordinates() {
         for (int i = 0; i <= 31; i++) {
             double level = Math.floor(Math.log(i + 1) / Math.log(2));

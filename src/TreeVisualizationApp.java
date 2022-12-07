@@ -22,12 +22,14 @@ public class TreeVisualizationApp {
     private static RedAndBlackHomepageButton rbButton;
     private static int treeSize;
     private static Button removeButton;
+    private static Button backButton;
     
     public TreeVisualizationApp() {
     }
 
     public static void main(String[] args) {
         TreeVisualizationApp newApp = new TreeVisualizationApp();
+        canvas = new CanvasWindow("Tree Visualization App", CANVAS_WIDTH, CANVAS_HEIGHT);
         treeAppRunner(newApp);
     }
 
@@ -37,7 +39,6 @@ public class TreeVisualizationApp {
      * @param newApp
      */
     public static void treeAppRunner(TreeVisualizationApp newApp) {
-        canvas = new CanvasWindow("Tree Visualization App", CANVAS_WIDTH, CANVAS_HEIGHT);
         avlButton = new AVLHomepageButton(CANVAS_WIDTH, canvas);
         rbButton = new RedAndBlackHomepageButton(CANVAS_WIDTH, canvas);
 
@@ -67,6 +68,11 @@ public class TreeVisualizationApp {
         removeButton.setCenter(avlButton.getSize()*0.7, avlButton.getSize()*0.7);
         removeButton.onClick(() -> removeButtonRunner());
 
+        //add the back button
+        backButton = new Button("Back to Home");
+        backButton.setCenter(avlButton.getSize()*0.7, avlButton.getSize()*0.75);
+        backButton.onClick(() -> backMethod(newApp));
+
         canvas.add(avlButton.getButtonGraphics());
         canvas.add(rbButton.getButtonGraphics());
         canvas.setBackground(Color.lightGray);
@@ -74,6 +80,15 @@ public class TreeVisualizationApp {
         canvas.onMouseMove(event -> totalOnHover(event.getPosition()));
         canvas.onClick(event -> totalOnClick(event.getPosition()));
 
+    }
+
+    /**
+     * method to return to the home page from the second page
+     * @param newApp
+     */
+    private static void backMethod(TreeVisualizationApp newApp) {
+        canvas.removeAll();
+        treeAppRunner(newApp);
     }
 
     /**
@@ -155,8 +170,8 @@ public class TreeVisualizationApp {
     }
 
     public static void totalOnClick(Point position) {
-        avlButton.onClick(position, treeArray, treeArrayButton, doneButton, removeButton);
-        rbButton.onClick(position, treeArray, treeArrayButton, doneButton, removeButton);
+        avlButton.onClick(position, treeArray, treeArrayButton, doneButton, removeButton, backButton);
+        rbButton.onClick(position, treeArray, treeArrayButton, doneButton, removeButton, backButton);
     }
 }
 
