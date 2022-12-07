@@ -63,11 +63,6 @@ public class RedAndBlackHomepageButton implements PleasingButton{
         rbDescription.setCenter(size * .35, size * .8);
         canvas.add(rbDescription);
 
-        // topBorder = new Line(size * 0.5, (size * 0) + 2.5, size, (size * 0) + 2.5);
-        // rightBorder= new Line(size - 2.5, size * 0, size - 2.5, size * .5);
-        // leftBorder = new Line(size * 0.5, size * 0, size * 0.5, size * .5);
-        // bottomBorder= new Line(size * 0.5, size * .5, size, size * .5);\
-
         update();
 
         topBorder = new Line(leftX-5, topY-2, rightX+5, topY-2);
@@ -111,7 +106,8 @@ public class RedAndBlackHomepageButton implements PleasingButton{
     }
 
     /**
-     * updates layout of avlicon and avllabel
+     * updates layout of red and black icon and red and black icon
+     * initializes variables which are used to create borders.
      */
     public void updateLayout() {
         rbIcon.setCenter(size * .75, size *.25);
@@ -123,14 +119,14 @@ public class RedAndBlackHomepageButton implements PleasingButton{
     }
 
     /**
-     * get size
+     * returns the value of the size variable
      */
     public double getSize() {
         return this.size;
     }
 
     /**
-     * 
+     * Runs the visual on hover effect. Borders around the image button appear.
      */
     @Override
     public void onHover(Point position) {
@@ -159,6 +155,16 @@ public class RedAndBlackHomepageButton implements PleasingButton{
         
     }
 
+    /**
+     * Clears the canvas and adds new objects to the canvas which 
+     * make up the input box screen
+     * @param position
+     * @param textField
+     * @param button
+     * @param doneButton
+     * @param removeButton
+     * @param backButton
+     */
     public void onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton, Button backButton) {
         if (rbIcon.isInBounds(position)) {
             canvas.removeAll();

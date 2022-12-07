@@ -15,7 +15,7 @@ import edu.macalester.graphics.Line;
 import java.awt.Color;
 
 
-public class AVLHomepageButton implements PleasingButton{
+public class AVLHomepageButton implements PleasingButton {
 
     //instance variables
     private final double size;
@@ -64,12 +64,6 @@ public class AVLHomepageButton implements PleasingButton{
         avlDescription.setCenter(size * .35, size * .8);
         canvas.add(avlDescription);
 
-        //border lines
-        // topBorder = new Line(size * 0, (size * 0) + 2.5, size * .5, (size * 0) + 2.5);
-        // rightBorder= new Line(size * .5, size * 0, size * .5, size * .5);
-        // leftBorder = new Line((size * 0) + 2.5, size * 0, (size * 0) + 2.5, size * .5);
-        // bottomBorder= new Line(size * 0, size * .5, size * .5, size * .5);
-
         update();
 
         topBorder = new Line(leftX-5, topY-2, rightX+5, topY-2);
@@ -114,6 +108,7 @@ public class AVLHomepageButton implements PleasingButton{
 
     /**
      * updates layout of avlicon and avllabel
+     * Initializes variables which are used to create borders.
      */
     public void updateLayout() {
         avlIcon.setCenter(size * .25, size *.25);
@@ -125,7 +120,7 @@ public class AVLHomepageButton implements PleasingButton{
     }
 
     /**
-     * get size
+     * returns the value of the size variable
      */
     public double getSize() {
         return this.size;
@@ -133,7 +128,7 @@ public class AVLHomepageButton implements PleasingButton{
 
     
     /**
-     * 
+     * Runs the visual on hover effect. Borders around the image button appear.
      */
     @Override
     public void onHover(Point position) {
@@ -163,6 +158,16 @@ public class AVLHomepageButton implements PleasingButton{
         
     }
 
+    /**
+     * upon clicking the avl label button, this function will clear 
+     * the canvas and add the input box screen
+     * @param position
+     * @param textField
+     * @param button
+     * @param doneButton
+     * @param removeButton
+     * @param backButton
+     */
     public void onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton, Button backButton) {
         if (avlIcon.isInBounds(position)) {
             canvas.removeAll();

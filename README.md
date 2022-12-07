@@ -24,59 +24,145 @@ Project Goal - We attempted to create a visualization GUI in Java that would be 
 7. VOILA! On the next screen you will see your inputs being added to the binary search tree which will be sorted by the method you chose in the first step. You will also see each of the traversals represented in array form. 
 
 # Information About Our Classes and Their Methods
-AVLHomepageButton 
+AVLHomepageButton ( implements PleasingButton interface )
 
 @author Minh Nguyen, Brayden Coronado, Devinn Chi
 
 This class is used to create a button which is represented as an image of an AVL Tree. Pressing this button leads to the input screen.
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+
+            - AVLHomepageButton(double size, CanvasWindow canvas) :: Class level object, creates the AVL home page button and creates a border around it upon hovering.
+            
+            - getButtonGraphics() :: Returns the graphics group which the AVL home button page is on.
+
+            - update() :: Updates the AVL label
+
+            - updateLayout() :: Updates layout of avlicon and avllabel. Initializes variables which are used to create borders.
+
+            - getSize() :: Returns the value of the size variable
+
+            - onHover(Point position) :: Runs the visual on hover effect. Borders around the image button appear.
+
+            - onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton, Button backButton) :: Upon clicking the avl label button, this function will clear the canvas and add the input box screen.
 
 
-AVLTree
+AVLTree ( AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> )
 
 @author Bret Jackson, Mayank Jaiswal
 
 A class to represent an AVL binary search tree. AVL trees self-balance to maintain a heights that only differ by at most 1 between the left and right child.
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+
+            - heightFromLeaf(Node<E> node) :: Convenience funtion to check for null and convert nodes to AVLNodes when getting the heightfromLeaf.
+
+            - getBalance(Node<E> node) :: Calculates the balance factor for node.
+
+            - rotateLeft(AVLNode<E> pivot) :: Left rotation of x around the pivot node.
+
+            - rotateRight(AVLNode<E> pivot) :: Right rotation of x around the pivot node.
+
+            - add(E item) :: The object being inserted. Return true if the object is inserted, false if the object already exists in the tree. The object to insert must implement the Comparable interface.
+
+            - add(AVLNode<E> localRoot, AVLNode<E> parent, E item) :: Recursive add method.
+
+            - delete(E target) :: Starter method delete.
+
+            - delete(AVLNode<E> localRoot, E item) :: Recursive delete method.
+
+            - findLargestChild(Node<E> parent) :: Find the node that is the inorder predecessor.
 
 
-BinarySearchTree 
+BinarySearchTree ( BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> )
 
 @author Koffman and Wolfgang
 
 A class to represent a binary search tree.
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+
+            - contains(E target) :: Checks whether the target is contained in the tree.
+
+            - find(E target) :: Starter method find.
+
+            - find(Node<E> localRoot, E target) :: Recursive find method.
+
+            - add(E item) :: Starter method add.
+
+            - add(Node<E> localRoot, Node<E> parent, E item) :: Recursive add method.
+
+            - delete(E target) :: Starter delete method.
+
+            - delete(Node<E> localRoot, E item) :: Recursive delete method.
+
+            - findLargestChild(Node<E> parent) :: Find the node that is the inorder predecessor and replace it with its left child (if any).
 
 
-BSTTreeVisualization
+BinaryTree ( BinaryTree<E> implements Serializable )
+
+@author Koffman and Wolfgang
+
+Class for a binary tree that stores type E objects.
+
+    --Methods
+
+        - BinaryTree() :: Constructs an empty binary tree.
+
+        - BinaryTree(Node<E> root) :: Construct a BinaryTree with a specified root. Should only be used by subclasses.
+
+        - BinaryTree(E data, BinaryTree<E> leftTree, BinaryTree<E> rightTree) :: Constructs a new binary tree with data in its root,leftTree as its left subtree and rightTree as its right subtree.
+
+        - getLeftSubtree() :: Return the left subtree.
+
+        - getRightSubtree() :: Return the right subtree.
+        
+        - getData() :: Return the data field of the root.
+
+        - isLeaf() :: Determine whether this tree is a leaf.
+
+        - toString() :: no description found
+
+        - preOrderTraverse(Node<E> node, int depth, StringBuilder sb) :: Perform a preorder traversal.
+
+        - readBinaryTree(BufferedReader bR) :: Method to read a binary tree.
+
+
+BSTTreeVisualization ( BSTTreeVisualization<E extends Comparable<E>> extends BinarySearchTree<E> )
 
 @author Minh Nguyen, Brayden Coronado, Devinn Chi
 
 A class which aids in the visualizations that are represented in TreeVisualizationApp.java
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+
+            - BSTTreeVisualization(double width, double height) :: Creates a binary tree visualization.
+
+            - createCoordinates() :: Creates coordinates to be used in the visualization. 
 
 
-Node
+NilNode 
+
+@author unknown
+
+NilNode
+
+    --Methods
+        -MethodOne :: methodD
+        -MethodTwo :: methodD
+
+
+Node ( Node<E> implements Serializable )
 
 @author unknown
 
 A class which represents the parts and functions of a node
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+
+            - MethodNameOne :: methodDescriptionOne
+
+            - MethodNameTwo :: methodDescriptionTwo
 
 
 NodeGraphics
