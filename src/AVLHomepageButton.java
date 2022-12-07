@@ -163,13 +163,14 @@ public class AVLHomepageButton implements PleasingButton{
         
     }
 
-    public void onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton) {
+    public void onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton, Button backButton) {
         if (avlIcon.isInBounds(position)) {
             canvas.removeAll();
             canvas.add(textField);
             canvas.add(button);
             canvas.add(doneButton);
             canvas.add(removeButton);
+            canvas.add(backButton);
         }
     }
 
