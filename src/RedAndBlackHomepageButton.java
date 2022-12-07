@@ -1,5 +1,3 @@
-
-
 //imports
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
@@ -13,13 +11,14 @@ import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 import java.awt.Color;
 
-
+/**
+ * This class is used to create a button which is represented as an image of a Red and Black Tree. Pressing this button leads to the input screen.
+ */
 public class RedAndBlackHomepageButton implements PleasingButton{
 
     //instance variables
     private final double size;
     private GraphicsGroup group;
-
     private Image rbIcon;
     private GraphicsText rbLabel;
     private GraphicsText rbDescription;
