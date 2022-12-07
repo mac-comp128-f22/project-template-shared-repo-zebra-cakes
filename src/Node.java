@@ -8,14 +8,17 @@ public class Node<E> implements Serializable {
     public Node<E> right;
     public Color color;
     public int index;
+    public NodeGraphics graphics;
 
     public Node(E data) {
         this.data = data;
+        graphics = new NodeGraphics(data);
     }
 
     public Node(E data, Color color) {
         this.color = color;
         this.data = data;
+        graphics = new NodeGraphics<>(data, color);
     }
 
     public void setRed() {
@@ -28,10 +31,13 @@ public class Node<E> implements Serializable {
 
     public int getIndex() {
         if (parent == null) {
+            index = 0;
             return 0;
         } else if (parent.left == this) {
+            index = 2 * parent.getIndex() + 1;
             return 2 * parent.getIndex() + 1;
         } else if (parent.right == this) {
+            index = 2 * (parent.getIndex() + 1);
             return 2 * (parent.getIndex() + 1);
         } else {
             return (int) Double.NEGATIVE_INFINITY;

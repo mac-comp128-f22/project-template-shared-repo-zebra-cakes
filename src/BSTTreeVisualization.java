@@ -13,6 +13,7 @@ public class BSTTreeVisualization<E extends Comparable<E>> extends BinarySearchT
 
     public BSTTreeVisualization(double width, double height) {
         super();
+        this.BSTGraphics = new GraphicsGroup(width, height);
         this.width = width;
         this.height = height;
         createCoordinates();
@@ -28,9 +29,42 @@ public class BSTTreeVisualization<E extends Comparable<E>> extends BinarySearchT
             coordinate.put(i, new Point(horizontalGap, verticalGap));
         }
     }
+
+    public void addGraphics(E data) {
+        add(data);
+        BSTGraphics.removeAll();
+        createGraphics(this.root);
+    }
+
+    private void createGraphics(Node<E> root) {
+        if (root != null) {
+            if (root.left != null) {
+                Line connector = new Line(coordinate.get(root.getIndex()), coordinate.get(root.left.getIndex()));
+                BSTGraphics.add(connector);
+            }
+            if (root.right != null) {
+                Line connector = new Line(coordinate.get(root.getIndex()), coordinate.get(root.right.getIndex()));
+                BSTGraphics.add(connector);
+            }
+            BSTGraphics.add(root.graphics.nodeGraphics);
+            root.graphics.nodeGraphics.setCenter(coordinate.get(root.getIndex()));
+            createGraphics(root.left);
+            createGraphics(root.right);
+        }
+    }
+
+
     public static void main(String[] args) {
         CanvasWindow canvas = new CanvasWindow("test", 400, 200);
         BSTTreeVisualization<Integer> test = new BSTTreeVisualization<>(canvas.getWidth(), canvas.getHeight());
-        test.coordinate.forEach((k, v) -> canvas.add(new Ellipse(v.getX(), v.getY(), 1, 1)));      
+        canvas.add(test.BSTGraphics, 0, 0);
+        test.addGraphics(1);
+        test.addGraphics(2);
+        test.addGraphics(3);
+        test.addGraphics(0);
+        test.addGraphics(6);
+        test.addGraphics(-3);
+        test.addGraphics(-1);
+        test.addGraphics(-4);
     }
 }

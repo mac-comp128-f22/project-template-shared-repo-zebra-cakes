@@ -214,6 +214,12 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
         }
     }
 
+    public static void main(String[] args) {
+        BinarySearchTree test = new BinarySearchTree<>();
+        test.add(1);
+        test.add(2);
+        test.add(3);
+    }
 
 }
 
