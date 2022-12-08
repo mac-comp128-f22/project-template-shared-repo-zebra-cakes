@@ -140,6 +140,12 @@ A class which aids in the visualizations that are represented in TreeVisualizati
 
             - createCoordinates() :: Creates coordinates to be used in the visualization. 
 
+            - addGraphics(E data) :: adds graphics based on data input
+
+            - createGraphics(Node<E> root) :: Creates graphics 
+
+            - 
+
 
 NilNode 
 

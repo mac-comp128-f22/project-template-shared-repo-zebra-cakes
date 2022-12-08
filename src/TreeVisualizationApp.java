@@ -1,7 +1,5 @@
-
-
+//imports
 import java.util.ArrayList;
-
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
@@ -9,7 +7,15 @@ import edu.macalester.graphics.ui.TextField;
 import edu.macalester.graphics.Point;
 import java.awt.Color;
 
+/**
+ * A class which operates and creates a Graphical User Interface 
+ * that has the capability of generating a Binary Search Tree visualization. 
+ * This tree can either be sorted via AVL or black and red. This GUI will 
+ * also print out the traversals of the created tree.
+ */
 public class TreeVisualizationApp {
+
+    //instance variables
     private static final int CANVAS_HEIGHT = 800;
     private static final int CANVAS_WIDTH = 800;
     private static GraphicsText errorText = new GraphicsText("You may not have entered an Integer value. Please try again.");
@@ -24,9 +30,16 @@ public class TreeVisualizationApp {
     private static Button removeButton;
     private static Button backButton;
     
+    /**
+     * Class level object
+     */
     public TreeVisualizationApp() {
     }
 
+    /**
+     * main method
+     * @param args
+     */
     public static void main(String[] args) {
         TreeVisualizationApp newApp = new TreeVisualizationApp();
         canvas = new CanvasWindow("Tree Visualization App", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -39,13 +52,16 @@ public class TreeVisualizationApp {
      * @param newApp
      */
     public static void treeAppRunner(TreeVisualizationApp newApp) {
+
+        //initialize first homescreen and picture buttons
         avlButton = new AVLHomepageButton(CANVAS_WIDTH, canvas);
         rbButton = new RedAndBlackHomepageButton(CANVAS_WIDTH, canvas);
 
+        //initialize array to store input values
         arrTree = new ArrayList<>();
 
         //error text set position
-        errorText.setCenter(avlButton.getSize()*0.5, avlButton.getSize()*0.7);
+        errorText.setCenter(avlButton.getSize()*0.4, avlButton.getSize()*0.8);
         errorText.setText("");
         canvas.add(errorText);
 
@@ -73,10 +89,12 @@ public class TreeVisualizationApp {
         backButton.setCenter(avlButton.getSize()*0.7, avlButton.getSize()*0.75);
         backButton.onClick(() -> backMethod(newApp));
 
+        //add button graphics and set background color
         canvas.add(avlButton.getButtonGraphics());
         canvas.add(rbButton.getButtonGraphics());
         canvas.setBackground(Color.lightGray);
 
+        //create event handlers
         canvas.onMouseMove(event -> totalOnHover(event.getPosition()));
         canvas.onClick(event -> totalOnClick(event.getPosition()));
 
@@ -87,7 +105,11 @@ public class TreeVisualizationApp {
      * @param newApp
      */
     private static void backMethod(TreeVisualizationApp newApp) {
+
+        //clears canvas
         canvas.removeAll();
+
+        //re-runs the main app running method
         treeAppRunner(newApp);
     }
 
@@ -96,12 +118,24 @@ public class TreeVisualizationApp {
      * @return
      */
     private static void removeButtonRunner() {
+
+        //sets error text to ""
         errorText.setText("");
+
+        //if the array of inputs is not empty...
         if (!arrTree.isEmpty()) {
+
+            //remove the most recent value which was added to the array
+            //amount of values is decremented
+            //print out array ( for testing purposes )
             arrTree.remove(arrTree.get(arrTree.size()-1));
             treeSize--;
             System.out.println(arrTree);
+
+        //else if array of inputs is empty...
         } else {
+
+            //set and display new error text 
             errorText.setText("There are no values to remove.");
             canvas.add(errorText);
         }
@@ -128,28 +162,58 @@ public class TreeVisualizationApp {
         //get text inside of treeArray and convert it to an integer
         String getNode = treeArray.getText();
         
+        //cases for the input box 
+        // 1. If the value cannot be converted to Int
+        // 2. If the value is null
         try {
             Integer.parseInt(getNode);
         } catch (NumberFormatException e) {
+
+            //sets new error text
+            //sets woah to false
             errorText.setText("You may not have entered an Integer value. Please try again.");
             canvas.add(errorText);
             woah = false;
         } catch (NullPointerException e) {
+
+            //sets new error text
+            //sets woah to false
             errorText.setText("You may not have entered an Integer value. Please try again.");
             canvas.add(errorText);
             woah = false;
         } 
 
+        //if array of inputs is full...
         if (treeSize >= 31) {
+
+            //display error text for maximum values
             errorText.setText("You have reached the maximum number of values. Press the done button to vizualize your tree.");
             canvas.add(errorText);
+
+            //else if array can store another value...
         } else {
+
+            //if there was no error earlier in the method
             if (woah == true) {
+
+                //get the value of the input box
                 Integer getNodeInt = Integer.valueOf(getNode);
+
+                //if the gotten value is a duplicate...
                 if (arrTree.contains(getNodeInt)) {
+
+                    //display error text
                     errorText.setText("You have entered a duplicate value. Please try again.");
                     canvas.add(errorText);
+
+                //if the gotten value is not a duplicate...
                 } else {
+
+                    //clear error text
+                    //add value to the input array
+                    //print out array for testing
+                    //clear the input box
+                    //increment the size of the tree
                     errorText.setText("");
                     arrTree.add(getNodeInt);
                     System.out.println(arrTree);   
@@ -165,11 +229,19 @@ public class TreeVisualizationApp {
      * @param position
      */
     public static void totalOnHover(Point position) {
+
+        //runs on hover methods
         avlButton.onHover(position);
         rbButton.onHover(position);
     }
 
+    /**
+     * creates the second screen
+     * @param position
+     */
     public static void totalOnClick(Point position) {
+
+        //runs methods to clear canvas and add new items to screen
         avlButton.onClick(position, treeArray, treeArrayButton, doneButton, removeButton, backButton);
         rbButton.onClick(position, treeArray, treeArrayButton, doneButton, removeButton, backButton);
     }

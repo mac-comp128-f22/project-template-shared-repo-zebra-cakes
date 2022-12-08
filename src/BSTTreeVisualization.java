@@ -6,6 +6,9 @@ import java.util.Iterator;
 import edu.macalester.graphics.*;
 
 public class BSTTreeVisualization<E extends Comparable<E>>{
+    /**
+     * A class which aids in the visualizations that are represented in TreeVisualizationApp.java
+    */
     public GraphicsGroup graphics;
     public BinarySearchTree<E> tree;
     public double width;
@@ -39,6 +42,10 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
         }
     }
 
+    /**
+     * adds graphics based on data input
+     * @param data
+     */
     public void addGraphics(E data) {
         tree.add(data);
         graphics.removeAll();
@@ -50,6 +57,10 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
         graphics.removeAll();
         createGraphics(this.tree.root);
     }
+    /**
+     * Creates graphics 
+     * @param root
+     */
     private void createGraphics(Node<E> root) {
         if (root != null) {
                     root.getIndex();
@@ -68,7 +79,10 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
         }
     }
 
-
+    /**
+     * Main method
+     * @param args
+     */
     public static void main(String[] args) {
         CanvasWindow canvas = new CanvasWindow("test", 1000, 300);
         BSTTreeVisualization<Integer> test = new BSTTreeVisualization<>(canvas.getWidth(), canvas.getHeight());
