@@ -172,6 +172,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
                     // Replace the data with the data in the
                     // left child.
                     localRoot.data = localRoot.left.data;
+                    localRoot.graphics = new NodeGraphics<E>(localRoot.data);
                     // Replace the left child with its left child.
                     localRoot.left = localRoot.left.left;
                     if (localRoot.left != null) {
@@ -182,6 +183,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
                     // Search for the inorder predecessor (ip) and
                     // replace deleted node's data with ip.
                     localRoot.data = findLargestChild(localRoot.left);
+                    localRoot.graphics = new NodeGraphics<E>(localRoot.data);
                     return localRoot;
                 }
             }
