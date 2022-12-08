@@ -17,12 +17,13 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    /**
-     * Asjusts the node based on its sibling
-     * @param node
-     * @param siblingNode
-     */
-    private void adjustBasedOnBlack(RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
+    protected static class NilNode<E> extends RedAndBlackNode<E> {
+        public NilNode() {
+            super(null);
+        }
+    }
+
+    private void adjustBasedOnBlack (RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
         boolean nodeIsLeftChild = node == node.parent.left;
 
         if (nodeIsLeftChild && siblingNode.right.color == Color.black) {

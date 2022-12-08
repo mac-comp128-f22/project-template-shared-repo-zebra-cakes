@@ -271,6 +271,7 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
 
                 // Copy the inorder predecessors's data to this node
                 localRoot.data = temp.data;
+                localRoot.graphics = new NodeGraphics<E>(localRoot.data);
 
                 // Delete the inorder successor
                 localRoot.right = delete((AVLNode<E>)localRoot.right, temp.data);
