@@ -14,7 +14,7 @@ public class Node<E> implements Serializable {
     public NodeGraphics graphics;
 
     /**
-     * 
+     * creates new graphics obj based on input
      */
     public Node(E data) {
         this.data = data;
@@ -22,7 +22,7 @@ public class Node<E> implements Serializable {
     }
 
     /**
-     * 
+     * Creates new graphics obj based on input
      * @param data
      * @param color
      */
@@ -33,21 +33,21 @@ public class Node<E> implements Serializable {
     }
 
     /**
-     * 
+     * Sets color to red
      */
     public void setRed() {
         this.color = Color.red;
     }
 
     /**
-     * 
+     * Sets color to black
      */
     public void setBlack() {
         this.color = Color.black;
     }
 
     /**
-     * 
+     * Returns the index of the called object
      * @return
      */
     public int getIndex() {
@@ -66,7 +66,7 @@ public class Node<E> implements Serializable {
     }
 
     /**
-     * 
+     * Converts node to string
      */
     @Override
     public String toString() {

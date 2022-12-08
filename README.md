@@ -5,8 +5,10 @@ Group - Zebra Cakes
 
 Members - Minh Nguyen | Brayden Coronado | Devinn Chi
 
+
 # Information About Our Project
 Project Goal - We attempted to create a visualization GUI in Java that would be able to accurately represent the automatic balancing operations done with an AVL Binary search Tree and a Black and Red Binary Search Tree. We allowed to user to input an array of values (one input at a time) with no duplicate values, and a maximum number of values that would represent a complete and full Binary Search Tree (31) of height 4. Our GUI also prints out the Inorder, Preorder, and Postorder traversals of the tree that is created. Each traversal is represented in its array form, with the order of the array being the order of the nodes to be traversed. Another strict boundary we made sure to add was that each value added to the Binary Search Tree through user input can ONLY be an Integer (not a double or string or anything else).
+
 
 # Steps to run our project 
 1. Upon running the app, select either the Black and Red or AVL picture to select which type of automatic rebalancing will be implemented.
@@ -22,6 +24,15 @@ Project Goal - We attempted to create a visualization GUI in Java that would be 
 6. When you are finished entering your values into the input box, you can press the "done" button.
 
 7. VOILA! On the next screen you will see your inputs being added to the binary search tree which will be sorted by the method you chose in the first step. You will also see each of the traversals represented in array form. 
+
+
+# Steps to test our project
+1. 
+
+2. 
+
+3. 
+
 
 # Information About Our Classes and Their Methods
 AVLHomepageButton ( implements PleasingButton interface )
@@ -84,19 +95,19 @@ A class to represent a binary search tree.
 
             - contains(E target) :: Checks whether the target is contained in the tree.
 
-            - find(E target) :: Starter method find.
+            - find(E target) :: Starter method find
 
-            - find(Node<E> localRoot, E target) :: Recursive find method.
+            - find(Node<E> localRoot, E target) :: Recursive find method
 
-            - add(E item) :: Starter method add.
+            - add(E item) :: Starter method add
 
-            - add(Node<E> localRoot, Node<E> parent, E item) :: Recursive add method.
+            - add(Node<E> localRoot, Node<E> parent, E item) :: Recursive add method
 
-            - delete(E target) :: Starter delete method.
+            - delete(E target) :: Starter delete method
 
-            - delete(Node<E> localRoot, E item) :: Recursive delete method.
+            - delete(Node<E> localRoot, E item) :: Recursive delete method
 
-            - findLargestChild(Node<E> parent) :: Find the node that is the inorder predecessor and replace it with its left child (if any).
+            - findLargestChild(Node<E> parent) :: Find the node that is the inorder predecessor and replace it with its left child (if any)
 
 
 BinaryTree ( BinaryTree<E> implements Serializable )
@@ -107,25 +118,25 @@ Class for a binary tree that stores type E objects.
 
     --Methods
 
-        - BinaryTree() :: Constructs an empty binary tree.
+        - BinaryTree() :: Constructs an empty binary tree
 
-        - BinaryTree(Node<E> root) :: Construct a BinaryTree with a specified root. Should only be used by subclasses.
+        - BinaryTree(Node<E> root) :: Construct a BinaryTree with a specified root. Should only be used by subclasses
 
-        - BinaryTree(E data, BinaryTree<E> leftTree, BinaryTree<E> rightTree) :: Constructs a new binary tree with data in its root,leftTree as its left subtree and rightTree as its right subtree.
+        - BinaryTree(E data, BinaryTree<E> leftTree, BinaryTree<E> rightTree) :: Constructs a new binary tree with data in its root,leftTree as its left subtree and rightTree as its right subtree
 
-        - getLeftSubtree() :: Return the left subtree.
+        - getLeftSubtree() :: Return the left subtree
 
-        - getRightSubtree() :: Return the right subtree.
+        - getRightSubtree() :: Return the right subtree
         
-        - getData() :: Return the data field of the root.
+        - getData() :: Return the data field of the root
 
-        - isLeaf() :: Determine whether this tree is a leaf.
+        - isLeaf() :: Determine whether this tree is a leaf
 
         - toString() :: no description found
 
-        - preOrderTraverse(Node<E> node, int depth, StringBuilder sb) :: Perform a preorder traversal.
+        - preOrderTraverse(Node<E> node, int depth, StringBuilder sb) :: Perform a preorder traversal
 
-        - readBinaryTree(BufferedReader bR) :: Method to read a binary tree.
+        - readBinaryTree(BufferedReader bR) :: Method to read a binary tree
 
 
 BSTTreeVisualization ( BSTTreeVisualization<E extends Comparable<E>> extends BinarySearchTree<E> )
@@ -138,13 +149,11 @@ A class which aids in the visualizations that are represented in TreeVisualizati
 
             - BSTTreeVisualization(double width, double height) :: Creates a binary tree visualization.
 
-            - createCoordinates() :: Creates coordinates to be used in the visualization. 
+            - createCoordinates() :: Creates coordinates to be used in the visualization
 
             - addGraphics(E data) :: adds graphics based on data input
 
-            - createGraphics(Node<E> root) :: Creates graphics 
-
-            - 
+            - createGraphics(Node<E> root) :: Creates graphics
 
 
 NilNode 
@@ -166,53 +175,112 @@ A class which represents the parts and functions of a node
 
         --Methods
 
-            - MethodNameOne :: methodDescriptionOne
+            - Node(E data) :: Creates new graphics obj based on input
 
-            - MethodNameTwo :: methodDescriptionTwo
+            - Node(E data, Color color) :: Creates new graphics obj based on input
+
+            - setRed() :: Sets color to red
+
+            - setBlack() :: Sets color to black
+
+            - getIndex() :: Returns the index of the called object
+
+            - toString() :: Converts node to string
 
 
-NodeGraphics
+NodeGraphics ( NodeGraphics<E> )
 
 @author Minh Nguyen, Brayden Coronado, Devinn Chi
 
 A class which handles the graphics of AVL and Black and Red trees including the visual shape of a node and the color (black/red)
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+
+            - NodeGraphics(E data) :: Creates the graphics for a node
+
+            - NodeGraphics(E data, Color color) :: Creates the graphics for a node, with color
+
+            - setColorBlack() :: Sets the color of a node to black
+
+            - setColorRed() :: Sets color of a node to red
 
 
-PleasingButton
+
+PleasingButton ( interface )
 
 @author Minh Nguyen, Brayden Coronado, Devinn Chi
 
 An interface to help the operations of buttons
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+
+            - getButtonGraphics() :: This shows what the graphics of the button look like
+
+            - update() :: This will show the proper image, label and description for the button
+
+            - onHover(Point position) :: This is called when the mouse is on top of the button
 
 
-RedAndBlackHomepageButton
+RedAndBlackHomepageButton ( implements interface PleasingButton )
 
 @author Minh Nguyen, Brayden Coronado, Devinn Chi
 
 This class is used to create a button which is represented as an image of a Red and Black Tree. Pressing this button leads to the input screen.
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+            
+            - RedAndBlackHomepageButton(double size, CanvasWindow canvas) :: RedAndBlackHomepageButton class object creates graphics group objects and text buttons
+
+            - getButtonGraphics() :: Returns the graphics group which the Red and Black home button page is on.
+
+            - update() :: Updates the Red and Black label
+
+            - updateLayout() :: Updates layout of avlicon and avllabel. Initializes variables which are used to create borders.
+
+            - getSize() :: Returns the value of the size variable
+
+            - onHover(Point position) :: Runs the visual on hover effect. Borders around the image button appear.
+
+            - onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton, Button backButton) :: Upon clicking the Red and Black label button, this function will clear the canvas and add the input box screen.
 
 
-RedAndBlackTree
+RedAndBlackTree ( RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E> )
 
 @author Minh Nguyen, Brayden Coronado, Devinn Chi
 
 A class to represent a Red and Black binary search tree. Red and Black trees self-balance by following a few rules relating to color.
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+
+            - adjustBasedOnBlack(RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) :: Asjusts the node based on its sibling
+
+            - adjustBasedOnRed(RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) :: Method to adjust node based on its sibling
+
+            - getSibling(RedAndBlackNode<E> searchNode) :: Returns the sibling of a node
+
+            - readjustColor(RedAndBlackNode<E> nodeToReadjust) :: Gets the color of a node
+
+            - findMinimum(RedAndBlackNode<E> nodeToSearch) :: Finds the minimum node 
+
+            - deleteNodeWithOneOrNoChild(RedAndBlackNode<E> nodeToDelete) :: Deletes the node if one or no child
+
+            - deleteNode(E key) :: Deletes the node
+
+            - rotations(RedAndBlackNode<E> insertedNode) :: handles rotations for nodes
+            
+            - getUncle(RedAndBlackNode<E> parentNode) :: Gets the uncle node of the parent
+
+            - insert(RedAndBlackNode<E> parentNode, E key) :: Handles the insertion of a node
+
+            - addNode(E key) :: adds node
+
+            - searchForNode(E key) :: Searches for input node based on key
+
+            - replaceParentsChild(RedAndBlackNode<E> parentNode, RedAndBlackNode<E> oldChildNode, RedAndBlackNode<E> newChildNode) :: replaces the child of the parent inputted
+
+            - rotateLeft(RedAndBlackNode<E> pivot) :: Left rotation of x around the pivot node
+
+            - rotateRight(RedAndBlackNode<E> pivot) :: Right rotation of x around the pivot node
 
 
 TreeVisualization
@@ -233,5 +301,19 @@ TreeVisualizationApp
 A class which operates and creates a Graphical User Interface that has the capability of generating a Binary Search Tree visualization. This tree can either be sorted via AVL or black and red. This GUI will also print out the traversals of the created tree.
 
         --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
+
+            - TreeVisualizationApp() :: Class level object
+
+            - treeAppRunner(TreeVisualizationApp newApp) :: Method which will create a canvas, and implement a user interface which will allow a user to see implmentations for AVL and Black and Red trees.
+
+            - backMethod(TreeVisualizationApp newApp) :: Method to return to the home page from the second page
+
+            - removeButtonRunner() :: Removes the most recently added value from the input treeArray
+
+            - inputComplete() :: Indicates that the user is done adding values to their tree starts the visualization process
+
+            - treeArrayButtonRunner() :: Run the button for the treeArrayButton add the integer from the treeArray to an array
+            
+            - totalOnHover(Point position) :: runs methods for onHover upon home screen
+
+            - totalOnClick(Point position) :: Creates the second screen

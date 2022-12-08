@@ -17,7 +17,12 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    private void adjustBasedOnBlack (RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
+    /**
+     * Asjusts the node based on its sibling
+     * @param node
+     * @param siblingNode
+     */
+    private void adjustBasedOnBlack(RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
         boolean nodeIsLeftChild = node == node.parent.left;
 
         if (nodeIsLeftChild && siblingNode.right.color == Color.black) {
@@ -42,7 +47,12 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    private void adjustBasedOnRed (RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
+    /**
+     * Method to adjust node based on its sibling
+     * @param node
+     * @param siblingNode
+     */
+    private void adjustBasedOnRed(RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
         siblingNode.color = Color.black;
         node.parent.color = Color.red;
         if (node == node.parent.left) {
@@ -52,7 +62,12 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    private RedAndBlackNode<E> getSibling (RedAndBlackNode<E> searchNode) {
+    /**
+     * Returns the sibling of a node
+     * @param searchNode
+     * @return
+     */
+    private RedAndBlackNode<E> getSibling(RedAndBlackNode<E> searchNode) {
         RedAndBlackNode<E> parentNode = (RedAndBlackNode<E>) searchNode.parent;
         if (searchNode  == parentNode.left) {
             return (RedAndBlackNode<E>) parentNode.right;
@@ -61,7 +76,11 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    private void readjustColor (RedAndBlackNode<E> nodeToReadjust) {
+    /**
+     * Gets the color of a node
+     * @param nodeToReadjust
+     */
+    private void readjustColor(RedAndBlackNode<E> nodeToReadjust) {
         if (nodeToReadjust == root) {
             return;
         }
@@ -84,6 +103,11 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
+    /**
+     * Finds the minimum node
+     * @param nodeToSearch
+     * @return
+     */
     private RedAndBlackNode<E> findMinimum(RedAndBlackNode<E> nodeToSearch) {
         while (nodeToSearch.left != null) {
             nodeToSearch = (RedAndBlackNode<E>) nodeToSearch.left;
@@ -91,7 +115,10 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         return nodeToSearch;
     }
 
-    private RedAndBlackNode<E> deleteNodeWithOneOrNoChild (RedAndBlackNode<E> nodeToDelete) {
+    /**
+     * Deletes the node if one or no child
+     */
+    private RedAndBlackNode<E> deleteNodeWithOneOrNoChild(RedAndBlackNode<E> nodeToDelete) {
         if (nodeToDelete.left != null) {
             replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, (RedAndBlackNode<E>)nodeToDelete.left);
             return (RedAndBlackNode<E>) nodeToDelete.left;
@@ -106,7 +133,11 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
 
     }
 
-    public void deleteNode (E key) {
+    /**
+     * deletes the node
+     * @param key
+     */
+    public void deleteNode(E key) {
         RedAndBlackNode<E> searchNode = (RedAndBlackNode<E>) root;
 
         while (searchNode.data != key && searchNode != null) {
@@ -139,7 +170,11 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    private void rotations (RedAndBlackNode<E> insertedNode) {
+    /**
+     * handles rotations for nodes
+     * @param insertedNode
+     */
+    private void rotations(RedAndBlackNode<E> insertedNode) {
         RedAndBlackNode<E> parentNode = (RedAndBlackNode<E>) insertedNode.parent;
         if (parentNode == null) {
             insertedNode.color = Color.black;
@@ -183,7 +218,12 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    public RedAndBlackNode<E> getUncle (RedAndBlackNode<E> parentNode) {
+    /**
+     * Gets the uncle node of the parent
+     * @param parentNode
+     * @return
+     */
+    public RedAndBlackNode<E> getUncle(RedAndBlackNode<E> parentNode) {
         RedAndBlackNode<E> grandparentNode = (RedAndBlackNode<E>) parentNode.parent;
         if (grandparentNode.right == parentNode) {
             return (RedAndBlackNode<E>) grandparentNode.right;
@@ -192,7 +232,12 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    public void insert (RedAndBlackNode<E> parentNode, E key) {
+    /**
+     * Handles the insertion of a node
+     * @param parentNode
+     * @param key
+     */
+    public void insert(RedAndBlackNode<E> parentNode, E key) {
         RedAndBlackNode<E> nodeToInsert = new RedAndBlackNode<E>(key);
         nodeToInsert.color = Color.red;
         if (parentNode == nodeToInsert) {
@@ -208,6 +253,10 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
 
     }
 
+    /**
+     * adds node
+     * @param key
+     */
     public void addNode(E key) {
         RedAndBlackNode<E> nodeSearcher = ((RedAndBlackNode<E>)root);
         RedAndBlackNode<E> parent = null;
@@ -226,6 +275,11 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         insert(parent, key);
     }
 
+    /**
+     * Searches for input node based on key
+     * @param key
+     * @return
+     */
     public RedAndBlackNode<E> searchForNode(E key) {
         RedAndBlackNode<E> nodeSearcher = ((RedAndBlackNode<E>)root);
         for (;;) {
@@ -241,6 +295,12 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
+    /**
+     * replaces the child of the parent inputted
+     * @param parentNode
+     * @param oldChildNode
+     * @param newChildNode
+     */
     private void replaceParentsChild(RedAndBlackNode<E> parentNode, RedAndBlackNode<E> oldChildNode, RedAndBlackNode<E> newChildNode) {
         if (parentNode == null) {
             root = newChildNode;
@@ -256,16 +316,10 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
 
     /**
      * Left rotation of x around the pivot node
-     *    pivot                      x
-     *    /  \                     /  \
-     *   T1   x        ----->  pivot  T3
-     *       / \                /  \
-     *     T2  T3              T1  T2
      * @param pivot
      * @return
      */
     private void rotateLeft(RedAndBlackNode<E> pivot) {
-
 
         RedAndBlackNode<E> parent = ((RedAndBlackNode<E>) pivot.parent);
         RedAndBlackNode<E> pivotRightChild = ((RedAndBlackNode<E>) pivot.right);
@@ -293,11 +347,6 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
 
     /**
      * Right rotation of x around the pivot node
-     *         pivot                 x
-     *         /  \                /  \
-     *        x   T3    ----->   T1   pivot
-     *       / \                      /  \
-     *     T1  T2                    T2  T3
      * @param pivot
      * @return
      */

@@ -38,7 +38,7 @@ public class RedAndBlackHomepageButton implements PleasingButton{
      * @param size
      * @param cavas
      */
-    public RedAndBlackHomepageButton (double size, CanvasWindow canvas) {
+    public RedAndBlackHomepageButton(double size, CanvasWindow canvas) {
 
         //initialize size
         this.size = size;

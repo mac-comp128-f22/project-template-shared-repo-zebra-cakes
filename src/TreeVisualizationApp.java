@@ -225,7 +225,7 @@ public class TreeVisualizationApp {
     }
 
     /**
-     * 
+     * runs methods for onHover upon home screen
      * @param position
      */
     public static void totalOnHover(Point position) {
