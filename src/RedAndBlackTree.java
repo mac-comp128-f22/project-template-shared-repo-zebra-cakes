@@ -120,6 +120,7 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
      * Deletes the node if one or no child
      */
     private RedAndBlackNode<E> deleteNodeWithOneOrNoChild(RedAndBlackNode<E> nodeToDelete) {
+        RedAndBlackNode nilChild = new RedAndBlackNode(null);
         if (nodeToDelete.left != null) {
             replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, (RedAndBlackNode<E>)nodeToDelete.left);
             return (RedAndBlackNode<E>) nodeToDelete.left;
@@ -127,7 +128,7 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
             replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, (RedAndBlackNode<E>)nodeToDelete.right);
             return (RedAndBlackNode<E>) nodeToDelete.right;
         } else {
-            RedAndBlackNode<E> nilChild = nilChild.color == Color.black ? new NilNode() : null;
+            nilChild = nilChild.color == Color.black ? new NilNode() : null;
             replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, nilChild);
             return nilChild;
         }
@@ -152,7 +153,7 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
              return;
         }
 
-        RedAndBlackNode<E> nodeToMove;
+        RedAndBlackNode<E> nodeToMove = new RedAndBlackNode<E>(null);
         Color deletedNodeColor;
 
         if (searchNode.left == null || searchNode.right == null) {
