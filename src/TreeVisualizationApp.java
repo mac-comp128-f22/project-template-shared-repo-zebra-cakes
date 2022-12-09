@@ -38,8 +38,6 @@ public class TreeVisualizationApp {
     private static GraphicsText preOrder;
     private static GraphicsText postOrder;
 
-    
-    
     /**
      * Class level object
      */
@@ -62,6 +60,8 @@ public class TreeVisualizationApp {
      * @param newApp
      */
     public static void treeAppRunner(TreeVisualizationApp newApp) {
+        //initialize variables in case of recalling
+        avlOrRb = null;
         treeSize = 0;
         traversalsRan = null;
         //initialize first homescreen and picture buttons
@@ -115,6 +115,9 @@ public class TreeVisualizationApp {
 
         //avlTree visualization handling
         avlTree = new AVLTreeVisualization<>(CANVAS_WIDTH,CANVAS_HEIGHT*0.7);
+
+        //rbTree visualization handling
+        rbTree = new RedAndBlackTreeVisualization<>(CANVAS_WIDTH,CANVAS_HEIGHT*0.7);
 
         //add button graphics and set background color
         canvas.add(avlButton.getButtonGraphics());
@@ -208,14 +211,30 @@ public class TreeVisualizationApp {
         //if the array of inputs is not empty...
         if (!arrTree.isEmpty()) {
             if (traversalsRan == null) {
-                //remove the most recent value which was added to the array
-                //amount of values is decremented
-                //print out array ( for testing purposes )
-                avlTree.removeGraphics(arrTree.get(arrTree.size()-1));
-                arrTree.remove(arrTree.get(arrTree.size()-1));
+
+                //if avl...
+                if (avlOrRb == true) {
+
+                    //remove the most recent value which was added to the array
+                    //amount of values is decremented
+                    //print out array ( for testing purposes )
+                    avlTree.removeGraphics(arrTree.get(arrTree.size()-1));
+                    arrTree.remove(arrTree.get(arrTree.size()-1));
+                    treeSize--;
+                    System.out.println(arrTree);
+
+                //else (red and black)
+                } else {
+
+                    //remove the most recent value which was added to the array
+                    //amount of values is decremented
+                    //print out array ( for testing purposes )
+                    rbTree.removeGraphics(arrTree.get(arrTree.size()-1));
+                    arrTree.remove(arrTree.get(arrTree.size()-1));
+                    treeSize--;
+                    System.out.println(arrTree);
+                }
                 
-                treeSize--;
-                System.out.println(arrTree);
             } else {
                 errorText.setText("Traversals have been run. Restart to continue.");
                 canvas.add(errorText);
@@ -291,22 +310,43 @@ public class TreeVisualizationApp {
     
                     //if the gotten value is not a duplicate...
                     } else {
-    
-                        //clear error text
-                        //add value to the input array
-                        //print out array for testing
-                        //clear the input box
-                        //increment the size of the tree
-                        errorText.setText("");
-                        arrTree.add(getNodeInt);
-                        System.out.println(arrTree);   
-                        treeArray.setText("");
-                        treeSize++;
-                        avlTree.addGraphics(getNodeInt);
+
+                        //if avl tree...
+                        if (avlOrRb == true) {
+                            //clear error text
+                            //add value to the input array
+                            //print out array for testing
+                            //clear the input box
+                            //increment the size of the tree
+                            errorText.setText("");
+                            arrTree.add(getNodeInt);
+                            avlTree.addGraphics(getNodeInt);
+                            System.out.println(arrTree);   
+                            treeArray.setText("");
+                            treeSize++;
+
+                        //else (red and black tree)
+                        } else {
+
+                            //clear error text
+                            //add value to the input array
+                            //print out array for testing
+                            //clear the input box
+                            //increment the size of the tree
+                            errorText.setText("");
+                            arrTree.add(getNodeInt);
+                            rbTree.addGraphics(getNodeInt);
+                            System.out.println(arrTree);   
+                            treeArray.setText("");
+                            treeSize++;
+                        }
+                        
                     }
                 }
             }
         } else {
+
+            //error
             errorText.setText("Traversals have been run. Restart to continue.");
             canvas.add(errorText);
         }
