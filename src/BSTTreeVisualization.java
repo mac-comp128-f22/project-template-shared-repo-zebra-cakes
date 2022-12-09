@@ -1,10 +1,10 @@
-import java.lang.System.Logger.Level;
-import java.util.ArrayList;
+//imports
 import java.util.HashMap;
-import java.util.Iterator;
-
 import edu.macalester.graphics.*;
 
+/**
+ * A class which aids in the visualizations that are represented in TreeVisualizationApp.java
+ */
 public class BSTTreeVisualization<E extends Comparable<E>>{
     /**
      * A class which aids in the visualizations that are represented in TreeVisualizationApp.java
@@ -98,17 +98,17 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
         CanvasWindow canvas = new CanvasWindow("test", 1000, 300);
         BSTTreeVisualization<Integer> test = new BSTTreeVisualization<>(canvas.getWidth(), canvas.getHeight());
         canvas.add(test.graphics, 0, 0);
-        test.addGraphics(3);
-        test.addGraphics(4);
-        test.addGraphics(5);
-        test.addGraphics(1);
-        test.addGraphics(8);
-        test.addGraphics(2);
-        test.addGraphics(11);
-        test.addGraphics(34);
-        test.removeGraphics(34);
-        test.removeGraphics(11);
-        test.removeGraphics(2);
+        // test.addGraphics(3);
+        // test.addGraphics(4);
+        // test.addGraphics(5);
+        // test.addGraphics(1);
+        // test.addGraphics(8);
+        // test.addGraphics(2);
+        // test.addGraphics(11);
+        // test.addGraphics(34);
+        // test.removeGraphics(34);
+        // test.removeGraphics(11);
+        // test.removeGraphics(2);
         // test.removeGraphics(11);
         // test.addGraphics(9);
         // test.addGraphics(12);

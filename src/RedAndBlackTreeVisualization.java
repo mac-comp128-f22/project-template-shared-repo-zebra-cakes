@@ -1,4 +1,5 @@
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsText;
 
 public class RedAndBlackTreeVisualization<E extends Comparable<E>> extends BSTTreeVisualization<E> {
     public RedAndBlackTreeVisualization(double width, double height) {

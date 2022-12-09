@@ -21,15 +21,21 @@ Project Goal - We attempted to create a visualization GUI in Java that would be 
 
 5. If you want to remove a value you inputted, you can press the "remove" button which will be next to the input box.
 
-6. When you are finished entering your values into the input box, you can press the "done" button.
-
-7. VOILA! On the next screen you will see your inputs being added to the binary search tree which will be sorted by the method you chose in the first step. You will also see each of the traversals represented in array form. 
+7. VOILA! On the next screen you will see your inputs being added to the binary search tree which will be sorted by the method you chose in the first step. If you are DONE adding / removing inputs from your tree, you can press the traversals button which will lock you out of adding or removing, and will display your traversals on screen.
 
 
 # Steps to test our project
 1. 
 
 2. 
+
+3. 
+
+
+# Future implementations
+1. We were unable to get the deletion for the Red and Black Tree to work, however, our attempt is shown in the code file. The remove button was deleted from the Red and Black tree interface due to this problem.
+
+2. We were unable to animate the insertions and deletions in our tree graphics. Given more time, we would have made it so that the nodes would move to more clearly show the rotations resulting from adding and removing. 
 
 3. 
 
@@ -85,6 +91,17 @@ A class to represent an AVL binary search tree. AVL trees self-balance to mainta
             - findLargestChild(Node<E> parent) :: Find the node that is the inorder predecessor.
 
 
+AvlTreeVisualization ( AVLTreeVisualization<E extends Comparable<E>> extends BSTTreeVisualization<E> )
+
+@author Minh Nguyen, Brayden Coronado, Devinn Chi
+
+Class that handles visualizations with the AVL Tree automatic Rotations. Extends BSTTReeVisualization.
+
+    --Methods
+
+        - AVLTreeVisualization(double width, double height) :: Declaration for AVLTree, which is a child of BSTTreeVisualization
+
+
 BinarySearchTree ( BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> )
 
 @author Koffman and Wolfgang
@@ -108,6 +125,18 @@ A class to represent a binary search tree.
             - delete(Node<E> localRoot, E item) :: Recursive delete method
 
             - findLargestChild(Node<E> parent) :: Find the node that is the inorder predecessor and replace it with its left child (if any)
+
+            - inOrderTraversal() :: returns a string of the in-order traversal
+
+            - inOrderTraversal(Node<E> localRoot, ArrayList<E>order) :: helper method in order to create the in-order traversal
+
+            - preOrderTraversal() :: returns a string of the pre-order traversal
+
+            - preOrderTraversal(Node<E> localRoot, ArrayList<E>order) :: helper method in order to create the pre-order traversal
+
+            - postOrderTraversal() :: returns a string of the post-order traversal
+
+            - postOrderTraversal(Node<E> localRoot, ArrayList<E>order) :: helper method in order to create the post-order traversal
 
 
 BinaryTree ( BinaryTree<E> implements Serializable )
@@ -156,17 +185,6 @@ A class which aids in the visualizations that are represented in TreeVisualizati
             - createGraphics(Node<E> root) :: Creates graphics
 
 
-NilNode 
-
-@author unknown
-
-NilNode
-
-    --Methods
-        -MethodOne :: methodD
-        -MethodTwo :: methodD
-
-
 Node ( Node<E> implements Serializable )
 
 @author unknown
@@ -187,6 +205,8 @@ A class which represents the parts and functions of a node
 
             - toString() :: Converts node to string
 
+            - updateGraphics() :: Updates the graphics of the node
+
 
 NodeGraphics ( NodeGraphics<E> )
 
@@ -203,7 +223,6 @@ A class which handles the graphics of AVL and Black and Red trees including the 
             - setColorBlack() :: Sets the color of a node to black
 
             - setColorRed() :: Sets color of a node to red
-
 
 
 PleasingButton ( interface )
@@ -283,17 +302,6 @@ A class to represent a Red and Black binary search tree. Red and Black trees sel
             - rotateRight(RedAndBlackNode<E> pivot) :: Right rotation of x around the pivot node
 
 
-TreeVisualization
-
-@author Minh Nguyen, Brayden Coronado, Devinn Chi
-
-A class which handles visualizations for a Tree in a GUI
-
-        --Methods
-            MethodNameOne :: methodDescriptionOne
-            MethodNameTwo :: methodDescriptionTwo
-
-
 TreeVisualizationApp
 
 @author Minh Nguyen, Brayden Coronado, Devinn Chi
@@ -306,11 +314,13 @@ A class which operates and creates a Graphical User Interface that has the capab
 
             - treeAppRunner(TreeVisualizationApp newApp) :: Method which will create a canvas, and implement a user interface which will allow a user to see implmentations for AVL and Black and Red trees.
 
+            - traversals() :: Prints out the traversals for the tree; prints inorder, postorder, and preorder traversals
+
+            - avlrbSetter(int n) :: setter method for avlOrRb
+
             - backMethod(TreeVisualizationApp newApp) :: Method to return to the home page from the second page
 
             - removeButtonRunner() :: Removes the most recently added value from the input treeArray
-
-            - inputComplete() :: Indicates that the user is done adding values to their tree starts the visualization process
 
             - treeArrayButtonRunner() :: Run the button for the treeArrayButton add the integer from the treeArray to an array
             

@@ -127,7 +127,6 @@ public class TreeVisualizationApp {
         //create event handlers
         canvas.onMouseMove(event -> totalOnHover(event.getPosition()));
         canvas.onClick(event -> totalOnClick(event.getPosition()));
-
     }
 
     /**
@@ -136,14 +135,24 @@ public class TreeVisualizationApp {
      * @return
      */
     private static void traversals() {
+
+        //set error text to ""
+        //add error text
         errorText.setText("");
         canvas.add(errorText);
+
         //if no traversals have been ran
         if (traversalsRan == null) {
+
             //if the array for the traversals is not empty
             if (!arrTree.isEmpty()) {
+
                 //if red and black tree
                 if (!avlOrRb) {
+
+                    //run operations for red and black tree
+                    //add the traversals to canvas
+                    //set traversals ran to true
                     postOrder.setText("Post-Order: " + rbTree.tree.postOrderTraversal());
                     preOrder.setText("Pre-Order: " + rbTree.tree.preOrderTraversal());
                     inOrder.setText("In-Order: " + rbTree.tree.inOrderTraversal());
@@ -151,8 +160,13 @@ public class TreeVisualizationApp {
                     canvas.add(preOrder);
                     canvas.add(inOrder);
                     traversalsRan = true;
-                    //else its avl tree
+
+                //else its avl tree
                 } else {
+
+                    //run operations for AVL Tree
+                    //add traversals to canvas
+                    //set traversals ran to true
                     postOrder.setText("Post-Order: " + avlTree.tree.postOrderTraversal());
                     preOrder.setText("Pre-Order: " + avlTree.tree.preOrderTraversal());
                     inOrder.setText("In-Order: " + avlTree.tree.inOrderTraversal());
@@ -161,17 +175,22 @@ public class TreeVisualizationApp {
                     canvas.add(inOrder);
                     traversalsRan = true;
                 }
-                //if the array of traversals is empty
+
+            //if the array of traversals is empty
             } else {
+
+                //set and display new error text
                 errorText.setText("There are no values to traverse.");
                 canvas.add(errorText);
             }
-            //if the traversals button has already been pushed once
+
+        //if the traversals button has already been pushed once
         } else {
+
+            //set and display new error text
             errorText.setText("The values have already been traversed.");
             canvas.add(errorText);
         }
-            
     }
 
     /**
@@ -179,6 +198,9 @@ public class TreeVisualizationApp {
      * @param newApp
      */
     public static void avlrbSetter(int n) {
+
+        //if statement sets boolean to true or false based on user input
+        //will determine wether or not to run AVL or RB balancing
         if (n == 0) {
             avlOrRb = true;
         } else {
@@ -234,11 +256,15 @@ public class TreeVisualizationApp {
                     treeSize--;
                     System.out.println(arrTree);
                 }
-                
+            
+            //traversals have been run
             } else {
+
+                //lock out of adding due to traversals having been run
                 errorText.setText("Traversals have been run. Restart to continue.");
                 canvas.add(errorText);
             }
+
         //else if array of inputs is empty...
         } else {
 
@@ -246,7 +272,6 @@ public class TreeVisualizationApp {
             errorText.setText("There are no values to remove.");
             canvas.add(errorText);
         }
-        
     }
 
     /**
@@ -255,6 +280,7 @@ public class TreeVisualizationApp {
      * @return
      */
     private static void treeArrayButtonRunner() {
+
         //boolean to avoid running if statement
         Boolean errorBoolean = true;
 
@@ -292,7 +318,7 @@ public class TreeVisualizationApp {
                 errorText.setText("You have reached the maximum number of values. Press the done button to vizualize your tree.");
                 canvas.add(errorText);
     
-                //else if array can store another value...
+            //else if array can store another value...
             } else {
     
                 //if there was no error earlier in the method
@@ -313,6 +339,7 @@ public class TreeVisualizationApp {
 
                         //if avl tree...
                         if (avlOrRb == true) {
+
                             //clear error text
                             //add value to the input array
                             //print out array for testing
@@ -340,17 +367,17 @@ public class TreeVisualizationApp {
                             treeArray.setText("");
                             treeSize++;
                         }
-                        
                     }
                 }
             }
+           
+        //if traversals have been run, lock out of adding    
         } else {
 
             //error
             errorText.setText("Traversals have been run. Restart to continue.");
             canvas.add(errorText);
         }
-        
     }
 
     /**

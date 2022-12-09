@@ -1,4 +1,6 @@
+//imports
 import java.awt.Color;
+
 /**
  * A class to represent a red and black search tree.
  * Red and black trees self-balance to maintain a heights that only differ by at most 1 between the left and right child. Only supports addition
@@ -9,15 +11,9 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
     protected boolean addReturn;
     /**
      * Left rotation of x around the pivot node
-     *    pivot                      x
-     *    /  \                     /  \
-     *   T1   x        ----->  pivot  T3
-     *       / \                /  \
-     *     T2  T3              T1  T2
      * @param pivot
      * @ret
     */
-
     private Node<E> rotateLeft(Node<E> pivot) {
         //create new AVLNode x, it takes the value of the right child of pivot (for rotation, x will be new root)
         //create new AVLNode t2, node that is the left child of pivot
@@ -49,11 +45,6 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
 
     /**
      * Right rotation of x around the pivot node
-     *         pivot                 x
-     *         /  \                /  \
-     *        x   T3    ----->   T1   pivot
-     *       / \                      /  \
-     *     T1  T2                    T2  T3
      * @param pivot
      * @return
      */
@@ -177,6 +168,9 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
      * @return
      */
 
+    /**
+     * 
+     */
     public Node<E> add(Node<E> localRoot, Node<E> parent, Node <E> item) {
         if (localRoot == null) {
             // item is not in the tree � insert it.
@@ -304,7 +298,7 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         while (root.parent!= null) {
             root = root.parent;
         }
-    }
+    }   
 
     /**
      * Assisit in rebalancing the tree affer addition of a node
@@ -361,6 +355,10 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         root.setBlack();
     }
 
+    /**
+     * Main method
+     * @param args
+     */
     public static void main(String[] args) {
         RedAndBlackTree<Integer> test = new RedAndBlackTree<Integer>();
         test.add(1);
