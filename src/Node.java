@@ -37,6 +37,7 @@ public class Node<E> implements Serializable {
      */
     public void setRed() {
         this.color = Color.red;
+        // this.graphics.setColorRed();
     }
 
     /**
@@ -44,6 +45,7 @@ public class Node<E> implements Serializable {
      */
     public void setBlack() {
         this.color = Color.black;
+        // this.graphics.setColorBlack();
     }
 
     /**

@@ -180,16 +180,20 @@ public class RedAndBlackHomepageButton implements PleasingButton{
      * @param removeButton
      * @param backButton
      */
-    public void onClick(Point position, TextField textField, Button button, Button doneButton, Button removeButton, Button backButton) {
+    public void onClick(Point position, TextField textField, Button button, Button removeButton, Button backButton, 
+    GraphicsText infoText, RedAndBlackTreeVisualization<Integer> rbTree, Button traverseButton) {
         //if the mouse position is within the bounds of the image
         if (rbIcon.isInBounds(position)) {
             //reset the canvas
             canvas.removeAll();
             canvas.add(textField);
             canvas.add(button);
-            canvas.add(doneButton);
             canvas.add(removeButton);
             canvas.add(backButton);
+            canvas.add(infoText);
+            canvas.add(rbTree.graphics);
+            canvas.add(traverseButton);
+            TreeVisualizationApp.avlrbSetter(1);
         }
     }
 

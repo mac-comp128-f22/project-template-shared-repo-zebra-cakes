@@ -7,7 +7,7 @@ import java.awt.Color;
  */
 public class NodeGraphics<E> {
     public GraphicsGroup nodeGraphics = new GraphicsGroup();
-    public Ellipse nodeBoundary = new Ellipse(0, 0, 20, 20);
+    public Ellipse nodeBoundary = new Ellipse(0, 0, 25, 25);
     public GraphicsText nodeContent = new GraphicsText();
     public Color backgroundColor;
     public Color textColor;
@@ -21,7 +21,7 @@ public class NodeGraphics<E> {
         this.nodeBoundary.setStrokeColor(Color.BLACK);
         this.nodeGraphics.add(nodeBoundary);
         this.nodeContent.setText(data.toString());
-        this.nodeContent.setCenter(10, 10);
+        this.nodeContent.setCenter(13, 13);
         this.nodeContent.setFillColor(Color.BLACK);
         this.nodeGraphics.add(this.nodeContent);
     }
@@ -36,7 +36,7 @@ public class NodeGraphics<E> {
         this.nodeGraphics.add(nodeBoundary);
         this.nodeGraphics.add(this.nodeContent);
         this.nodeContent.setText(data.toString());
-        this.nodeContent.setCenter(10, 10);
+        this.nodeContent.setCenter(13, 13);
         if (color == Color.BLACK) {
             setColorBlack();
         } else if (color == Color.RED) {

@@ -67,6 +67,7 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
      */
     private void createGraphics(Node<E> root) {
         if (root != null) {
+            root.updateGraphics();
             try {
                 coordinate.get(root.getIndex());
                 if (root.left != null) {
@@ -90,7 +91,7 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
     }
 
     /**
-     * Main method
+     * Main method that will visually test our methods
      * @param args
      */
     public static void main(String[] args) {
