@@ -62,6 +62,8 @@ public class TreeVisualizationApp {
      * @param newApp
      */
     public static void treeAppRunner(TreeVisualizationApp newApp) {
+        //initialize variables in case of recalling
+        avlOrRb = null;
         treeSize = 0;
         traversalsRan = null;
         //initialize first homescreen and picture buttons
