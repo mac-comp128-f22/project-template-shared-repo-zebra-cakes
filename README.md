@@ -24,20 +24,33 @@ Project Goal - We attempted to create a visualization GUI in Java that would be 
 7. VOILA! On the next screen you will see your inputs being added to the binary search tree which will be sorted by the method you chose in the first step. If you are DONE adding / removing inputs from your tree, you can press the traversals button which will lock you out of adding or removing, and will display your traversals on screen.
 
 
+<<<<<<< Updated upstream
 # Steps to test our project
 1. Most of our testing was done via visual testing, in line with AVL tree test where we tried removing a node to see if the tree aligns with what we were thinking. The visual test was done by inserting random numbers into tree visualization app, and checking to see if the tree behaves as expected. The tests for each of the visualization are commented out in the main method
+=======
+# Testing our project
+1. 
+>>>>>>> Stashed changes
 
 2. For our AVL tree, we tested by removing a node with left child, right child, 2 childs and no child at all. By doing that, we were able to find a bug in the AVL tree class, where the original author was using in order successor and in order predecessor at the same time, which led to a buggy tree
 
 3. For our red and black tree, we tested the tree by inserting nodes in different cases (i.e. left child or right child, grandparent color is black, etc.) and observe its behavior 
+
+4. For our input box, we tested the add and remove method via a printed out arrayList. Every time we add a value to the tree, it should add the value to the array and print it out. The same goes for the remove button. 
+
+5. We tested the other buttons functions similarily. The remove button cannot remove anything if the arrayList is empty, so if there are no values in the tree it should print out an error statement.
+
+6. We tested maximum values by adding 31 values into the tree and trying to add another value. This should give an error message.
+
+7. The traversals expected behavior is that once they are run, nothing else should be able to be done except returning to the home screen. We tested this visually by trying to add / remove after the traversals had been run and displayed. We tested the validity of the traversals by visually checking to see if they were correct based on the tree.
+
+8. We tested the other functions of the buttons by having them display an error message if an error is encountered. This includes adding inputs which are not integers and so on. 
 
 
 # Future implementations
 1. We were unable to get the deletion for the Red and Black Tree to work, however, our attempt is shown in the code file. The remove button was deleted from the Red and Black tree interface due to this problem.
 
 2. We were unable to animate the insertions and deletions in our tree graphics. Given more time, we would have made it so that the nodes would move to more clearly show the rotations resulting from adding and removing. 
-
-3. 
 
 
 # Information About Our Classes and Their Methods
@@ -271,35 +284,17 @@ A class to represent a Red and Black binary search tree. Red and Black trees sel
 
         --Methods
 
-            - adjustBasedOnBlack(RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) :: Asjusts the node based on its sibling
+            - insertRebalance(Node<E> node) :: handles recoloring and rebalancing after adding a node
 
-            - adjustBasedOnRed(RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) :: Method to adjust node based on its sibling
+            - add(RedAndBlackNode<E> parentNode, E key) :: Handles the insertion of a node
 
-            - getSibling(RedAndBlackNode<E> searchNode) :: Returns the sibling of a node
-
-            - readjustColor(RedAndBlackNode<E> nodeToReadjust) :: Gets the color of a node
-
-            - findMinimum(RedAndBlackNode<E> nodeToSearch) :: Finds the minimum node 
-
-            - deleteNodeWithOneOrNoChild(RedAndBlackNode<E> nodeToDelete) :: Deletes the node if one or no child
-
-            - deleteNode(E key) :: Deletes the node
-
-            - rotations(RedAndBlackNode<E> insertedNode) :: handles rotations for nodes
-            
-            - getUncle(RedAndBlackNode<E> parentNode) :: Gets the uncle node of the parent
-
-            - insert(RedAndBlackNode<E> parentNode, E key) :: Handles the insertion of a node
-
-            - addNode(E key) :: adds node
-
-            - searchForNode(E key) :: Searches for input node based on key
-
-            - replaceParentsChild(RedAndBlackNode<E> parentNode, RedAndBlackNode<E> oldChildNode, RedAndBlackNode<E> newChildNode) :: replaces the child of the parent inputted
+            - add(E key) :: adds node
 
             - rotateLeft(RedAndBlackNode<E> pivot) :: Left rotation of x around the pivot node
 
             - rotateRight(RedAndBlackNode<E> pivot) :: Right rotation of x around the pivot node
+
+            - updateRoot() :: update the root of the tree
 
 
 TreeVisualizationApp

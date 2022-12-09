@@ -315,7 +315,7 @@ public class TreeVisualizationApp {
             if (treeSize >= 31) {
 
                 //display error text for maximum values
-                errorText.setText("You have reached the maximum number of values. Press the done button to vizualize your tree.");
+                errorText.setText("You have reached the maximum number of values.");
                 canvas.add(errorText);
     
             //else if array can store another value...
