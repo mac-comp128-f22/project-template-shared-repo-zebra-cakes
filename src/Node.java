@@ -14,7 +14,7 @@ public class Node<E> implements Serializable {
     public NodeGraphics graphics;
 
     /**
-     * creates new graphics obj based on input
+     * Creates new graphics obj based on input
      */
     public Node(E data) {
         this.data = data;
@@ -62,6 +62,14 @@ public class Node<E> implements Serializable {
             return 2 * (parent.getIndex() + 1);
         } else {
             return (int) Double.NEGATIVE_INFINITY;
+        }
+    }
+
+    public void updateGraphics() {
+        if (this.color == null) {
+            this.graphics = new NodeGraphics<E>(data);
+        } else {
+            this.graphics = new NodeGraphics<E>(data, color);
         }
     }
 

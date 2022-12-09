@@ -2,10 +2,17 @@ import edu.macalester.graphics.CanvasWindow;
 
 public class AVLTreeVisualization<E extends Comparable<E>> extends BSTTreeVisualization<E> {
 
+    /**
+     * Declaration for AVLTree, which is a child of BSTTreeVisualization
+     * @param width
+     * @param height
+     */
     public AVLTreeVisualization(double width, double height) {
         super(width, height);
         this.tree = new AVLTree<>();
     }
+
+    
     
     public static void main(String[] args) {
         CanvasWindow canvas = new CanvasWindow("test", 1000, 500);

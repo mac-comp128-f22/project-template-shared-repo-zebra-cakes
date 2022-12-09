@@ -20,6 +20,7 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
     protected static class NilNode<E> extends RedAndBlackNode<E> {
         public NilNode() {
             super(null);
+            this.color = Color.black;
         }
     }
 
@@ -46,6 +47,10 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
             siblingNode.left.color = Color.black;
             rotateRight((RedAndBlackNode<E>) node.parent);
         }
+        siblingNode.updateGraphics();
+        siblingNode.left.updateGraphics();
+        siblingNode.right.updateGraphics();
+        node.parent.updateGraphics();
     }
 
     /**
@@ -61,6 +66,8 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         } else {
             rotateRight((RedAndBlackNode<E>) node.parent);
         }
+        siblingNode.updateGraphics();
+        node.parent.updateGraphics();
     }
 
     /**
@@ -102,6 +109,8 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         } else {
             adjustBasedOnBlack(nodeToReadjust, siblingNode);
         }
+        siblingNode.updateGraphics();
+        nodeToReadjust.parent.updateGraphics();
     }
 
     /**
@@ -379,13 +388,10 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-
-   
-
-    
-
-
-    
-
+    public static void main(String[] args) {
+        RedAndBlackTree<Integer> test = new RedAndBlackTree<>();
+        test.addNode(1);
+        test.addNode(2);
+    }
 }
 

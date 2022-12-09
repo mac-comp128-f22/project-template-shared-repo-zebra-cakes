@@ -3,6 +3,7 @@
  * AVL trees self-balance to maintain a heights that only differ by at most 1 between the left and right child
  *
  * @author Bret Jackson, Mayank Jaiswal
+ * Modified to use with Node class with graphics
  */
 public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
 
@@ -193,7 +194,7 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
     }
 
     /**
-     * Starter method delete.
+     * Starter method delete. 
      *
      * @param target The object to be deleted
      * @return The object deleted from the tree
@@ -209,7 +210,7 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
     }
 
     /**
-     * Recursive delete method.
+     * Recursive delete method. Updates the graphics for nodes when their data gets updated
      *
      * @param localRoot The root of the current subtree
      * @param item      The item to be deleted
@@ -271,7 +272,7 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
 
                 // Copy the inorder predecessors's data to this node
                 localRoot.data = temp.data;
-                localRoot.graphics = new NodeGraphics<E>(localRoot.data);
+                localRoot.updateGraphics();
 
                 // Delete the inorder successor
                 localRoot.right = delete((AVLNode<E>)localRoot.right, temp.data);
