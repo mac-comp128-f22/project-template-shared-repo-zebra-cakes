@@ -1,25 +1,20 @@
+//imports
 import java.awt.Color;
+
 /**
  * A class to represent a red and black search tree.
- * Red and black trees self-balance to maintain a heights that only differ by at most 1 between the left and right child
+ * Red and black trees self-balance to maintain a heights that follow a set of rules based on color 
  *
  * @author Bret Jackson, Mayank Jaiswal, (adjusted by Brayden Coronado, Devinn Chi, and Minh Nguyen to work with Red and Black trees)
  */
 public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E> {
     protected boolean addReturn;
-    // Inner class that extends Node to add a heightFromLeaf property to calculate the balance factor
 
     /**
      * Left rotation of x around the pivot node
-     *    pivot                      x
-     *    /  \                     /  \
-     *   T1   x        ----->  pivot  T3
-     *       / \                /  \
-     *     T2  T3              T1  T2
      * @param pivot
      * @ret
     */
-
     private Node<E> rotateLeft(Node<E> pivot) {
         //create new AVLNode x, it takes the value of the right child of pivot (for rotation, x will be new root)
         //create new AVLNode t2, node that is the left child of pivot
@@ -52,11 +47,6 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
 
     /**
      * Right rotation of x around the pivot node
-     *         pivot                 x
-     *         /  \                /  \
-     *        x   T3    ----->   T1   pivot
-     *       / \                      /  \
-     *     T1  T2                    T2  T3
      * @param pivot
      * @return
      */
@@ -90,6 +80,9 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         return x;
     }
 
+    /**
+     * 
+     */
     public void deleteRebalance(Node<E> node) {
         while (node.parent != null && node.color == Color.black) {
             if (node == node.parent.right) {
@@ -170,6 +163,9 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         node.setBlack();
     }
 
+    /**
+     * 
+     */
     public Node<E> add(Node<E> localRoot, Node<E> parent, Node <E> item) {
         if (localRoot == null) {
             // item is not in the tree � insert it.
@@ -192,7 +188,9 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-
+    /**
+     * 
+     */
     private Node<E> delete(Node<E> localRoot, Node<E> item) {
         if (localRoot == null) {
             // item is not in the tree.
@@ -252,6 +250,11 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
+    /**
+     * 
+     * @param parent
+     * @return
+     */
     private E findLargestChild(Node<E> parent) {
         // If the right child has no right child, it is
         // the inorder predecessor.
@@ -267,6 +270,12 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
+    /**
+     * 
+     * @param localRoot
+     * @param target
+     * @return
+     */
     private Node<E> findNode(Node<E> localRoot, E target) {
         if (localRoot == null) {
             return null;
@@ -282,7 +291,10 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
             return findNode(localRoot.right, target);
         }
     }
-        
+    
+    /**
+     * 
+     */
     @Override
     public E delete(E item) {
         Node<E> itemNode = new Node<E>(item);
@@ -293,8 +305,9 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         return null;
     }
 
-
-
+    /**
+     * 
+     */
     @Override
     public boolean add(E item) {
         Node<E> itemNode = new Node<E>(item);
@@ -311,12 +324,18 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         return addReturn;
     }
 
+    /**
+     * 
+     */
     public void updateRoot() {
         while (root.parent!= null) {
             root = root.parent;
         }
-    }
+    }   
 
+    /**
+     * 
+     */
     public void insertRebalance (Node<E> node) {
         while (node.parent != null && node.parent.color == Color.red) {
             if (node.parent == node.parent.parent.right) {
@@ -369,6 +388,10 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
+    /**
+     * Main method
+     * @param args
+     */
     public static void main(String[] args) {
         RedAndBlackTree<Integer> test = new RedAndBlackTree<Integer>();
         test.add(1);

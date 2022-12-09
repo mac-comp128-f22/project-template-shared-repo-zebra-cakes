@@ -1,5 +1,3 @@
-
-
 //imports
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
@@ -19,7 +17,6 @@ public class AVLHomepageButton implements PleasingButton {
     //instance variables
     private final double size;
     private GraphicsGroup group;
-
     private Image avlIcon;
     private GraphicsText avlLabel;
     private GraphicsText avlDescription;

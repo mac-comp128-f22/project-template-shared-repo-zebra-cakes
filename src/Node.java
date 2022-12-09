@@ -67,6 +67,9 @@ public class Node<E> implements Serializable {
         }
     }
 
+    /**
+     * Updates the graphics of the node
+     */
     public void updateGraphics() {
         if (this.color == null) {
             this.graphics = new NodeGraphics<E>(data);

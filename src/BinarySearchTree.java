@@ -1,3 +1,4 @@
+//imports
 import java.util.ArrayList;
 
 /**
@@ -252,9 +253,6 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
         }
     }
 
-
-
-
     /**
      * Find the node that is the
      * inorder predecessor and replace it
@@ -280,10 +278,13 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
         }
     }
 
+    /**
+     * Main method
+     * @param args
+     */
     public static void main(String[] args) {
         BinarySearchTree test = new BinarySearchTree<>();
 
     }
-
 }
 

@@ -1,6 +1,10 @@
+//imports
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Point;
 
+/**
+ * An interface to help the operations of buttons
+ */
 public interface PleasingButton {
 
     /*

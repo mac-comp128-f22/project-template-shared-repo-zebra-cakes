@@ -1,5 +1,9 @@
+//imports
 import edu.macalester.graphics.CanvasWindow;
 
+/**
+ * Class that handles visualizations with the AVL Tree automatic Rotations. Extends BSTTReeVisualization.
+ */
 public class AVLTreeVisualization<E extends Comparable<E>> extends BSTTreeVisualization<E> {
 
     /**

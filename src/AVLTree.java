@@ -263,7 +263,7 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
                 else { // One child case
                     localRoot = temp; // Copy the contents of the non-empty child
                 }
-                
+
             } else {
                 // Search for the inorder predecessor (ip) and
                 // replace deleted node's data with ip.
@@ -343,7 +343,4 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
         }
         return current;
     }
-
-
-
 }

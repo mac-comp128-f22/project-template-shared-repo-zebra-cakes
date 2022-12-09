@@ -1,3 +1,4 @@
+//imports
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Serializable;
@@ -9,7 +10,6 @@ import java.io.Serializable;
  **/
 public class BinaryTree<E> implements Serializable {
  
-
     // Data Field
     /**
      * The root of the binary tree
@@ -156,6 +156,4 @@ public class BinaryTree<E> implements Serializable {
             return new BinaryTree<String>(data, leftTree, rightTree);
         }
     }
-
-
 }

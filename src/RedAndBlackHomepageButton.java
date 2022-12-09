@@ -188,10 +188,10 @@ public class RedAndBlackHomepageButton implements PleasingButton{
             canvas.removeAll();
             canvas.add(textField);
             canvas.add(button);
-            canvas.add(removeButton);
+            // canvas.add(removeButton); // We were unable to implement the deletion 
             canvas.add(backButton);
             canvas.add(infoText);
-            canvas.add(rbTree.graphics);
+            canvas.add(rbTree.graphics, 0, 0);
             canvas.add(traverseButton);
             TreeVisualizationApp.avlrbSetter(1);
         }
