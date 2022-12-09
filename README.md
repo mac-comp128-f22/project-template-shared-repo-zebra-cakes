@@ -24,13 +24,8 @@ Project Goal - We attempted to create a visualization GUI in Java that would be 
 7. VOILA! On the next screen you will see your inputs being added to the binary search tree which will be sorted by the method you chose in the first step. If you are DONE adding / removing inputs from your tree, you can press the traversals button which will lock you out of adding or removing, and will display your traversals on screen.
 
 
-<<<<<<< Updated upstream
-# Steps to test our project
-1. Most of our testing was done via visual testing, in line with AVL tree test where we tried removing a node to see if the tree aligns with what we were thinking. The visual test was done by inserting random numbers into tree visualization app, and checking to see if the tree behaves as expected. The tests for each of the visualization are commented out in the main method
-=======
 # Testing our project
-1. 
->>>>>>> Stashed changes
+1. Most of our testing was done via visual testing, in line with AVL tree test where we tried removing a node to see if the tree aligns with what we were thinking. The visual test was done by inserting random numbers into tree visualization app, and checking to see if the tree behaves as expected. The tests for each of the visualization are commented out in the main method
 
 2. For our AVL tree, we tested by removing a node with left child, right child, 2 childs and no child at all. By doing that, we were able to find a bug in the AVL tree class, where the original author was using in order successor and in order predecessor at the same time, which led to a buggy tree
 
