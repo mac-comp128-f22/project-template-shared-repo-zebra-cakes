@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A class to represent a binary search tree.
  *
@@ -190,6 +192,54 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
         }
     }
 
+    /**
+     * 
+     * @return
+     */
+    public String inOrderTraversal() {
+        ArrayList<E> order = new ArrayList<>();
+        inOrderTraversal(root, order);
+        return order.toString();
+    }
+
+    public void inOrderTraversal(Node<E> localRoot, ArrayList<E>order) {
+        if (localRoot != null) {
+            inOrderTraversal(localRoot.left, order);
+            order.add(localRoot.data);
+            inOrderTraversal(localRoot.right, order);
+        }
+    }
+
+    public String preOrderTraversal() {
+        ArrayList<E> order = new ArrayList<>();
+        preOrderTraversal(root, order);
+        return order.toString();
+    }
+
+    public void preOrderTraversal(Node<E> localRoot, ArrayList<E>order) {
+        if (localRoot != null) {
+            order.add(localRoot.data);
+            preOrderTraversal(localRoot.left, order);
+            preOrderTraversal(localRoot.right, order);
+        }
+    }
+
+    public String postOrderTraversal() {
+        ArrayList<E> order = new ArrayList<>();
+        postOrderTraversal(root, order);
+        return order.toString();
+    }
+
+    public void postOrderTraversal(Node<E> localRoot, ArrayList<E>order) {
+        if (localRoot != null) {
+            postOrderTraversal(localRoot.left, order);
+            postOrderTraversal(localRoot.right, order);
+            order.add(localRoot.data);
+        }
+    }
+
+
+
 
     /**
      * Find the node that is the
@@ -218,9 +268,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 
     public static void main(String[] args) {
         BinarySearchTree test = new BinarySearchTree<>();
-        test.add(1);
-        test.add(2);
-        test.add(3);
+
     }
 
 }
