@@ -17,381 +17,500 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    protected static class NilNode<E> extends RedAndBlackNode<E> {
-        public NilNode() {
-            super(null);
-            this.color = Color.black;
+    // protected static class NilNode<E> extends RedAndBlackNode<E> {
+    //     public NilNode() {
+    //         super(null);
+    //         this.color = Color.black;
+    //     }
+    // }
+
+    // private void adjustBasedOnBlack (RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
+    //     boolean nodeIsLeftChild = node == node.parent.left;
+
+    //     if (nodeIsLeftChild && siblingNode.right.color == Color.black) {
+    //         siblingNode.left.color = Color.black;
+    //         siblingNode.color = Color.red;
+    //         rotateRight(siblingNode);
+    //         siblingNode = (RedAndBlackNode<E>) node.parent.right;
+    //     } else if (!nodeIsLeftChild && siblingNode.left.color == Color.black) {
+    //         siblingNode.right.color = Color.black;
+    //         siblingNode.color = Color.red;
+    //         rotateLeft(siblingNode);
+    //         siblingNode = (RedAndBlackNode<E>) node.parent.left;
+    //     }
+    //     siblingNode.color = node.parent.color;
+    //     node.parent.color = Color.black;
+    //     if (nodeIsLeftChild) {
+    //         siblingNode.right.color = Color.black;
+    //         rotateLeft((RedAndBlackNode<E>)node.parent);
+    //     }else {
+    //         siblingNode.left.color = Color.black;
+    //         rotateRight((RedAndBlackNode<E>) node.parent);
+    //     }
+    //     siblingNode.updateGraphics();
+    //     siblingNode.left.updateGraphics();
+    //     siblingNode.right.updateGraphics();
+    //     node.parent.updateGraphics();
+    // }
+
+    // /**
+    //  * Method to adjust node based on its sibling
+    //  * @param node
+    //  * @param siblingNode
+    //  */
+    // private void adjustBasedOnRed(RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
+    //     siblingNode.color = Color.black;
+    //     node.parent.color = Color.red;
+    //     if (node == node.parent.left) {
+    //         rotateLeft((RedAndBlackNode<E>)node.parent);
+    //     } else {
+    //         rotateRight((RedAndBlackNode<E>) node.parent);
+    //     }
+    //     siblingNode.updateGraphics();
+    //     node.parent.updateGraphics();
+    // }
+
+    // /**
+    //  * Returns the sibling of a node
+    //  * @param searchNode
+    //  * @return
+    //  */
+    // private RedAndBlackNode<E> getSibling(RedAndBlackNode<E> searchNode) {
+    //     RedAndBlackNode<E> parentNode = (RedAndBlackNode<E>) searchNode.parent;
+    //     if (searchNode  == parentNode.left) {
+    //         return (RedAndBlackNode<E>) parentNode.right;
+    //     } else {
+    //         return (RedAndBlackNode<E>) parentNode.left;
+    //     }
+    // }
+
+    // /**
+    //  * Gets the color of a node
+    //  * @param nodeToReadjust
+    //  */
+    // private void readjustColor(RedAndBlackNode<E> nodeToReadjust) {
+    //     if (nodeToReadjust == root) {
+    //         return;
+    //     }
+
+    //     RedAndBlackNode<E> siblingNode = getSibling(nodeToReadjust);
+
+    //     if (siblingNode.color == Color.red) {
+    //         adjustBasedOnRed(nodeToReadjust, siblingNode);
+    //         siblingNode = getSibling(nodeToReadjust);
+    //     }
+    //     if (siblingNode.left.color == Color.black && siblingNode.right.color == Color.black) {
+    //         siblingNode.color = Color.red;
+    //         if (nodeToReadjust.parent.color == Color.red) {
+    //             nodeToReadjust.parent.color = Color.black;
+    //         } else {
+    //             readjustColor((RedAndBlackNode<E>) nodeToReadjust.parent);
+    //         }
+    //     } else {
+    //         adjustBasedOnBlack(nodeToReadjust, siblingNode);
+    //     }
+    //     siblingNode.updateGraphics();
+    //     nodeToReadjust.parent.updateGraphics();
+    // }
+
+    // /**
+    //  * Finds the minimum node
+    //  * @param nodeToSearch
+    //  * @return
+    //  */
+    // private RedAndBlackNode<E> findMinimum(RedAndBlackNode<E> nodeToSearch) {
+    //     while (nodeToSearch.left != null) {
+    //         nodeToSearch = (RedAndBlackNode<E>) nodeToSearch.left;
+    //     }
+    //     return nodeToSearch;
+    // }
+
+    // /**
+    //  * Deletes the node if one or no child
+    //  */
+    // private RedAndBlackNode<E> deleteNodeWithOneOrNoChild(RedAndBlackNode<E> nodeToDelete) {
+    //     RedAndBlackNode nilChild = new RedAndBlackNode(null);
+    //     if (nodeToDelete.left != null) {
+    //         replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, (RedAndBlackNode<E>)nodeToDelete.left);
+    //         return (RedAndBlackNode<E>) nodeToDelete.left;
+    //     } else if (nodeToDelete.right != null) {
+    //         replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, (RedAndBlackNode<E>)nodeToDelete.right);
+    //         return (RedAndBlackNode<E>) nodeToDelete.right;
+    //     } else {
+    //         nilChild = nilChild.color == Color.black ? new NilNode() : null;
+    //         replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, nilChild);
+    //         return nilChild;
+    //     }
+
+    // }
+
+    // /**
+    //  * deletes the node
+    //  * @param key
+    //  */
+    // public void deleteNode(E key) {
+    //     RedAndBlackNode<E> searchNode = (RedAndBlackNode<E>) root;
+
+    //     while (searchNode.data != key && searchNode != null) {
+    //         if (key.compareTo(searchNode.data) < 0) {
+    //             searchNode = (RedAndBlackNode<E>) searchNode.left;
+    //         } else {
+    //             searchNode  = (RedAndBlackNode<E>) searchNode.right;
+    //         }
+    //     }
+    //     if (searchNode == null) {
+    //          return;
+    //     }
+
+    //     RedAndBlackNode<E> nodeToMove = new RedAndBlackNode<E>(null);
+    //     Color deletedNodeColor;
+
+    //     if (searchNode.left == null || searchNode.right == null) {
+    //         nodeToMove = deleteNodeWithOneOrNoChild(searchNode);
+    //         deletedNodeColor = searchNode.color;
+    //     } else {
+    //         RedAndBlackNode<E> successor = findMinimum((RedAndBlackNode<E>)searchNode.right);
+    //         searchNode.data = successor.data;
+    //         deletedNodeColor = successor.color;
+    //     }
+    //     if (deletedNodeColor == Color.black) {
+    //         readjustColor(nodeToMove);
+    //         if (nodeToMove.getClass() == NilNode.class) {
+    //             replaceParentsChild((RedAndBlackNode<E>)nodeToMove.parent, nodeToMove, null);
+    //         }
+    //     }
+    // }
+
+    // /**
+    //  * handles rotations for nodes
+    //  * @param insertedNode
+    //  */
+    // private void rotations(RedAndBlackNode<E> insertedNode) {
+    //     RedAndBlackNode<E> parentNode = (RedAndBlackNode<E>) insertedNode.parent;
+    //     if (parentNode == null) {
+    //         insertedNode.color = Color.black;
+    //         return;
+    //     }
+    //     if (parentNode.color == Color.black) {
+    //         return;
+    //     }
+
+    //     RedAndBlackNode<E> grandparentNode = (RedAndBlackNode<E>) parentNode.parent;
+
+    //     if (grandparentNode == null) {
+    //         parentNode.color =Color.black;
+    //         return;
+    //     }
+
+    //     RedAndBlackNode<E> uncleNode = getUncle(parentNode);
+
+    //     if (uncleNode != null && uncleNode.color == Color.black) {
+    //         parentNode.color = Color.black;
+    //         grandparentNode.color = Color.red;
+    //         uncleNode.color = Color.black;
+
+    //         rotations(grandparentNode);
+    //     } else if (parentNode == grandparentNode.left) {
+    //         if (insertedNode == parentNode.right) {
+    //             rotateLeft(parentNode);
+    //             parentNode = insertedNode;
+    //         }
+    //         rotateRight(grandparentNode);
+    //         parentNode.color = Color.black;
+    //         grandparentNode.color = Color.red;
+    //     } else {
+    //         if (insertedNode == parentNode.left) {
+    //             rotateRight(parentNode);
+    //             parentNode = insertedNode;
+    //         }
+    //         rotateLeft(grandparentNode);
+    //         parentNode.color = Color.black;
+    //         grandparentNode.color = Color.red;
+    //     }
+    // }
+
+    // /**
+    //  * Gets the uncle node of the parent
+    //  * @param parentNode
+    //  * @return
+    //  */
+    // public RedAndBlackNode<E> getUncle(RedAndBlackNode<E> parentNode) {
+    //     RedAndBlackNode<E> grandparentNode = (RedAndBlackNode<E>) parentNode.parent;
+    //     if (grandparentNode.right == parentNode) {
+    //         return (RedAndBlackNode<E>) grandparentNode.right;
+    //     } else {
+    //         return (RedAndBlackNode<E>) grandparentNode.left;
+    //     }
+    // }
+
+    // /**
+    //  * Handles the insertion of a node
+    //  * @param parentNode
+    //  * @param key
+    //  */
+    // public void insert(RedAndBlackNode<E> parentNode, E key) {
+    //     RedAndBlackNode<E> nodeToInsert = new RedAndBlackNode<E>(key);
+    //     nodeToInsert.color = Color.red;
+    //     if (parentNode == nodeToInsert) {
+    //         root = nodeToInsert;
+    //     } else if (key.compareTo(parentNode.data) < 0) {
+    //         parentNode.left = nodeToInsert;
+    //     } else {
+    //         parentNode.right = nodeToInsert;
+    //     }
+    //     nodeToInsert.parent = parentNode;
+
+    //     rotations(nodeToInsert);
+
+    // }
+
+    // /**
+    //  * adds node
+    //  * @param key
+    //  */
+    // public void addNode(E key) {
+    //     RedAndBlackNode<E> nodeSearcher = ((RedAndBlackNode<E>)root);
+    //     RedAndBlackNode<E> parent = null;
+
+    //     for (;;) {
+    //         if (nodeSearcher == null) {
+    //             break;
+    //         } 
+    //         parent = nodeSearcher;
+    //         if (key.compareTo(nodeSearcher.data) < 0) {
+    //             nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.left;
+    //         } else if (key.compareTo(nodeSearcher.data) > 0) {
+    //             nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.right;
+    //         }
+    //     }
+    //     insert(parent, key);
+    // }
+
+    // /**
+    //  * Searches for input node based on key
+    //  * @param key
+    //  * @return
+    //  */
+    // public RedAndBlackNode<E> searchForNode(E key) {
+    //     RedAndBlackNode<E> nodeSearcher = ((RedAndBlackNode<E>)root);
+    //     for (;;) {
+    //         if (nodeSearcher == null) {
+    //             return null;
+    //         } else if (key.compareTo(nodeSearcher.data) == 0) {
+    //             return nodeSearcher;
+    //         } else if (key.compareTo(nodeSearcher.data) < 0) {
+    //             nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.left;
+    //         } else {
+    //             nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.right;
+    //         }
+    //     }
+    // }
+
+    // /**
+    //  * replaces the child of the parent inputted
+    //  * @param parentNode
+    //  * @param oldChildNode
+    //  * @param newChildNode
+    //  */
+    // private void replaceParentsChild(RedAndBlackNode<E> parentNode, RedAndBlackNode<E> oldChildNode, RedAndBlackNode<E> newChildNode) {
+    //     if (parentNode == null) {
+    //         root = newChildNode;
+    //     } else if (parentNode.left == oldChildNode) {
+    //         parentNode.left = newChildNode;
+    //     } else if (parentNode.right == oldChildNode) {
+    //         parentNode.right = newChildNode;
+    //     }
+    //     if (newChildNode != null) {
+    //         newChildNode.parent = parentNode;
+    //     }
+    // }
+
+    // /**
+    //  * Left rotation of x around the pivot node
+    //  * @param pivot
+    //  * @return
+    //  */
+    // private void rotateLeft(RedAndBlackNode<E> pivot) {
+
+    //     RedAndBlackNode<E> parent = ((RedAndBlackNode<E>) pivot.parent);
+    //     RedAndBlackNode<E> pivotRightChild = ((RedAndBlackNode<E>) pivot.right);
+    //     pivot.right = pivotRightChild.left;
+
+    //     if(pivotRightChild.left != null) {
+    //         pivotRightChild.left.parent = pivot;
+    //     }
+
+    //     pivotRightChild.left = pivot;
+    //     pivot.parent = pivotRightChild;
+
+    //     if (parent == null) {
+    //         root = pivotRightChild;
+    //     } else if(pivot.left == pivot) {
+    //         parent.left = pivotRightChild;
+    //     } else if(parent.right == pivot) {
+    //         parent.right = pivotRightChild;
+    //     }
+
+    //     if (pivotRightChild != null) {
+    //         pivotRightChild.parent = parent;
+    //     }
+    // }
+
+    // /**
+    //  * Right rotation of x around the pivot node
+    //  * @param pivot
+    //  * @return
+    //  */
+    // private void rotateRight(RedAndBlackNode<E> pivot) {
+
+
+    //     RedAndBlackNode<E> parent = ((RedAndBlackNode<E>) pivot.parent);
+    //     RedAndBlackNode<E> pivotLeftChild = ((RedAndBlackNode<E>) pivot.left);
+    //     pivot.left = pivotLeftChild.right;
+
+    //     if(pivotLeftChild.right != null) {
+    //         pivotLeftChild.right.parent = pivot;
+    //     }
+
+    //     pivotLeftChild.right = pivot;
+    //     pivot.parent = pivotLeftChild;
+
+    //     if (parent == null) {
+    //         root = pivotLeftChild;
+    //     } else if(pivot.left == pivot) {
+    //         parent.left = pivotLeftChild;
+    //     } else if(parent.right == pivot) {
+    //         parent.right = pivotLeftChild;
+    //     }
+
+    //     if (pivotLeftChild != null) {
+    //         pivotLeftChild.parent = parent;
+    //     }
+    // }
+
+    // public static void main(String[] args) {
+    //     RedAndBlackTree<Integer> test = new RedAndBlackTree<>();
+    //     test.addNode(1);
+    //     test.addNode(2);
+    // }
+
+    private RedAndBlackNode<E> rotateLeft(RedAndBlackNode<E> pivot) {
+        //create new AVLNode x, it takes the value of the right child of pivot (for rotation, x will be new root)
+        //create new AVLNode t2, node that is the left child of pivot
+        RedAndBlackNode<E> x = ((RedAndBlackNode<E>) pivot.right);
+        RedAndBlackNode<E> t2 = ((RedAndBlackNode<E>) x.left);
+        pivot.right = t2;
+        //if pivot does have a pointer to a parent..
+        if(t2 != null) {
+
+           //t2's parent is pivot
+           t2.parent = pivot;
         }
-    }
 
-    private void adjustBasedOnBlack (RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
-        boolean nodeIsLeftChild = node == node.parent.left;
+        //x's left, pivot, reset pointer after rotation
+        //x's parent is pivot's parent
+        //pivot's parent is x (new root)
+        x.left = pivot;
+        x.parent = pivot.parent;
+        pivot.parent = x;
 
-        if (nodeIsLeftChild && siblingNode.right.color == Color.black) {
-            siblingNode.left.color = Color.black;
-            siblingNode.color = Color.red;
-            rotateRight(siblingNode);
-            siblingNode = (RedAndBlackNode<E>) node.parent.right;
-        } else if (!nodeIsLeftChild && siblingNode.left.color == Color.black) {
-            siblingNode.right.color = Color.black;
-            siblingNode.color = Color.red;
-            rotateLeft(siblingNode);
-            siblingNode = (RedAndBlackNode<E>) node.parent.left;
-        }
-        siblingNode.color = node.parent.color;
-        node.parent.color = Color.black;
-        if (nodeIsLeftChild) {
-            siblingNode.right.color = Color.black;
-            rotateLeft((RedAndBlackNode<E>)node.parent);
-        }else {
-            siblingNode.left.color = Color.black;
-            rotateRight((RedAndBlackNode<E>) node.parent);
-        }
-        siblingNode.updateGraphics();
-        siblingNode.left.updateGraphics();
-        siblingNode.right.updateGraphics();
-        node.parent.updateGraphics();
-    }
-
-    /**
-     * Method to adjust node based on its sibling
-     * @param node
-     * @param siblingNode
-     */
-    private void adjustBasedOnRed(RedAndBlackNode<E> node, RedAndBlackNode<E> siblingNode) {
-        siblingNode.color = Color.black;
-        node.parent.color = Color.red;
-        if (node == node.parent.left) {
-            rotateLeft((RedAndBlackNode<E>)node.parent);
-        } else {
-            rotateRight((RedAndBlackNode<E>) node.parent);
-        }
-        siblingNode.updateGraphics();
-        node.parent.updateGraphics();
-    }
-
-    /**
-     * Returns the sibling of a node
-     * @param searchNode
-     * @return
-     */
-    private RedAndBlackNode<E> getSibling(RedAndBlackNode<E> searchNode) {
-        RedAndBlackNode<E> parentNode = (RedAndBlackNode<E>) searchNode.parent;
-        if (searchNode  == parentNode.left) {
-            return (RedAndBlackNode<E>) parentNode.right;
-        } else {
-            return (RedAndBlackNode<E>) parentNode.left;
-        }
-    }
-
-    /**
-     * Gets the color of a node
-     * @param nodeToReadjust
-     */
-    private void readjustColor(RedAndBlackNode<E> nodeToReadjust) {
-        if (nodeToReadjust == root) {
-            return;
-        }
-
-        RedAndBlackNode<E> siblingNode = getSibling(nodeToReadjust);
-
-        if (siblingNode.color == Color.red) {
-            adjustBasedOnRed(nodeToReadjust, siblingNode);
-            siblingNode = getSibling(nodeToReadjust);
-        }
-        if (siblingNode.left.color == Color.black && siblingNode.right.color == Color.black) {
-            siblingNode.color = Color.red;
-            if (nodeToReadjust.parent.color == Color.red) {
-                nodeToReadjust.parent.color = Color.black;
-            } else {
-                readjustColor((RedAndBlackNode<E>) nodeToReadjust.parent);
-            }
-        } else {
-            adjustBasedOnBlack(nodeToReadjust, siblingNode);
-        }
-        siblingNode.updateGraphics();
-        nodeToReadjust.parent.updateGraphics();
-    }
-
-    /**
-     * Finds the minimum node
-     * @param nodeToSearch
-     * @return
-     */
-    private RedAndBlackNode<E> findMinimum(RedAndBlackNode<E> nodeToSearch) {
-        while (nodeToSearch.left != null) {
-            nodeToSearch = (RedAndBlackNode<E>) nodeToSearch.left;
-        }
-        return nodeToSearch;
-    }
-
-    /**
-     * Deletes the node if one or no child
-     */
-    private RedAndBlackNode<E> deleteNodeWithOneOrNoChild(RedAndBlackNode<E> nodeToDelete) {
-        RedAndBlackNode nilChild = new RedAndBlackNode(null);
-        if (nodeToDelete.left != null) {
-            replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, (RedAndBlackNode<E>)nodeToDelete.left);
-            return (RedAndBlackNode<E>) nodeToDelete.left;
-        } else if (nodeToDelete.right != null) {
-            replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, (RedAndBlackNode<E>)nodeToDelete.right);
-            return (RedAndBlackNode<E>) nodeToDelete.right;
-        } else {
-            nilChild = nilChild.color == Color.black ? new NilNode() : null;
-            replaceParentsChild((RedAndBlackNode<E>)nodeToDelete.parent, nodeToDelete, nilChild);
-            return nilChild;
-        }
-
-    }
-
-    /**
-     * deletes the node
-     * @param key
-     */
-    public void deleteNode(E key) {
-        RedAndBlackNode<E> searchNode = (RedAndBlackNode<E>) root;
-
-        while (searchNode.data != key && searchNode != null) {
-            if (key.compareTo(searchNode.data) < 0) {
-                searchNode = (RedAndBlackNode<E>) searchNode.left;
-            } else {
-                searchNode  = (RedAndBlackNode<E>) searchNode.right;
-            }
-        }
-        if (searchNode == null) {
-             return;
-        }
-
-        RedAndBlackNode<E> nodeToMove = new RedAndBlackNode<E>(null);
-        Color deletedNodeColor;
-
-        if (searchNode.left == null || searchNode.right == null) {
-            nodeToMove = deleteNodeWithOneOrNoChild(searchNode);
-            deletedNodeColor = searchNode.color;
-        } else {
-            RedAndBlackNode<E> successor = findMinimum((RedAndBlackNode<E>)searchNode.right);
-            searchNode.data = successor.data;
-            deletedNodeColor = successor.color;
-        }
-        if (deletedNodeColor == Color.black) {
-            readjustColor(nodeToMove);
-            if (nodeToMove.getClass() == NilNode.class) {
-                replaceParentsChild((RedAndBlackNode<E>)nodeToMove.parent, nodeToMove, null);
-            }
-        }
-    }
-
-    /**
-     * handles rotations for nodes
-     * @param insertedNode
-     */
-    private void rotations(RedAndBlackNode<E> insertedNode) {
-        RedAndBlackNode<E> parentNode = (RedAndBlackNode<E>) insertedNode.parent;
-        if (parentNode == null) {
-            insertedNode.color = Color.black;
-            return;
-        }
-        if (parentNode.color == Color.black) {
-            return;
-        }
-
-        RedAndBlackNode<E> grandparentNode = (RedAndBlackNode<E>) parentNode.parent;
-
-        if (grandparentNode == null) {
-            parentNode.color =Color.black;
-            return;
-        }
-
-        RedAndBlackNode<E> uncleNode = getUncle(parentNode);
-
-        if (uncleNode != null && uncleNode.color == Color.black) {
-            parentNode.color = Color.black;
-            grandparentNode.color = Color.red;
-            uncleNode.color = Color.black;
-
-            rotations(grandparentNode);
-        } else if (parentNode == grandparentNode.left) {
-            if (insertedNode == parentNode.right) {
-                rotateLeft(parentNode);
-                parentNode = insertedNode;
-            }
-            rotateRight(grandparentNode);
-            parentNode.color = Color.black;
-            grandparentNode.color = Color.red;
-        } else {
-            if (insertedNode == parentNode.left) {
-                rotateRight(parentNode);
-                parentNode = insertedNode;
-            }
-            rotateLeft(grandparentNode);
-            parentNode.color = Color.black;
-            grandparentNode.color = Color.red;
-        }
-    }
-
-    /**
-     * Gets the uncle node of the parent
-     * @param parentNode
-     * @return
-     */
-    public RedAndBlackNode<E> getUncle(RedAndBlackNode<E> parentNode) {
-        RedAndBlackNode<E> grandparentNode = (RedAndBlackNode<E>) parentNode.parent;
-        if (grandparentNode.right == parentNode) {
-            return (RedAndBlackNode<E>) grandparentNode.right;
-        } else {
-            return (RedAndBlackNode<E>) grandparentNode.left;
-        }
-    }
-
-    /**
-     * Handles the insertion of a node
-     * @param parentNode
-     * @param key
-     */
-    public void insert(RedAndBlackNode<E> parentNode, E key) {
-        RedAndBlackNode<E> nodeToInsert = new RedAndBlackNode<E>(key);
-        nodeToInsert.color = Color.red;
-        if (parentNode == nodeToInsert) {
-            root = nodeToInsert;
-        } else if (key.compareTo(parentNode.data) < 0) {
-            parentNode.left = nodeToInsert;
-        } else {
-            parentNode.right = nodeToInsert;
-        }
-        nodeToInsert.parent = parentNode;
-
-        rotations(nodeToInsert);
-
-    }
-
-    /**
-     * adds node
-     * @param key
-     */
-    public void addNode(E key) {
-        RedAndBlackNode<E> nodeSearcher = ((RedAndBlackNode<E>)root);
-        RedAndBlackNode<E> parent = null;
-
-        for (;;) {
-            if (nodeSearcher == null) {
-                break;
-            } 
-            parent = nodeSearcher;
-            if (key.compareTo(nodeSearcher.data) < 0) {
-                nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.left;
-            } else if (key.compareTo(nodeSearcher.data) > 0) {
-                nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.right;
-            }
-        }
-        insert(parent, key);
-    }
-
-    /**
-     * Searches for input node based on key
-     * @param key
-     * @return
-     */
-    public RedAndBlackNode<E> searchForNode(E key) {
-        RedAndBlackNode<E> nodeSearcher = ((RedAndBlackNode<E>)root);
-        for (;;) {
-            if (nodeSearcher == null) {
-                return null;
-            } else if (key.compareTo(nodeSearcher.data) == 0) {
-                return nodeSearcher;
-            } else if (key.compareTo(nodeSearcher.data) < 0) {
-                nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.left;
-            } else {
-                nodeSearcher = (RedAndBlackNode<E>) nodeSearcher.right;
-            }
-        }
-    }
-
-    /**
-     * replaces the child of the parent inputted
-     * @param parentNode
-     * @param oldChildNode
-     * @param newChildNode
-     */
-    private void replaceParentsChild(RedAndBlackNode<E> parentNode, RedAndBlackNode<E> oldChildNode, RedAndBlackNode<E> newChildNode) {
-        if (parentNode == null) {
-            root = newChildNode;
-        } else if (parentNode.left == oldChildNode) {
-            parentNode.left = newChildNode;
-        } else if (parentNode.right == oldChildNode) {
-            parentNode.right = newChildNode;
-        }
-        if (newChildNode != null) {
-            newChildNode.parent = parentNode;
-        }
-    }
-
-    /**
-     * Left rotation of x around the pivot node
-     * @param pivot
-     * @return
-     */
-    private void rotateLeft(RedAndBlackNode<E> pivot) {
-
-        RedAndBlackNode<E> parent = ((RedAndBlackNode<E>) pivot.parent);
-        RedAndBlackNode<E> pivotRightChild = ((RedAndBlackNode<E>) pivot.right);
-        pivot.right = pivotRightChild.left;
-
-        if(pivotRightChild.left != null) {
-            pivotRightChild.left.parent = pivot;
-        }
-
-        pivotRightChild.left = pivot;
-        pivot.parent = pivotRightChild;
-
-        if (parent == null) {
-            root = pivotRightChild;
-        } else if(pivot.left == pivot) {
-            parent.left = pivotRightChild;
-        } else if(parent.right == pivot) {
-            parent.right = pivotRightChild;
-        }
-
-        if (pivotRightChild != null) {
-            pivotRightChild.parent = parent;
-        }
+        return x;
     }
 
     /**
      * Right rotation of x around the pivot node
+     *         pivot                 x
+     *         /  \                /  \
+     *        x   T3    ----->   T1   pivot
+     *       / \                      /  \
+     *     T1  T2                    T2  T3
      * @param pivot
      * @return
      */
-    private void rotateRight(RedAndBlackNode<E> pivot) {
+    private RedAndBlackNode<E> rotateRight(RedAndBlackNode<E> pivot) {
+        //create new AVLNode x, it takes the value of the right child of pivot (for rotation, x will be new root)
+        //create new AVLNode t2, node that is the right child of x
+        RedAndBlackNode<E> x = ((RedAndBlackNode<E>) pivot.left);
+        RedAndBlackNode<E> t2 = ((RedAndBlackNode<E>) x.right);
+        pivot.left = t2;
+        //if pivot does have a pointer to a parent..
+        if(t2 != null) {
 
-
-        RedAndBlackNode<E> parent = ((RedAndBlackNode<E>) pivot.parent);
-        RedAndBlackNode<E> pivotLeftChild = ((RedAndBlackNode<E>) pivot.left);
-        pivot.left = pivotLeftChild.right;
-
-        if(pivotLeftChild.right != null) {
-            pivotLeftChild.right.parent = pivot;
+            //new parent node is created, 
+            //which has the value of pivot's parent node
+            t2.parent = pivot;
         }
 
-        pivotLeftChild.right = pivot;
-        pivot.parent = pivotLeftChild;
+        //x's right, pivot, reset pointer after rotation
+        //x's right is pivot
+        //pivot's parent is x (new root)
+        x.right = pivot;
+        x.parent = pivot.parent;
+        pivot.parent = x;
 
-        if (parent == null) {
-            root = pivotLeftChild;
-        } else if(pivot.left == pivot) {
-            parent.left = pivotLeftChild;
-        } else if(parent.right == pivot) {
-            parent.right = pivotLeftChild;
-        }
+        return x;
+    }
 
-        if (pivotLeftChild != null) {
-            pivotLeftChild.parent = parent;
+    public void deleteRebalance(RedAndBlackNode<E> node) {
+        @Override
+        delete(E data);
+        while (node != root && node.color == Color.black) {
+            if (node == node.parent.left) {
+                RedAndBlackNode<E> sibling = (RedAndBlackNode<E>) node.parent.right;
+                if (sibling.color == Color.red) {
+                    sibling.color = Color.black;
+                    node.parent.color = Color.red;
+                    rotateLeft((RedAndBlackNode<E>) node.parent);
+                    sibling = (RedAndBlackNode<E>) node.parent.right;
+                }
+                if (sibling.left.color == Color.black && sibling.right.color == Color.black) {
+                    sibling.color = Color.red;
+                    node = (RedAndBlackNode<E>)node.parent;
+                } else if (sibling.right.color == Color.black) {
+                    sibling.left.color = Color.black;
+                    sibling.color = Color.red;
+                    rotateRight(sibling);
+                    sibling = (RedAndBlackNode<E>) node.parent.right;
+                }
+                sibling.color = node.parent.right.color;
+                node.parent.color = Color.black;
+                sibling.right.color = Color.black;
+                rotateLeft((RedAndBlackNode<E>) node.parent);
+                node = (RedAndBlackNode<E>)root;
+            } //ELSE SAME AS THEN WITH "RIGHT" AND "LEFT" EXCHANGE
+            node.color = Color.black;
         }
     }
 
-    public static void main(String[] args) {
-        RedAndBlackTree<Integer> test = new RedAndBlackTree<>();
-        test.addNode(1);
-        test.addNode(2);
+    public void insert () {
+        
+    }
+    public void insertRebalance (RedAndBlackNode<E> node) {
+        @Override
+        add(E data);
+        for (;;) {
+            if (node.parent.color == Color.red) {
+                break;
+            }
+            if (node.parent == node.parent.parent.right) {
+                RedAndBlackNode<E> uncle = (RedAndBlackNode<E>) node.parent.parent.left;
+                if (uncle.color == Color.red) {
+                    uncle.color = Color.black;
+                    node.parent.color = Color.black;
+                    node.parent.parent.color = Color.red;
+                    node = (RedAndBlackNode<E>) node.parent.parent;
+                } else if (node == node.parent.left) {
+                    node = (RedAndBlackNode<E>) node.parent;
+                    rotateLeft(node);
+                }
+                    node.parent.color = Color.black;
+                    node.parent.parent.color = Color.red;
+                    rotateRight((RedAndBlackNode<E>)node.parent.parent);
+                 //ELSE SAME AS THEN CLAUSE WITH "LEFT" AND "RIGHT" EXCHANGED
+            }
+        }
+        root.color = Color.black;
+        //BINARY SEARCH TREE ROOT = BLACK
     }
 }
 
