@@ -1,14 +1,12 @@
 import java.awt.Color;
 /**
  * A class to represent a red and black search tree.
- * Red and black trees self-balance to maintain a heights that only differ by at most 1 between the left and right child
+ * Red and black trees self-balance to maintain a heights that only differ by at most 1 between the left and right child. Only supports addition
  *
- * @author Bret Jackson, Mayank Jaiswal, (adjusted by Brayden Coronado, Devinn Chi, and Minh Nguyen to work with Red and Black trees)
+ * @author Bret Jackson, Mayank Jaiswal, (adjusted by Brayden Coronado, Devinn Chi, and Minh Nguyen to work with Red and Black trees with reference from https://www.programiz.com/dsa/red-black-tree)
  */
 public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E> {
     protected boolean addReturn;
-    // Inner class that extends Node to add a heightFromLeaf property to calculate the balance factor
-
     /**
      * Left rotation of x around the pivot node
      *    pivot                      x
@@ -26,7 +24,6 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         Node<E> x = ((Node<E>) pivot.right);
         Node<E> t2 = ((Node<E>) x.left);
         pivot.right = t2;
-        Node<E> parent = pivot.parent;
         //if pivot does have a pointer to a parent..
         if(t2 != null) {
 
@@ -90,91 +87,100 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         return x;
     }
 
-    public void deleteRebalance(Node<E> node) {
-        while (node.parent != null && node.color == Color.black) {
-            if (node == node.parent.right) {
-                Node<E> sibling = node.parent.left;
-                Color siblingColor = Color.black;
-                if (siblingColor != null && sibling.color == Color.red) {
-                    siblingColor = Color.red;
-                }
-                if (siblingColor == Color.red) {
-                    sibling.setBlack();
-                    node.parent.setRed();
-                    rotateRight(node.parent);
-                    sibling = node.parent.left;
-                }
-                Color leftSiblingColor = Color.black;
-                Color rightSiblingColor = Color.black;
-                if (sibling.left != null && sibling.left.color == Color.red) {
-                    leftSiblingColor = Color.red;
-                } 
-                if (sibling.right != null && sibling.right.color == Color.red) {
-                    rightSiblingColor = Color.red;
-                }
-                if (leftSiblingColor == Color.black && rightSiblingColor == Color.black) {
-                    sibling.setRed();
-                    node = node.parent;
-                } else {
-                    if (leftSiblingColor == Color.black) {
-                        sibling.right.setBlack();
-                        sibling.setRed();
-                        rotateLeft(sibling);
-                        sibling = node.parent.left;
-                    }
-                    sibling.color = node.parent.color;
-                    node.parent.setBlack();
-                    sibling.left.setBlack();
-                    rotateRight(node.parent);
-                    node = root;
-                } 
-            }
-            if (node == node.parent.left) {
-                Node<E> sibling = node.parent.right;
-                Color siblingColor = Color.black;
-                if (siblingColor != null && sibling.color == Color.red) {
-                    siblingColor = Color.red;
-                }
-                if (siblingColor == Color.red) {
-                    sibling.setBlack();
-                    node.parent.setRed();
-                    rotateLeft(node.parent);
-                    sibling = node.parent.right;
-                }
-                Color leftSiblingColor = Color.black;
-                Color rightSiblingColor = Color.black;
-                if (sibling.right != null && sibling.left.color == Color.red) {
-                    leftSiblingColor = Color.red;
-                } 
-                if (sibling.right != null && sibling.right.color == Color.red) {
-                    rightSiblingColor = Color.red;
-                }
-                if (leftSiblingColor == Color.black && rightSiblingColor == Color.black) {
-                    sibling.setRed();
-                    node = node.parent;
-                } else {
-                    if (rightSiblingColor == Color.black) {
-                        sibling.left.setBlack();
-                        sibling.setRed();
-                        rotateRight(sibling);
-                        sibling = node.parent.right;
-                    }
-                    sibling.color = node.parent.color;
-                    node.parent.setBlack();
-                    sibling.right.setBlack();
-                    rotateLeft(node.parent);
-                    node = root;
-                } 
-            }
-        }
-        node.setBlack();
-    }
+    // public void deleteRebalance(Node<E> node) {
+    //     while (node.parent != null && node.color == Color.black) {
+    //         if (node == node.parent.right) {
+    //             Node<E> sibling = node.parent.left;
+    //             Color siblingColor = Color.black;
+    //             if (siblingColor != null && sibling.color == Color.red) {
+    //                 siblingColor = Color.red;
+    //             }
+    //             if (siblingColor == Color.red) {
+    //                 sibling.setBlack();
+    //                 node.parent.setRed();
+    //                 rotateRight(node.parent);
+    //                 sibling = node.parent.left;
+    //             }
+    //             Color leftSiblingColor = Color.black;
+    //             Color rightSiblingColor = Color.black;
+    //             if (sibling.left != null && sibling.left.color == Color.red) {
+    //                 leftSiblingColor = Color.red;
+    //             } 
+    //             if (sibling.right != null && sibling.right.color == Color.red) {
+    //                 rightSiblingColor = Color.red;
+    //             }
+    //             if (leftSiblingColor == Color.black && rightSiblingColor == Color.black) {
+    //                 sibling.setRed();
+    //                 node = node.parent;
+    //             } else {
+    //                 if (leftSiblingColor == Color.black) {
+    //                     sibling.right.setBlack();
+    //                     sibling.setRed();
+    //                     rotateLeft(sibling);
+    //                     sibling = node.parent.left;
+    //                 }
+    //                 sibling.color = node.parent.color;
+    //                 node.parent.setBlack();
+    //                 sibling.left.setBlack();
+    //                 rotateRight(node.parent);
+    //                 updateRoot();
+    //                 node = root;
+    //             } 
+    //         }
+    //         if (node == node.parent.left) {
+    //             Node<E> sibling = node.parent.right;
+    //             Color siblingColor = Color.black;
+    //             if (siblingColor != null && sibling.color == Color.red) {
+    //                 siblingColor = Color.red;
+    //             }
+    //             if (siblingColor == Color.red) {
+    //                 sibling.setBlack();
+    //                 node.parent.setRed();
+    //                 rotateLeft(node.parent);
+    //                 sibling = node.parent.right;
+    //             }
+    //             Color leftSiblingColor = Color.black;
+    //             Color rightSiblingColor = Color.black;
+    //             if (sibling.right != null && sibling.left.color == Color.red) {
+    //                 leftSiblingColor = Color.red;
+    //             } 
+    //             if (sibling.right != null && sibling.right.color == Color.red) {
+    //                 rightSiblingColor = Color.red;
+    //             }
+    //             if (leftSiblingColor == Color.black && rightSiblingColor == Color.black) {
+    //                 sibling.setRed();
+    //                 node = node.parent;
+    //             } else {
+    //                 if (rightSiblingColor == Color.black) {
+    //                     sibling.left.setBlack();
+    //                     sibling.setRed();
+    //                     rotateRight(sibling);
+    //                     sibling = node.parent.right;
+    //                 }
+    //                 sibling.color = node.parent.color;
+    //                 node.parent.setBlack();
+    //                 sibling.right.setBlack();
+    //                 rotateLeft(node.parent);
+    //                 updateRoot();
+    //                 node = root;
+    //             } 
+    //         }
+    //     }
+    //     root.setBlack();
+    // }
+
+    /**
+     * Add a node to the tree, comparing it to the local root
+     * @param localRoot the root of the subtree
+     * @param parent parent of the newly added node
+     * @param item the node being added
+     * @return
+     */
 
     public Node<E> add(Node<E> localRoot, Node<E> parent, Node <E> item) {
         if (localRoot == null) {
             // item is not in the tree � insert it.
             addReturn = true;
-            // Node<E> newNode = new Node<E>(item);
             item.parent = parent;
             return item;
         } else if (item.data.compareTo(localRoot.data) == 0) {
@@ -192,108 +198,88 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
+    // private Node<E> findNode(Node<E> localRoot, E target) {
+    //     if (localRoot == null) {
+    //         return null;
+    //     }
 
-    private Node<E> delete(Node<E> localRoot, Node<E> item) {
-        if (localRoot == null) {
-            // item is not in the tree.
-            deleteReturn = null;
-            return localRoot;
-        }
-
-        // Search for item to delete.
-        int compResult = item.data.compareTo(localRoot.data);
-        if (compResult < 0) {
-            // item is smaller than localRoot.data.
-            localRoot.left = delete(localRoot.left, item);
-            if (localRoot.left != null) {
-                localRoot.left.parent = localRoot;
-            }
-            return localRoot;
-        } else if (compResult > 0) {
-            // item is larger than localRoot.data.
-            localRoot.right = delete(localRoot.right, item);
-            if (localRoot.right != null) {
-                localRoot.right.parent = localRoot;
-            }
-            return localRoot;
-        } else {
-            // item is at local root.
-            deleteReturn = localRoot.data;
-            if (localRoot.left == null) {
-                // If there is no left child, return right child
-                // which can also be null.
-                return localRoot.right;
-            } else if (localRoot.right == null) {
-                // If there is no right child, return left child.
-                return localRoot.left;
-            } else {
-                // Node being deleted has 2 children, replace the data
-                // with inorder predecessor.
-                if (localRoot.left.right == null) {
-                    // The left child has no right child.
-                    // Replace the data with the data in the
-                    // left child.
-                    localRoot.data = localRoot.left.data;
-                    localRoot.updateGraphics();
-                    // Replace the left child with its left child.
-                    localRoot.left = localRoot.left.left;
-                    if (localRoot.left != null) {
-                        localRoot.left.parent = localRoot;
-                    }
-                    return localRoot;
-                } else {
-                    // Search for the inorder predecessor (ip) and
-                    // replace deleted node's data with ip.
-                    localRoot.data = findLargestChild(localRoot.left);
-                    localRoot.updateGraphics();
-                    return localRoot;
-                }
-            }
-        }
-    }
-
-    private E findLargestChild(Node<E> parent) {
-        // If the right child has no right child, it is
-        // the inorder predecessor.
-        if (parent.right.right == null) {
-            E returnValue = parent.right.data;
-            parent.right = parent.right.left;
-            if (parent.right != null) {
-                parent.right.parent = parent;
-            }
-            return returnValue;
-        } else {
-            return findLargestChild(parent.right);
-        }
-    }
-
-    private Node<E> findNode(Node<E> localRoot, E target) {
-        if (localRoot == null) {
-            return null;
-        }
-
-        // Compare the target with the data field at the root.
-        int compResult = target.compareTo(localRoot.data);
-        if (compResult == 0) {
-            return localRoot;
-        } else if (compResult < 0) {
-            return findNode(localRoot.left, target);
-        } else {
-            return findNode(localRoot.right, target);
-        }
-    }
+    //     // Compare the target with the data field at the root.
+    //     int compResult = target.compareTo(localRoot.data);
+    //     if (compResult == 0) {
+    //         return localRoot;
+    //     } else if (compResult < 0) {
+    //         return findNode(localRoot.left, target);
+    //     } else {
+    //         return findNode(localRoot.right, target);
+    //     }
+    // }
         
+    // @Override
+    // public E delete(E item) {
+    //     Node<E> origin;
+    //     Node<E> inOrderSuccessor;
+    //     Node<E> itemNode = findNode(root, item);
+    //     if (itemNode == null) {
+    //         return null;
+    //     }
+    //     Color originalColor = itemNode.color;
+    //     if (itemNode.left == null) {
+    //         origin = itemNode.right;
+    //         transplant(itemNode, itemNode.right);
+    //     } else if (itemNode.right == null) {
+    //         origin = itemNode.left;
+    //         transplant(itemNode, itemNode.left);
+    //     } else {
+    //         inOrderSuccessor = findSmallestChild(itemNode.right);
+    //         originalColor = inOrderSuccessor.color;
+    //         origin = itemNode.right;
+    //         if (inOrderSuccessor.parent == itemNode) {
+    //             origin.parent = inOrderSuccessor;
+    //         } else {
+    //             transplant(inOrderSuccessor, inOrderSuccessor.right);
+    //             inOrderSuccessor.right = itemNode.right;
+    //             inOrderSuccessor.right.parent = inOrderSuccessor; 
+    //         }
+    //         transplant(itemNode, inOrderSuccessor);
+    //         inOrderSuccessor.left = itemNode.left;
+    //         inOrderSuccessor.left.parent = inOrderSuccessor;
+    //         inOrderSuccessor.color = itemNode.color;
+    //     }
+
+    //     if (originalColor == Color.black) {
+    //         deleteRebalance(origin);
+    //     }
+    //     return itemNode.data;
+    // }
+
+    // private void transplant(Node<E> parent, Node<E> child) {
+    //     if (parent.parent == null) {
+    //         root = child;
+    //     } else if (parent == parent.parent.left) {
+    //         parent.left = child;
+    //     } else {
+    //         parent.right = child;
+    //     }
+    //     child.parent = parent.parent;
+    // }
+
+    // private Node<E> findSmallestChild(Node<E> parent) {
+    //     Node<E> current = parent;
+
+    //     /* loop down to find the leftmost leaf */
+    //     while (current.left != null)
+    //     {
+    //         current = current.left;
+    //     }
+    //     return current;
+    // }
+
     @Override
     public E delete(E item) {
-        Node<E> itemNode = new Node<E>(item);
-        Node<E> itemNodeArchive = findNode(root, item);
-        root = this.delete(root, itemNode);
-        updateRoot();
-        deleteRebalance(itemNodeArchive);
         return null;
+        //We tried implementing delete, which did not work out. All the codes commented out showed our attempt.
     }
-
-
+    
 
     @Override
     public boolean add(E item) {
@@ -311,12 +297,18 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         return addReturn;
     }
 
+    /*
+     * Update the root of the tree
+     */
     public void updateRoot() {
         while (root.parent!= null) {
             root = root.parent;
         }
     }
 
+    /**
+     * Assisit in rebalancing the tree affer addition of a node
+     */
     public void insertRebalance (Node<E> node) {
         while (node.parent != null && node.parent.color == Color.red) {
             if (node.parent == node.parent.parent.right) {
@@ -364,9 +356,9 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
                     rotateRight(node.parent.parent);
                 }
             }
-            updateRoot();
-            root.setBlack();   
         }
+        updateRoot();
+        root.setBlack();
     }
 
     public static void main(String[] args) {
@@ -378,8 +370,8 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         test.add(5);
         test.add(6);
         test.add(7);
-        test.delete(1);
-        test.delete(2);
     }
 }
+
+
 

@@ -5,6 +5,10 @@ public class RedAndBlackTreeVisualization<E extends Comparable<E>> extends BSTTr
         super(width, height);
         this.tree = new RedAndBlackTree();
     }
+    @Override
+    public void removeGraphics(E data) {
+        
+    }
 
     public static void main(String[] args) {
         CanvasWindow canvas = new CanvasWindow("test", 1000, 300);
