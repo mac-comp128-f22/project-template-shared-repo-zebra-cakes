@@ -360,14 +360,14 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
      * @param args
      */
     public static void main(String[] args) {
-        RedAndBlackTree<Integer> test = new RedAndBlackTree<Integer>();
-        test.add(1);
-        test.add(2);
-        test.add(3);
-        test.add(4);
-        test.add(5);
-        test.add(6);
-        test.add(7);
+        // RedAndBlackTree<Integer> test = new RedAndBlackTree<Integer>();
+        // test.add(1);
+        // test.add(2);
+        // test.add(3);
+        // test.add(4);
+        // test.add(5);
+        // test.add(6);
+        // test.add(7);
     }
 }
 

@@ -3,7 +3,7 @@
  * AVL trees self-balance to maintain a heights that only differ by at most 1 between the left and right child
  *
  * @author Bret Jackson, Mayank Jaiswal
- * Modified to use with Node class with graphics
+ * Modified to use with Node class with graphics, and fixed a bug relating to inOrder successor with the tree
  */
 public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
 
