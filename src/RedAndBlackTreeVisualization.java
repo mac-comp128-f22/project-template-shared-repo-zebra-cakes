@@ -1,7 +1,7 @@
 import edu.macalester.graphics.CanvasWindow;
 
 public class RedAndBlackTreeVisualization<E extends Comparable<E>> extends BSTTreeVisualization<E> {
-    public RedAndBlackTreeVisualization(int width, int height) {
+    public RedAndBlackTreeVisualization(double width, double height) {
         super(width, height);
         this.tree = new RedAndBlackTree();
     }

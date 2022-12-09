@@ -142,7 +142,7 @@ public class AVLHomepageButton implements PleasingButton {
         //if the mouse position is within the bounds of the image
         if (avlIcon.isInBounds(position)) {
             //add information about the tree to the canvas
-            avlDescription.setText("Information about the avl structure");
+            avlDescription.setText("AVL Tree Automatic Balancing");
             //make the borders visible
             topBorder.setStrokeWidth(5);
             rightBorder.setStrokeWidth(5);

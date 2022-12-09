@@ -141,7 +141,7 @@ public class RedAndBlackHomepageButton implements PleasingButton{
         //if the mouse position is within the bounds of the image
         if (rbIcon.isInBounds(position)) {
             //add information about the tree to the canvas
-            rbDescription.setText("Information about the avl structure");
+            rbDescription.setText("Red and Black Tree Automatic Balancing");
 
             //make the borders visible
             topBorder.setStrokeWidth(5);
