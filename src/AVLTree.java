@@ -272,10 +272,9 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
 
                 // Copy the inorder predecessors's data to this node
                 localRoot.data = temp.data;
-                localRoot.updateGraphics();
 
                 // Delete the inorder successor
-                localRoot.right = delete((AVLNode<E>)localRoot.right, temp.data);
+                localRoot.left = delete((AVLNode<E>)localRoot.left, temp.data);
             }
 
         }
@@ -329,10 +328,23 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> {
         Node<E> current = parent;
 
         /* loop down to find the leftmost leaf */
-        while (current.right != null)
+        while (current.right != null) {
             current = current.right;
-
+        }
         return current;
     }
+
+    private Node<E> findSmallestChild(Node<E> parent) {
+        Node<E> current = parent;
+
+        /* loop down to find the rightmost leaf */
+        while (current.left != null)
+        {
+            current = current.left;
+        }
+        return current;
+    }
+
+
 
 }

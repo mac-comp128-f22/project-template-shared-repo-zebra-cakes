@@ -67,7 +67,6 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
      */
     private void createGraphics(Node<E> root) {
         if (root != null) {
-            root.updateGraphics();
             try {
                 coordinate.get(root.getIndex());
                 if (root.left != null) {
@@ -80,6 +79,7 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
                     Line connector = new Line(coordinate.get(root.getIndex()), coordinate.get(root.right.getIndex()));
                     graphics.add(connector);
                 }
+                root.updateGraphics();
                 graphics.add(root.graphics.nodeGraphics);
                 root.graphics.nodeGraphics.setCenter(coordinate.get(root.getIndex()));
                 createGraphics(root.left);
@@ -98,16 +98,18 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
         CanvasWindow canvas = new CanvasWindow("test", 1000, 300);
         BSTTreeVisualization<Integer> test = new BSTTreeVisualization<>(canvas.getWidth(), canvas.getHeight());
         canvas.add(test.graphics, 0, 0);
-        // test.addGraphics(1);
-        // test.addGraphics(2);
-        // test.addGraphics(3);
-        // test.addGraphics(0);
-        // test.addGraphics(6);
-        // test.addGraphics(-3);
-        // test.addGraphics(-1);
-        // test.addGraphics(-4);
-        // test.removeGraphics(1);
-        // test.removeGraphics(2);
+        test.addGraphics(3);
+        test.addGraphics(4);
+        test.addGraphics(5);
+        test.addGraphics(1);
+        test.addGraphics(8);
+        test.addGraphics(2);
+        test.addGraphics(11);
+        test.addGraphics(34);
+        test.removeGraphics(34);
+        test.removeGraphics(11);
+        test.removeGraphics(2);
+        // test.removeGraphics(11);
         // test.addGraphics(9);
         // test.addGraphics(12);
         // test.addGraphics(20);

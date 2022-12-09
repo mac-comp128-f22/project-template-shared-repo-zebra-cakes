@@ -168,32 +168,6 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
             }
         }
         node.setBlack();
-        // while (node != root && node.color == Color.black) {
-        //     if (node == node.parent.left) {
-        //         Node<E> sibling = (Node<E>) node.parent.right;
-        //         if (sibling.color == Color.red) {
-        //             sibling.color = Color.black;
-        //             node.parent.color = Color.red;
-        //             rotateLeft((Node<E>) node.parent);
-        //             sibling = (Node<E>) node.parent.right;
-        //         }
-        //         if (sibling.left.color == Color.black && sibling.right.color == Color.black) {
-        //             sibling.color = Color.red;
-        //             node = (Node<E>)node.parent;
-        //         } else if (sibling.right.color == Color.black) {
-        //             sibling.left.color = Color.black;
-        //             sibling.color = Color.red;
-        //             rotateRight(sibling);
-        //             sibling = (Node<E>) node.parent.right;
-        //         }
-        //         sibling.color = node.parent.right.color;
-        //         node.parent.color = Color.black;
-        //         sibling.right.color = Color.black;
-        //         rotateLeft((Node<E>) node.parent);
-        //         node = (Node<E>)root;
-        //     } //ELSE SAME AS THEN WITH "RIGHT" AND "LEFT" EXCHANGE
-        //     node.color = Color.black;
-        // }
     }
 
     public Node<E> add(Node<E> localRoot, Node<E> parent, Node <E> item) {
@@ -293,7 +267,7 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         }
     }
 
-    private Node<E> find(Node<E> localRoot, E target) {
+    private Node<E> findNode(Node<E> localRoot, E target) {
         if (localRoot == null) {
             return null;
         }
@@ -303,18 +277,19 @@ public class RedAndBlackTree<E extends Comparable<E>> extends BinarySearchTree<E
         if (compResult == 0) {
             return localRoot;
         } else if (compResult < 0) {
-            return find(localRoot.left, target);
+            return findNode(localRoot.left, target);
         } else {
-            return find(localRoot.right, target);
+            return findNode(localRoot.right, target);
         }
     }
         
     @Override
     public E delete(E item) {
         Node<E> itemNode = new Node<E>(item);
+        Node<E> itemNodeArchive = findNode(root, item);
         root = this.delete(root, itemNode);
         updateRoot();
-        deleteRebalance(itemNode);
+        deleteRebalance(itemNodeArchive);
         return null;
     }
 
