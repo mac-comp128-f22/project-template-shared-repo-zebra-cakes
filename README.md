@@ -21,7 +21,7 @@ Project Goal - We attempted to create a visualization GUI in Java that would be 
 
 5. If you want to remove a value you inputted, you can press the "remove" button which will be next to the input box.
 
-7. VOILA! On the next screen you will see your inputs being added to the binary search tree which will be sorted by the method you chose in the first step. You will also see each of the traversals represented in array form. 
+7. VOILA! On the next screen you will see your inputs being added to the binary search tree which will be sorted by the method you chose in the first step. If you are DONE adding / removing inputs from your tree, you can press the traversals button which will lock you out of adding or removing, and will display your traversals on screen.
 
 
 # Steps to test our project
@@ -33,9 +33,9 @@ Project Goal - We attempted to create a visualization GUI in Java that would be 
 
 
 # Future implementations
-1. We were unable to get the deletion for the Red and Black Tree to work. 
+1. We were unable to get the deletion for the Red and Black Tree to work, however, our attempt is shown in the code file. The remove button was deleted from the Red and Black tree interface due to this problem.
 
-2. 
+2. We were unable to animate the insertions and deletions in our tree graphics. Given more time, we would have made it so that the nodes would move to more clearly show the rotations resulting from adding and removing. 
 
 3. 
 
