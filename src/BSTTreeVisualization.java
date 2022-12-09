@@ -90,7 +90,7 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
     }
 
     /**
-     * Main method
+     * Main method that will visually test our methods
      * @param args
      */
     public static void main(String[] args) {
@@ -112,41 +112,41 @@ public class BSTTreeVisualization<E extends Comparable<E>>{
         // test.addGraphics(20);
         // test.addGraphics(10);
         // test.addGraphics(25);
-        test.addGraphics(0);
-        test.addGraphics(3);
-        test.addGraphics(4);
-        test.addGraphics(2);
-        test.addGraphics(6);
-        test.addGraphics(1);
-        test.addGraphics(-1);
-        test.addGraphics(-2);
-        test.addGraphics(0);
+        // test.addGraphics(0);
+        // test.addGraphics(3);
+        // test.addGraphics(4);
+        // test.addGraphics(2);
+        // test.addGraphics(6);
+        // test.addGraphics(1);
+        // test.addGraphics(-1);
+        // test.addGraphics(-2);
+        // test.addGraphics(0);
         // test.removeGraphics(3);
         // test.removeGraphics(0);
         
-        test.addGraphics(37);
-        test.addGraphics(44);
-        test.addGraphics(25);
-        test.addGraphics(63);
-        test.addGraphics(15);
-        test.addGraphics(-16);
-        test.addGraphics(-24);
-        test.addGraphics(025);
+        // test.addGraphics(37);
+        // test.addGraphics(44);
+        // test.addGraphics(25);
+        // test.addGraphics(63);
+        // test.addGraphics(15);
+        // test.addGraphics(-16);
+        // test.addGraphics(-24);
+        // test.addGraphics(025);
 
         
-        test.addGraphics(37);
-        test.addGraphics(45);
-        test.addGraphics(267);
-        test.addGraphics(68);
-        test.addGraphics(19);
-        test.addGraphics(-16);
-        test.addGraphics(-24);
-        test.addGraphics(0245);
+        // test.addGraphics(37);
+        // test.addGraphics(45);
+        // test.addGraphics(267);
+        // test.addGraphics(68);
+        // test.addGraphics(19);
+        // test.addGraphics(-16);
+        // test.addGraphics(-24);
+        // test.addGraphics(0245);
 
         
-        test.addGraphics(376);
-        test.addGraphics(445);
-        test.addGraphics(273);
-        test.addGraphics(638);
+        // test.addGraphics(376);
+        // test.addGraphics(445);
+        // test.addGraphics(273);
+        // test.addGraphics(638);
     }
 }

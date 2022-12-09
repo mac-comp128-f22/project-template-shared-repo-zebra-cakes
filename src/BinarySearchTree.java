@@ -194,14 +194,16 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 
     /**
      * 
-     * @return
+     * returns a string of the in-order traversal
      */
     public String inOrderTraversal() {
         ArrayList<E> order = new ArrayList<>();
         inOrderTraversal(root, order);
         return order.toString();
     }
-
+    /**
+     * helper method in order to create the in-order traversal
+     */
     public void inOrderTraversal(Node<E> localRoot, ArrayList<E>order) {
         if (localRoot != null) {
             inOrderTraversal(localRoot.left, order);
@@ -210,12 +212,18 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
         }
     }
 
+    /**
+     * returns a string of the pre-order traversal
+     */
     public String preOrderTraversal() {
         ArrayList<E> order = new ArrayList<>();
         preOrderTraversal(root, order);
         return order.toString();
     }
 
+    /**
+     * helper method in order to create the pre-order traversal
+     */
     public void preOrderTraversal(Node<E> localRoot, ArrayList<E>order) {
         if (localRoot != null) {
             order.add(localRoot.data);
@@ -224,12 +232,18 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
         }
     }
 
+    /**
+     * returns a string of the post-order traversal
+     */
     public String postOrderTraversal() {
         ArrayList<E> order = new ArrayList<>();
         postOrderTraversal(root, order);
         return order.toString();
     }
 
+    /**
+     * helper method in order to create the post-order traversal
+     */
     public void postOrderTraversal(Node<E> localRoot, ArrayList<E>order) {
         if (localRoot != null) {
             postOrderTraversal(localRoot.left, order);

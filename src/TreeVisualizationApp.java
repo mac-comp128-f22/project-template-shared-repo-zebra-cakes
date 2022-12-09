@@ -135,8 +135,11 @@ public class TreeVisualizationApp {
     private static void traversals() {
         errorText.setText("");
         canvas.add(errorText);
+        //if no traversals have been ran
         if (traversalsRan == null) {
+            //if the array for the traversals is not empty
             if (!arrTree.isEmpty()) {
+                //if red and black tree
                 if (!avlOrRb) {
                     postOrder.setText("Post-Order: " + rbTree.tree.postOrderTraversal());
                     preOrder.setText("Pre-Order: " + rbTree.tree.preOrderTraversal());
@@ -145,6 +148,7 @@ public class TreeVisualizationApp {
                     canvas.add(preOrder);
                     canvas.add(inOrder);
                     traversalsRan = true;
+                    //else its avl tree
                 } else {
                     postOrder.setText("Post-Order: " + avlTree.tree.postOrderTraversal());
                     preOrder.setText("Pre-Order: " + avlTree.tree.preOrderTraversal());
@@ -154,10 +158,12 @@ public class TreeVisualizationApp {
                     canvas.add(inOrder);
                     traversalsRan = true;
                 }
+                //if the array of traversals is empty
             } else {
                 errorText.setText("There are no values to traverse.");
                 canvas.add(errorText);
             }
+            //if the traversals button has already been pushed once
         } else {
             errorText.setText("The values have already been traversed.");
             canvas.add(errorText);
